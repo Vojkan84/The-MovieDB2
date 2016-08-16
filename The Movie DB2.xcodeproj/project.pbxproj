@@ -12,9 +12,13 @@
 		E82F7E881D62DC0B00590791 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82F7E861D62DC0B00590791 /* Main.storyboard */; };
 		E82F7E8A1D62DC0B00590791 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E82F7E891D62DC0B00590791 /* Assets.xcassets */; };
 		E82F7E8D1D62DC0B00590791 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82F7E8B1D62DC0B00590791 /* LaunchScreen.storyboard */; };
+		F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Movie_DB2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8116B5A80F92CEE475C8C84 /* Pods-The Movie DB2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Movie DB2.release.xcconfig"; path = "Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2.release.xcconfig"; sourceTree = "<group>"; };
+		C3868C84A0AB859A95AACF74 /* Pods-The Movie DB2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Movie DB2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2.debug.xcconfig"; sourceTree = "<group>"; };
 		E82F7E7F1D62DC0B00590791 /* The Movie DB2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Movie DB2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E82F7E821D62DC0B00590791 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E82F7E841D62DC0B00590791 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE4DAF98B6AA9FB75DB29D1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C893DB8A4DA4D37FA86995E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3868C84A0AB859A95AACF74 /* Pods-The Movie DB2.debug.xcconfig */,
+				A8116B5A80F92CEE475C8C84 /* Pods-The Movie DB2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E82F7E761D62DC0B00590791 = {
 			isa = PBXGroup;
 			children = (
 				E82F7E811D62DC0B00590791 /* The Movie DB2 */,
 				E82F7E801D62DC0B00590791 /* Products */,
+				C893DB8A4DA4D37FA86995E2 /* Pods */,
+				AE4DAF98B6AA9FB75DB29D1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E82F7E911D62DC0B00590791 /* Build configuration list for PBXNativeTarget "The Movie DB2" */;
 			buildPhases = (
+				AB6400BB7FA3256753519C18 /* [CP] Check Pods Manifest.lock */,
 				E82F7E7B1D62DC0B00590791 /* Sources */,
 				E82F7E7C1D62DC0B00590791 /* Frameworks */,
 				E82F7E7D1D62DC0B00590791 /* Resources */,
+				7B7D3638780AC591A9876019 /* [CP] Embed Pods Frameworks */,
+				A6C7B3384C0855FF9AF586F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B7D3638780AC591A9876019 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6C7B3384C0855FF9AF586F2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB6400BB7FA3256753519C18 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E82F7E7B1D62DC0B00590791 /* Sources */ = {
@@ -249,6 +324,7 @@
 		};
 		E82F7E921D62DC0B00590791 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3868C84A0AB859A95AACF74 /* Pods-The Movie DB2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "The Movie DB2/Info.plist";
@@ -260,6 +336,7 @@
 		};
 		E82F7E931D62DC0B00590791 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8116B5A80F92CEE475C8C84 /* Pods-The Movie DB2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "The Movie DB2/Info.plist";
@@ -288,6 +365,7 @@
 				E82F7E931D62DC0B00590791 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

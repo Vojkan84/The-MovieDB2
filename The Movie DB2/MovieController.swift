@@ -8,11 +8,13 @@
 
 import UIKit
 
-class MovieController: UIViewController,UITableViewDataSource,UITableViewDelegate{
+class MovieController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
+    
     var movieLists = ["Poster","Showing Today","Top Rated","Popular"]
+    var timer = NSTimer()
     
 
     override func viewDidLoad() {
@@ -27,59 +29,49 @@ class MovieController: UIViewController,UITableViewDataSource,UITableViewDelegat
         super.didReceiveMemoryWarning()
         print("MEMORY WARNING")
     }
+
+}
+
+extension MovieController:UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return movieLists.count
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        if section == 0{
-            return nil
-        }
-        
-        return movieLists[section]
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-  
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
             let posterCell = tableView.dequeueReusableCellWithIdentifier("POSTERCELL", forIndexPath: indexPath) as! PosterRow
-            
             return posterCell
         }else{
-            
             let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as! MovieListRow
             return movieCell
         }
-        
     }
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.min
-    }
+}
+
+extension MovieController:UITableViewDelegate{
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         if indexPath.section == 0{
             return 220
         }
         return tableView.rowHeight
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return nil
+        }
+        return movieLists[section]
     }
-    */
+    
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.min
+    }
 
+    
 }

@@ -14,7 +14,6 @@ class MovieController: UIViewController{
     
     
     var movieLists = ["Poster","Showing Today","Top Rated","Popular"]
-    var timer = NSTimer()
     
 
     override func viewDidLoad() {

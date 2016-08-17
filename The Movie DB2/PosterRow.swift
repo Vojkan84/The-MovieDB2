@@ -15,7 +15,7 @@ class PosterRow: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var images = [UIImage(named:"jason bourne"),UIImage(named:"equalizer"),UIImage(named:"batman")]
-  
+    var timer = NSTimer()
     
  
 
@@ -23,7 +23,7 @@ class PosterRow: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        setupDataForCollectionView()
+        setupDataForCollectionView(images)
         startTimer()
         
     }
@@ -34,44 +34,7 @@ class PosterRow: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setupDataForCollectionView(){
-        
-        var originalImages = [UIImage(named:"jason bourne"),UIImage(named:"equalizer"),UIImage(named:"batman")]
-        let firstItem = originalImages[0]
-        let lastItem = originalImages.last
-        var workingImages = originalImages
-        workingImages.insert(lastItem!, atIndex: 0)
-        workingImages.append(firstItem!)
-        self.images = workingImages
-    }
-    func scrollToNextCell(){
-        
-        let cellSize = CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.height)
-        let contentOffSet = collectionView.contentOffset
-        collectionView.scrollRectToVisible(CGRectMake(contentOffSet.x+cellSize.width, contentOffSet.y, cellSize.width, cellSize.height), animated: true)
-        
-    }
     
-    func startTimer(){
-        
-        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(scrollToNextCell), userInfo: nil, repeats: true)
-        
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        let contentOffSetWhenFullyScrolledRight = self.collectionView.frame.size.width * CGFloat(self.images.count-1)
-        
-        if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
-            let newIndexPath = NSIndexPath(forItem: 1, inSection: 0)
-            self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
-        }else if scrollView.contentOffset.x == 0{
-            let newIndexPath = NSIndexPath(forItem: self.images.count - 2, inSection: 0)
-            self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
-        }
-
-        
-    }
   
 
 }
@@ -103,6 +66,61 @@ extension PosterRow:UICollectionViewDelegateFlowLayout{
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         
         return CGFloat.min
+    }
+
+}
+
+// Scrolling system
+
+extension PosterRow{
+       /**
+       Inserts last item from collectionViewDataSource on first place in colectionViewDataSource,and appends first item from collectionViewDataSource to collectionViewDataSource.
+
+       - Parameter collectionViewDataSource: Array of optional Images
+       */
+    func setupDataForCollectionView(colectionViewDataSource:[UIImage?]){
+        
+        var workingImages = colectionViewDataSource
+        let firstItem = workingImages[0]
+        let lastItem = workingImages.last
+        workingImages.insert(lastItem!, atIndex: 0)
+        workingImages.append(firstItem!)
+        self.images = workingImages
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let contentOffSetWhenFullyScrolledRight = self.collectionView.frame.size.width * CGFloat(self.images.count-1)
+        
+        // when scrollView is fully scrolled to right
+        if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
+            let newIndexPath = NSIndexPath(forItem: 1, inSection: 0)
+            // scroll back to item 1
+            self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
+        // when scroolView is fully scroled to left
+        }else if scrollView.contentOffset.x == 0{
+            let newIndexPath = NSIndexPath(forItem: self.images.count - 2, inSection: 0)
+            // scroll back to one item before last
+            self.collectionView.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+        }
+        // restart timer
+        restartTimer()
+        
+    }
+    /// Scrolls to next cell
+    func scrollToNextCell(){
+        let cellSize = CGSizeMake(collectionView.bounds.size.width, collectionView.bounds.size.height)
+        let contentOffSet = collectionView.contentOffset
+        collectionView.scrollRectToVisible(CGRectMake(contentOffSet.x+cellSize.width, contentOffSet.y, cellSize.width, cellSize.height), animated: true)
+    }
+    
+    func startTimer(){
+        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(scrollToNextCell), userInfo: nil, repeats: true)
+    }
+    
+    func restartTimer(){
+        timer.invalidate()
+        startTimer()
     }
 
 }

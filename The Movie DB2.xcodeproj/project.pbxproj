@@ -16,6 +16,7 @@
 		E82F7E9B1D6304FB00590791 /* PosterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9A1D6304FB00590791 /* PosterRow.swift */; };
 		E82F7E9D1D634C5A00590791 /* CollectionViewPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9C1D634C5A00590791 /* CollectionViewPhotoCell.swift */; };
 		E82F7E9F1D64C92E00590791 /* TMDB Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9E1D64C92E00590791 /* TMDB Manager.swift */; };
+		E883DBDE1D65812A009210DE /* Data Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883DBDD1D65812A009210DE /* Data Model.swift */; };
 		F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		E82F7E9A1D6304FB00590791 /* PosterRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterRow.swift; sourceTree = "<group>"; };
 		E82F7E9C1D634C5A00590791 /* CollectionViewPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewPhotoCell.swift; sourceTree = "<group>"; };
 		E82F7E9E1D64C92E00590791 /* TMDB Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TMDB Manager.swift"; sourceTree = "<group>"; };
+		E883DBDD1D65812A009210DE /* Data Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data Model.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		E82F7E761D62DC0B00590791 = {
 			isa = PBXGroup;
 			children = (
+				E883DBDD1D65812A009210DE /* Data Model.swift */,
 				E82F7E811D62DC0B00590791 /* The Movie DB2 */,
 				E82F7E801D62DC0B00590791 /* Products */,
 				C893DB8A4DA4D37FA86995E2 /* Pods */,
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E883DBDE1D65812A009210DE /* Data Model.swift in Sources */,
 				E82F7E971D62E78E00590791 /* MovieController.swift in Sources */,
 				E82F7E991D62EA1F00590791 /* MovieListRow.swift in Sources */,
 				E82F7E831D62DC0B00590791 /* AppDelegate.swift in Sources */,

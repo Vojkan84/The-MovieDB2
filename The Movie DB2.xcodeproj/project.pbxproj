@@ -15,6 +15,7 @@
 		E82F7E991D62EA1F00590791 /* MovieListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E981D62EA1F00590791 /* MovieListRow.swift */; };
 		E82F7E9B1D6304FB00590791 /* PosterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9A1D6304FB00590791 /* PosterRow.swift */; };
 		E82F7E9D1D634C5A00590791 /* CollectionViewPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9C1D634C5A00590791 /* CollectionViewPhotoCell.swift */; };
+		E82F7E9F1D64C92E00590791 /* TMDB Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7E9E1D64C92E00590791 /* TMDB Manager.swift */; };
 		F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		E82F7E981D62EA1F00590791 /* MovieListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListRow.swift; sourceTree = "<group>"; };
 		E82F7E9A1D6304FB00590791 /* PosterRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PosterRow.swift; sourceTree = "<group>"; };
 		E82F7E9C1D634C5A00590791 /* CollectionViewPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewPhotoCell.swift; sourceTree = "<group>"; };
+		E82F7E9E1D64C92E00590791 /* TMDB Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TMDB Manager.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				E82F7E981D62EA1F00590791 /* MovieListRow.swift */,
 				E82F7E9A1D6304FB00590791 /* PosterRow.swift */,
 				E82F7E9C1D634C5A00590791 /* CollectionViewPhotoCell.swift */,
+				E82F7E9E1D64C92E00590791 /* TMDB Manager.swift */,
 				E82F7E891D62DC0B00590791 /* Assets.xcassets */,
 				E82F7E8B1D62DC0B00590791 /* LaunchScreen.storyboard */,
 				E82F7E8E1D62DC0B00590791 /* Info.plist */,
@@ -222,6 +225,7 @@
 				E82F7E971D62E78E00590791 /* MovieController.swift in Sources */,
 				E82F7E991D62EA1F00590791 /* MovieListRow.swift in Sources */,
 				E82F7E831D62DC0B00590791 /* AppDelegate.swift in Sources */,
+				E82F7E9F1D64C92E00590791 /* TMDB Manager.swift in Sources */,
 				E82F7E9D1D634C5A00590791 /* CollectionViewPhotoCell.swift in Sources */,
 				E82F7E9B1D6304FB00590791 /* PosterRow.swift in Sources */,
 			);

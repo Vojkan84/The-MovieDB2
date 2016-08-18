@@ -1,12 +1,13 @@
 
-  use_frameworks!
+platform :ios, '9.0'
+ 
+inhibit_all_warnings!
+use_frameworks!
+ 
+target 'The Movie DB2’ do
 
-
-  target 'The Movie DB2' do
-	platform :ios, '9.0'
-
-	pod 'Alamofire', '~> 3.4'
-
-
+  pod 'Alamofire', '~> 3.4'
+  pod 'SwiftyJSON'
+  
 
 end

@@ -11,6 +11,7 @@ import UIKit
 class MovieController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
+    var nowShowingMovies:[Movie]?
     
     
     var movieLists = ["Poster","Now Showing","Top Rated","Popular"]
@@ -18,11 +19,18 @@ class MovieController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         
+                TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
         
+                    if let err = error {
+                        print(err)
+                    }else{
+                        self.nowShowingMovies = movies
+                        self.tableView.reloadData()
         
-        
+                    }
+                    
+                }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,11 +57,14 @@ extension MovieController:UITableViewDataSource{
             let posterCell = tableView.dequeueReusableCellWithIdentifier("POSTERCELL", forIndexPath: indexPath)
             return posterCell
         }else if indexPath.section == 1{
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as! NowShowingRow
+            movieCell.collectionView.reloadData()
             return movieCell
         }else{
         
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as!
+            NowShowingRow
+            movieCell.collectionView.reloadData()
             return movieCell
         }
     }
@@ -121,16 +132,46 @@ extension MovieController:UITableViewDelegate{
             view.addConstraint(mLLLeadingConstraint)
             view.addConstraint(seeAllButtonBottomConstraint)
             view.addConstraint(seeAllButtonTrailingConstraint)
-
- 
-        
-
-            
-        
-
         return view
         }
         
     }
     
 }
+
+extension MovieController:UICollectionViewDataSource{
+
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        if let movies = self.nowShowingMovies{
+            return movies.count
+        }else{
+            return 0
+        }
+
+
+    }
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VIDEOCELL", forIndexPath: indexPath) as! MovieListRowCell
+        let URL = nowShowingMovies![indexPath.row].moviePosterUrl
+        cell.photoView.af_setImageWithURL(URL!)
+        return cell
+    }
+
+}
+extension MovieController:UICollectionViewDelegateFlowLayout{
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+
+        let itemsPerRow : CGFloat = 3
+        let hardcodedPadding:CGFloat = 5
+        let itemWidth = (collectionView.bounds.size.width/itemsPerRow)-hardcodedPadding
+        let itemHeight = collectionView.bounds.size.height
+
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
+}
+
+

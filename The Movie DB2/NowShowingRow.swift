@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import AlamofireImage
 
-class MovieListRow: UITableViewCell {
+class NowShowingRow: UITableViewCell {
+    
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var nowShowingMovies:[Movie]?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+            
+            if let err = error {
+                print(err)
+            }else{
+                self.nowShowingMovies = movies
+                self.collectionView.reloadData()
+                
+            }
+            
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -22,21 +39,29 @@ class MovieListRow: UITableViewCell {
     }
 
 }
-extension MovieListRow:UICollectionViewDataSource{
+extension NowShowingRow:UICollectionViewDataSource{
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        
+        if let movies = self.nowShowingMovies{
+            return movies.count
+        }else{
+            return 0
+        }
+        
+        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VIDEOCELL", forIndexPath: indexPath) 
-        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VIDEOCELL", forIndexPath: indexPath) as! MovieListRowCell
+        let URL = nowShowingMovies![indexPath.row].moviePosterUrl
+        cell.photoView.af_setImageWithURL(URL!)
         return cell
     }
 
 }
-extension MovieListRow:UICollectionViewDelegateFlowLayout{
+extension NowShowingRow:UICollectionViewDelegateFlowLayout{
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
@@ -48,3 +73,4 @@ extension MovieListRow:UICollectionViewDelegateFlowLayout{
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
+

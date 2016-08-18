@@ -19,8 +19,6 @@ class MovieController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        
         
         
     }
@@ -46,10 +44,14 @@ extension MovieController:UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
-            let posterCell = tableView.dequeueReusableCellWithIdentifier("POSTERCELL", forIndexPath: indexPath) as! PosterRow
+            let posterCell = tableView.dequeueReusableCellWithIdentifier("POSTERCELL", forIndexPath: indexPath)
             return posterCell
+        }else if indexPath.section == 1{
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
+            return movieCell
         }else{
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as! MovieListRow
+        
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
             return movieCell
         }
     }

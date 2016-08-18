@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" rowHeight="165" id="DwY-mG-Zdo" customClass="MovieListRow" customModule="The_Movie_DB2" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" rowHeight="165" id="DwY-mG-Zdo" customClass="NowShowingRow" customModule="The_Movie_DB2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="114" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DwY-mG-Zdo" id="ee7-Ir-bXA">
@@ -49,21 +49,35 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wP3-nP-Yvy">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yO0-hY-OdW">
-                                                        <size key="itemSize" width="50" height="50"/>
+                                                        <size key="itemSize" width="92" height="145"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VIDEOCELL" id="ocq-EC-kXX">
-                                                            <rect key="frame" x="5" y="0.0" width="50" height="50"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VIDEOCELL" id="ocq-EC-kXX" customClass="MovieListRowCell" customModule="The_Movie_DB2" customModuleProvider="target">
+                                                            <rect key="frame" x="5" y="10" width="92" height="145"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-Q2-jhz">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
+                                                                    </imageView>
+                                                                </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
                                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="NO3-Q2-jhz" firstAttribute="leading" secondItem="ocq-EC-kXX" secondAttribute="leading" id="1pb-Qi-E8Q"/>
+                                                                <constraint firstItem="NO3-Q2-jhz" firstAttribute="top" secondItem="ocq-EC-kXX" secondAttribute="top" id="7xo-hF-PFw"/>
+                                                                <constraint firstAttribute="trailing" secondItem="NO3-Q2-jhz" secondAttribute="trailing" id="ZQx-RF-SZw"/>
+                                                                <constraint firstAttribute="bottom" secondItem="NO3-Q2-jhz" secondAttribute="bottom" id="tWh-BJ-WLG"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="photoView" destination="NO3-Q2-jhz" id="WRC-4G-Vp0"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
@@ -79,6 +93,9 @@
                                                 <constraint firstItem="wP3-nP-Yvy" firstAttribute="top" secondItem="ee7-Ir-bXA" secondAttribute="top" id="bfE-ds-BUl"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="collectionView" destination="wP3-nP-Yvy" id="qNn-Gk-nxU"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="POSTERCELL" rowHeight="292" id="bTF-H4-5Eb" customClass="PosterRow" customModule="The_Movie_DB2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="279" width="375" height="292"/>
@@ -96,7 +113,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PHOTOCELL" id="2HA-e0-hlc" customClass="CollectionViewPhotoCell" customModule="The_Movie_DB2" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PHOTOCELL" id="2HA-e0-hlc" customClass="PosterRowPhotoCell" customModule="The_Movie_DB2" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -160,7 +177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCT-bn-osd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1751.5" y="-2202.5"/>
+            <point key="canvasLocation" x="-1889.5" y="-2202.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vOW-Ci-PMy">

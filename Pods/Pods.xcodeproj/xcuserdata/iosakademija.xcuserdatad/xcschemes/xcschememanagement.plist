@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AlamofireImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-The Movie DB2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>05094CC4A047119F7ADC14EE74C4881C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D342327CBBA87F99E88EB299BFDBB65</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91DC97FFBCC7BB5BB63B9CD16C964735</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E9B57C8CE840681A59E90A9FE570BC70</key>
+		<key>86B5BC613A2A7E07A22100C02D6DA3D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

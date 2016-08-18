@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CollectionViewPhotoCell: UICollectionViewCell {
+class PosterRowPhotoCell: UICollectionViewCell {
     
-    
+
     @IBOutlet weak var photoView: UIImageView!
     
 }

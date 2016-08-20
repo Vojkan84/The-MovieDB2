@@ -12,25 +12,44 @@ class MovieController: UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     var nowShowingMovies:[Movie]?
+    var comingSoonMovies:[Movie]?
+    var popularMovies:[Movie]?
     
     
-    var movieLists = ["Poster","Now Showing","Top Rated","Popular"]
+    var movieLists = ["Poster","Now Showing","Coming Soon","Popular"]
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-                TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+            TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
         
-                    if let err = error {
+                if let err = error {
+                    print(err)
+                }else{
+                    self.nowShowingMovies = movies
+                    self.tableView.reloadData()
+        
+                }
+                TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
+                    
+                    if let err = error{
                         print(err)
                     }else{
-                        self.nowShowingMovies = movies
+                        self.comingSoonMovies = movies
                         self.tableView.reloadData()
-        
                     }
-                    
-                }
+                    TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
+                        
+                        if let err = error{
+                            print(err)
+                        }else{
+                            self.popularMovies = movies
+                            self.tableView.reloadData()
+                        }
+                    })
+                })
+            }
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,19 +73,29 @@ extension MovieController:UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
-            let posterCell = tableView.dequeueReusableCellWithIdentifier("POSTERCELL", forIndexPath: indexPath)
+            let posterCell = tableView.dequeueReusableCellWithIdentifier("PosterRow", forIndexPath: indexPath) as! PosterRow
+            posterCell.collectionView.tag = indexPath.section
             return posterCell
         }else if indexPath.section == 1{
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as! NowShowingRow
+            
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("NowShowingRow", forIndexPath: indexPath) as! NowShowingRow
+            movieCell.collectionView.tag = indexPath.section
             movieCell.collectionView.reloadData()
             return movieCell
-        }else{
+        }else if indexPath.section == 2{
         
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath) as!
-            NowShowingRow
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("ComingSoonRow", forIndexPath: indexPath) as! ComingSoonRow
+            movieCell.collectionView.tag = indexPath.section
+            movieCell.collectionView.reloadData()
+            return movieCell
+        }else {
+            let movieCell = tableView.dequeueReusableCellWithIdentifier("PopularRow", forIndexPath: indexPath) as! PopularRow
+            movieCell.collectionView.tag = indexPath.section
             movieCell.collectionView.reloadData()
             return movieCell
         }
+       
+        
     }
   
 }
@@ -142,36 +171,77 @@ extension MovieController:UITableViewDelegate{
 extension MovieController:UICollectionViewDataSource{
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        if let movies = self.nowShowingMovies{
-            return movies.count
-        }else{
+        
+        switch collectionView.tag {
+            
+        case 0:
+            return 5
+        case 1:
+            if let movies = self.nowShowingMovies{
+                return movies.count
+            }else{
+                return 0
+            }
+        case 2:
+            if let movies = self.comingSoonMovies{
+                return movies.count
+            }else{
+                return 0
+            }
+        case 3:
+            if let movies = self.popularMovies{
+                return movies.count
+            }else{
+                return 0
+            }
+        default:
             return 0
         }
+        
+   
 
 
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VIDEOCELL", forIndexPath: indexPath) as! MovieListRowCell
-        let URL = nowShowingMovies![indexPath.row].moviePosterUrl
-        cell.photoView.af_setImageWithURL(URL!)
-        return cell
+        if collectionView.tag == 1{
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
+            let URL = nowShowingMovies![indexPath.row].moviePosterUrl
+            cell.photoView.af_setImageWithURL(URL!)
+            return cell
+        }else if collectionView.tag == 2{
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ComingSoonCell", forIndexPath: indexPath) as! ComingSoonCell
+            let URL = comingSoonMovies![indexPath.row].moviePosterUrl
+            cell.photoView.af_setImageWithURL(URL!)
+            return cell
+        }else{
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PopularCell", forIndexPath: indexPath) as! PopularCell
+            let URL = popularMovies![indexPath.row].moviePosterUrl
+            cell.photoView.af_setImageWithURL(URL!)
+            return cell
+        }
     }
 
 }
 extension MovieController:UICollectionViewDelegateFlowLayout{
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
+        
+        
+   
         let itemsPerRow : CGFloat = 3
-        let hardcodedPadding:CGFloat = 5
-        let itemWidth = (collectionView.bounds.size.width/itemsPerRow)-hardcodedPadding
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        let itemWidth = (collectionView.bounds.size.width - 4*layout.minimumInteritemSpacing)/itemsPerRow
         let itemHeight = collectionView.bounds.size.height
-
         return CGSize(width: itemWidth, height: itemHeight)
+      
+        
     }
+        
 }
+
 
 

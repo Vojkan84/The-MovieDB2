@@ -19,7 +19,7 @@ class NowShowingRow: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        collectionView.reloadData()
+   
 //        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
 //            
 //            if let err = error {

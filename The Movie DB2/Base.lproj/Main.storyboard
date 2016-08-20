@@ -37,7 +37,8 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="165" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-Ww-2LK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1200"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NowShowingRow" rowHeight="165" id="DwY-mG-Zdo" customClass="NowShowingRow" customModule="The_Movie_DB2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="114" width="375" height="165"/>
@@ -296,12 +297,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCT-bn-osd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1889.5" y="-2202.5"/>
+            <point key="canvasLocation" x="-1745.5" y="-2459"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vOW-Ci-PMy">
             <objects>
-                <tabBarController id="fNY-D6-lDq" sceneMemberID="viewController">
+                <tabBarController id="fNY-D6-lDq" customClass="TMDBTabBarController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="6De-AN-xJe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -380,7 +381,7 @@
         <!--Movies-->
         <scene sceneID="QfF-Ze-qhK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lex-J0-mTS" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lex-J0-mTS" customClass="TMDBNavigationController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Movies" id="m76-2V-ydJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L4s-P9-Ab3">

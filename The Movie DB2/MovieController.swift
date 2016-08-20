@@ -22,44 +22,59 @@ class MovieController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         
-                if let err = error {
-                    print(err)
-                }else{
-                    self.nowShowingMovies = movies
-                    self.tableView.reloadData()
+       
         
-                }
-                TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
-                    
-                    if let err = error{
-                        print(err)
-                    }else{
-                        self.comingSoonMovies = movies
-                        self.tableView.reloadData()
-                    }
-                    TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
-                        
-                        if let err = error{
-                            print(err)
-                        }else{
-                            self.popularMovies = movies
-                            self.tableView.reloadData()
-                        }
-                    })
-                })
-            }
-    }
+        fetchData()
+        
+               }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("MEMORY WARNING")
     }
     
+    func fetchData(){
+    
+        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+            
+            if let err = error {
+                print(err)
+            }else{
+                self.nowShowingMovies = movies
+                self.tableView.reloadData()
+                
+            }
+            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
+                
+                if let err = error{
+                    print(err)
+                }else{
+                    self.comingSoonMovies = movies
+                    self.tableView.reloadData()
+                }
+                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
+                    
+                    if let err = error{
+                        print(err)
+                    }else{
+                        self.popularMovies = movies
+                        self.tableView.reloadData()
+                    }
+                })
+            })
+        }
+
+    }
     
 
 }
+
+
 
 extension MovieController:UITableViewDataSource{
     

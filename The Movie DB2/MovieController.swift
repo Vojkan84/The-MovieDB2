@@ -14,7 +14,9 @@ class MovieController: UIViewController{
     var nowShowingMovies:[Movie]?
     var comingSoonMovies:[Movie]?
     var popularMovies:[Movie]?
-    
+    var images = [UIImage(named:"jason bourne"),UIImage(named:"equalizer"),UIImage(named:"batman")]
+    var timer = NSTimer()
+    var indexPathsForPosterROw = NSIndexPath(forItem: 0, inSection: 0)
     
     var movieLists = ["Poster","Now Showing","Coming Soon","Popular"]
     
@@ -22,13 +24,15 @@ class MovieController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        
          navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         navigationController?.navigationBar.barTintColor = UIColor.blackColor()
         navigationController?.navigationBar.tintColor = UIColor.blackColor()
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         
        
-        
+        setupDataForPoserRow(self.images)
         fetchData()
         
                }
@@ -70,6 +74,16 @@ class MovieController: UIViewController{
         }
 
     }
+    func setupDataForPoserRow(images:[UIImage?]){
+        
+        var workingImages = images
+        let firstItem = workingImages[0]
+        let lastItem = workingImages.last
+        workingImages.insert(lastItem!, atIndex: 0)
+        workingImages.append(firstItem!)
+        self.images = workingImages
+    }
+
     
 
 }
@@ -89,23 +103,24 @@ extension MovieController:UITableViewDataSource{
         
         if indexPath.section == 0{
             let posterCell = tableView.dequeueReusableCellWithIdentifier("PosterRow", forIndexPath: indexPath) as! PosterRow
-            posterCell.collectionView.tag = indexPath.section
+            posterCell.collectionView.tag = indexPath.section+100
+            posterCell.collectionView.reloadData()
             return posterCell
         }else if indexPath.section == 1{
             
             let movieCell = tableView.dequeueReusableCellWithIdentifier("NowShowingRow", forIndexPath: indexPath) as! NowShowingRow
-            movieCell.collectionView.tag = indexPath.section
+            movieCell.collectionView.tag = indexPath.section+100
             movieCell.collectionView.reloadData()
             return movieCell
         }else if indexPath.section == 2{
         
             let movieCell = tableView.dequeueReusableCellWithIdentifier("ComingSoonRow", forIndexPath: indexPath) as! ComingSoonRow
-            movieCell.collectionView.tag = indexPath.section
+            movieCell.collectionView.tag = indexPath.section+100
             movieCell.collectionView.reloadData()
             return movieCell
         }else {
             let movieCell = tableView.dequeueReusableCellWithIdentifier("PopularRow", forIndexPath: indexPath) as! PopularRow
-            movieCell.collectionView.tag = indexPath.section
+            movieCell.collectionView.tag = indexPath.section+100
             movieCell.collectionView.reloadData()
             return movieCell
         }
@@ -189,21 +204,21 @@ extension MovieController:UICollectionViewDataSource{
         
         switch collectionView.tag {
             
-        case 0:
-            return 5
-        case 1:
+        case 100:
+            return images.count
+        case 101:
             if let movies = self.nowShowingMovies{
                 return movies.count
             }else{
                 return 0
             }
-        case 2:
+        case 102:
             if let movies = self.comingSoonMovies{
                 return movies.count
             }else{
                 return 0
             }
-        case 3:
+        case 103:
             if let movies = self.popularMovies{
                 return movies.count
             }else{
@@ -219,13 +234,19 @@ extension MovieController:UICollectionViewDataSource{
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if collectionView.tag == 1{
+        
+        if collectionView.tag == 100{
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PHOTOCELL", forIndexPath: indexPath) as! PosterRowPhotoCell
+            cell.photoView.image = images[indexPath.row]
+            return cell
+            
+        }else if collectionView.tag == 101{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
             let URL = nowShowingMovies![indexPath.row].moviePosterUrl
             cell.photoView.af_setImageWithURL(URL!)
             return cell
-        }else if collectionView.tag == 2{
+        }else if collectionView.tag == 102{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ComingSoonCell", forIndexPath: indexPath) as! ComingSoonCell
             let URL = comingSoonMovies![indexPath.row].moviePosterUrl
@@ -242,10 +263,17 @@ extension MovieController:UICollectionViewDataSource{
 
 }
 extension MovieController:UICollectionViewDelegateFlowLayout{
+    
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        
+        if collectionView.tag == 100{
+            
+            let itemWidth = collectionView.bounds.size.width
+            let itemHeight = collectionView.bounds.size.height
+            
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
    
         let itemsPerRow : CGFloat = 3
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -256,6 +284,55 @@ extension MovieController:UICollectionViewDelegateFlowLayout{
         
     }
         
+}
+// Scrolling system
+extension MovieController{
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let posterRow = self.view.viewWithTag(100) as? UICollectionView
+        
+        if posterRow != nil{
+        
+            let contentOffSetWhenFullyScrolledRight = posterRow!.frame.size.width * CGFloat(self.images.count-1)
+        
+            // when scrollView is fully scrolled to right
+            if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
+                let newIndexPath = NSIndexPath(forItem: 1, inSection: 0)
+                // scroll back to item 1
+                posterRow!.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
+                // when scroolView is fully scroled to left
+            }else if scrollView.contentOffset.x == 0{
+                let newIndexPath = NSIndexPath(forItem: self.images.count - 2, inSection: 0)
+                // scroll back to one item before last
+                posterRow!.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
+            }
+        }
+        // restart timer
+        restartTimer()
+        
+    }
+    /// Scrolls to next cell
+    func scrollToNextCell(){
+        
+        if let posterRow = self.view.viewWithTag(100) as? UICollectionView{
+            let cellSize = CGSizeMake(posterRow.bounds.size.width, posterRow.bounds.size.height)
+            let contentOffSet = posterRow.contentOffset
+            posterRow.scrollRectToVisible(CGRectMake(contentOffSet.x+cellSize.width, contentOffSet.y,      cellSize.width, cellSize.height), animated: true)
+        }
+    }
+    
+    func startTimer(){
+        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(scrollToNextCell), userInfo: nil, repeats: true)
+    }
+    
+    func restartTimer(){
+        timer.invalidate()
+        startTimer()
+    }
+    
+    
+
 }
 
 

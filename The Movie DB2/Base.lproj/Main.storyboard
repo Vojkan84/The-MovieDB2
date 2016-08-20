@@ -26,7 +26,7 @@
         <!--Movies-->
         <scene sceneID="vIQ-6U-arn">
             <objects>
-                <viewController id="3Tb-AB-nuu" customClass="MovieController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Movies" id="3Tb-AB-nuu" customClass="MovieController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="48J-kn-NiC"/>
                         <viewControllerLayoutGuide type="bottom" id="75B-BD-a5k"/>
@@ -105,7 +105,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="292"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-7r-h0t">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-7r-h0t">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OSw-cv-cfH">
                                                         <size key="itemSize" width="375" height="291"/>
@@ -139,8 +139,8 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="bTF-H4-5Eb" id="5bl-5i-jf9"/>
-                                                        <outlet property="delegate" destination="bTF-H4-5Eb" id="aEP-S6-a7n"/>
+                                                        <outlet property="dataSource" destination="3Tb-AB-nuu" id="OOz-f2-oeH"/>
+                                                        <outlet property="delegate" destination="3Tb-AB-nuu" id="UCq-Le-R59"/>
                                                     </connections>
                                                 </collectionView>
                                             </subviews>

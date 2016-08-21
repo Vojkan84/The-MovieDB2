@@ -263,6 +263,7 @@ extension MovieController:UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PHOTOCELL", forIndexPath: indexPath) as! PosterRowPhotoCell
             let URL = posterRowMovies![indexPath.row].backdropUrl
             cell.photoView.af_setImageWithURL(URL!)
+            cell.titleTextField.text = posterRowMovies![indexPath.row].movieTitle
             return cell
             
         }else if collectionView.tag == 101{

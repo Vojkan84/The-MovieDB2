@@ -121,20 +121,38 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jason bourne" translatesAutoresizingMaskIntoConstraints="NO" id="miv-Bp-1W9">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jason bourne" translatesAutoresizingMaskIntoConstraints="NO" id="miv-Bp-1W9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                                                     </imageView>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Jason Bourne" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MOS-NH-4Sv">
+                                                                        <rect key="frame" x="-8" y="263" width="375" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="220" id="7Up-Dm-ir2"/>
+                                                                        </constraints>
+                                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <variation key="default">
+                                                                            <mask key="constraints">
+                                                                                <exclude reference="7Up-Dm-ir2"/>
+                                                                            </mask>
+                                                                        </variation>
+                                                                    </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
                                                             <constraints>
+                                                                <constraint firstItem="MOS-NH-4Sv" firstAttribute="width" secondItem="miv-Bp-1W9" secondAttribute="width" id="CPr-ct-Knl"/>
+                                                                <constraint firstItem="MOS-NH-4Sv" firstAttribute="trailing" secondItem="miv-Bp-1W9" secondAttribute="trailing" constant="-8" id="MYr-bs-ZT9"/>
                                                                 <constraint firstAttribute="trailing" secondItem="miv-Bp-1W9" secondAttribute="trailing" id="TPP-Xy-wZp"/>
                                                                 <constraint firstItem="miv-Bp-1W9" firstAttribute="leading" secondItem="2HA-e0-hlc" secondAttribute="leading" id="fAW-R3-adb"/>
                                                                 <constraint firstItem="miv-Bp-1W9" firstAttribute="top" secondItem="2HA-e0-hlc" secondAttribute="top" id="hfH-DJ-TWe"/>
+                                                                <constraint firstItem="MOS-NH-4Sv" firstAttribute="bottom" secondItem="miv-Bp-1W9" secondAttribute="bottom" constant="-8" id="jn6-Uq-P3W"/>
                                                                 <constraint firstAttribute="bottom" secondItem="miv-Bp-1W9" secondAttribute="bottom" id="njp-Ky-ehe"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="photoView" destination="miv-Bp-1W9" id="Yci-Qr-nxy"/>
+                                                                <outlet property="titleTextField" destination="MOS-NH-4Sv" id="Dji-MD-buq"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>

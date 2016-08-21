@@ -13,10 +13,15 @@ class MovieController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     var nowShowingMovies:[Movie]?
     var comingSoonMovies:[Movie]?
-    var popularMovies:[Movie]?
+    var popularMovies:[Movie]?{
+        didSet{
+            setupDataForPosterRow(self.images)
+        }
+    }
     var images = [UIImage(named:"jason bourne"),UIImage(named:"equalizer"),UIImage(named:"batman")]
     var timer = NSTimer()
     var indexPathsForPosterROw = NSIndexPath(forItem: 0, inSection: 0)
+    var posterRowMovies:[Movie]?
     
     var movieLists = ["Poster","Now Showing","Coming Soon","Popular"]
     
@@ -32,10 +37,12 @@ class MovieController: UIViewController{
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         
        
-        setupDataForPoserRow(self.images)
-        fetchData()
         
-               }
+        fetchData()
+        startTimer()
+
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,14 +81,27 @@ class MovieController: UIViewController{
         }
 
     }
-    func setupDataForPoserRow(images:[UIImage?]){
+    func setupDataForPosterRow(images:[UIImage?]){
         
-        var workingImages = images
-        let firstItem = workingImages[0]
-        let lastItem = workingImages.last
-        workingImages.insert(lastItem!, atIndex: 0)
-        workingImages.append(firstItem!)
-        self.images = workingImages
+        var expandedMovies = [Movie]()
+        
+        if let workingMovies = self.popularMovies{
+            var i = 0
+            for movie in workingMovies{
+                if i < 5{
+                    expandedMovies.append(movie)
+                    i += 1
+                }
+            }
+        }
+    
+    
+        let firstItem = expandedMovies.first
+        let lastItem = expandedMovies.last
+        expandedMovies.insert(lastItem!, atIndex: 0)
+        expandedMovies.append(firstItem!)
+        self.posterRowMovies = expandedMovies
+        
     }
 
     
@@ -205,7 +225,11 @@ extension MovieController:UICollectionViewDataSource{
         switch collectionView.tag {
             
         case 100:
-            return images.count
+            if let movies = posterRowMovies{
+                return movies.count
+            }else{
+                return 0
+            }
         case 101:
             if let movies = self.nowShowingMovies{
                 return movies.count
@@ -237,7 +261,8 @@ extension MovieController:UICollectionViewDataSource{
         
         if collectionView.tag == 100{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PHOTOCELL", forIndexPath: indexPath) as! PosterRowPhotoCell
-            cell.photoView.image = images[indexPath.row]
+            let URL = posterRowMovies![indexPath.row].backdropUrl
+            cell.photoView.af_setImageWithURL(URL!)
             return cell
             
         }else if collectionView.tag == 101{
@@ -256,6 +281,7 @@ extension MovieController:UICollectionViewDataSource{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PopularCell", forIndexPath: indexPath) as! PopularCell
             let URL = popularMovies![indexPath.row].moviePosterUrl
+            print(URL)
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }
@@ -285,7 +311,8 @@ extension MovieController:UICollectionViewDelegateFlowLayout{
     }
         
 }
-// Scrolling system
+// Scrolling system for posterRow
+
 extension MovieController{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -293,8 +320,10 @@ extension MovieController{
         let posterRow = self.view.viewWithTag(100) as? UICollectionView
         
         if posterRow != nil{
+            
+            if scrollView != posterRow {return}
         
-            let contentOffSetWhenFullyScrolledRight = posterRow!.frame.size.width * CGFloat(self.images.count-1)
+            let contentOffSetWhenFullyScrolledRight = posterRow!.frame.size.width * CGFloat(self.posterRowMovies!.count - 1)
         
             // when scrollView is fully scrolled to right
             if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
@@ -303,13 +332,15 @@ extension MovieController{
                 posterRow!.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
                 // when scroolView is fully scroled to left
             }else if scrollView.contentOffset.x == 0{
-                let newIndexPath = NSIndexPath(forItem: self.images.count - 2, inSection: 0)
+                let newIndexPath = NSIndexPath(forItem: self.posterRowMovies!.count - 2, inSection: 0)
                 // scroll back to one item before last
                 posterRow!.scrollToItemAtIndexPath(newIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: false)
             }
+            // restart timer
+            restartTimer()
+
         }
-        // restart timer
-        restartTimer()
+        
         
     }
     /// Scrolls to next cell

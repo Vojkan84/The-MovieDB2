@@ -23,12 +23,18 @@ struct Movie {
     }
     
     var moviePosterPath:String?
+    var backdropPath:String?
     var moviePosterUrl:NSURL?{
         
         guard let posterPath = self.moviePosterPath else{return nil}
         
         return NSURL(string:posterPath)
         
+    }
+    var backdropUrl:NSURL?{
+        
+        guard let backdropPath = self.backdropPath else {return nil}
+        return NSURL(string:backdropPath)
     }
     func convertGenreIDsToNames()->String{
         

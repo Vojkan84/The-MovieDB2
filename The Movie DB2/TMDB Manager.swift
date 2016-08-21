@@ -40,6 +40,7 @@ class TMDBMenager {
                         let overview = item["overview"].stringValue
                         let realiseDate = item["release_date"].stringValue
                         let genreIds = item["genre_ids"].arrayValue
+                        let backdropPath = item["backdrop_path"].stringValue
                         var stringGenreIds = [String]()
                         for genreId in genreIds{
                             let stringGenreId = genreId.stringValue
@@ -52,7 +53,8 @@ class TMDBMenager {
                             overview: overview,
                             releaseDate: realiseDate,
                             genreIds: stringGenreIds,
-                            moviePosterPath: "https://image.tmdb.org/t/p/w342\(moviePosterPath)")
+                            moviePosterPath: "https://image.tmdb.org/t/p/w342\(moviePosterPath)",
+                            backdropPath: "https://image.tmdb.org/t/p/w1280\(backdropPath)")
                         movies.append(movie)
                         
                     }
@@ -81,7 +83,7 @@ class TMDBMenager {
             case .Success:
                 if let value = response.result.value{
                     let json = JSON(value)
-                    print(json)
+//                    print(json)
                     for item in json["results"].arrayValue{
                         
                         let movieTitle = item["original_title"].stringValue
@@ -91,6 +93,7 @@ class TMDBMenager {
                         let overview = item["overview"].stringValue
                         let realiseDate = item["release_date"].stringValue
                         let genreIds = item["genre_ids"].arrayValue
+                        let backdropPath = item["backdrop_path"].stringValue
                         var stringGenreIds = [String]()
                         for genreId in genreIds{
                             let stringGenreId = genreId.stringValue
@@ -103,12 +106,13 @@ class TMDBMenager {
                             overview: overview,
                             releaseDate: realiseDate,
                             genreIds: stringGenreIds,
-                            moviePosterPath: "https://image.tmdb.org/t/p/w342\(moviePosterPath)")
+                            moviePosterPath: "https://image.tmdb.org/t/p/w342\(moviePosterPath)",
+                            backdropPath:"https://image.tmdb.org/t/p/w1280\(backdropPath)")
                         movies.append(movie)
                         
                     }
                     result(movies: movies, error: nil)
-                    print(movies)
+//                    print(movies)
                     
                     
                     
@@ -126,7 +130,7 @@ class TMDBMenager {
         
         var movies :[Movie]=[]
         
-        request(.GET,"https://api.themoviedb.org/3/movie/popular?api_key=1a8cf68cea1be9ce3938eb5a6024d19a").validate().responseJSON { (response) in
+        request(.GET,"https://api.themoviedb.org/3/movie/popular?api_key=1a8cf68cea1be9ce3938eb5a6024d19a&append_to_response=images").validate().responseJSON { (response) in
             switch response.result{
                 
             case .Success:
@@ -142,6 +146,7 @@ class TMDBMenager {
                         let overview = item["overview"].stringValue
                         let realiseDate = item["release_date"].stringValue
                         let genreIds = item["genre_ids"].arrayValue
+                        let backdropPath = item["backdrop_path"].stringValue
                         var stringGenreIds = [String]()
                         for genreId in genreIds{
                             let stringGenreId = genreId.stringValue
@@ -154,7 +159,8 @@ class TMDBMenager {
                             overview: overview,
                             releaseDate: realiseDate,
                             genreIds: stringGenreIds,
-                            moviePosterPath: "https://image.tmdb.org/t/p/w342\(moviePosterPath)")
+                            moviePosterPath: "https://image.tmdb.org/t/p/w780\(moviePosterPath)",
+                        backdropPath:"https://image.tmdb.org/t/p/w1280\(backdropPath)")
                         movies.append(movie)
                         
                     }

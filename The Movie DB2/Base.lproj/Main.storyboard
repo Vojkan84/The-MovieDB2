@@ -40,30 +40,30 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NowShowingRow" rowHeight="165" id="DwY-mG-Zdo" customClass="NowShowingRow" customModule="The_Movie_DB2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="114" width="375" height="165"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NowShowingRow" rowHeight="170" id="DwY-mG-Zdo" customClass="NowShowingRow" customModule="The_Movie_DB2" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="114" width="375" height="170"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DwY-mG-Zdo" id="ee7-Ir-bXA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wP3-nP-Yvy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
+                                                    <rect key="frame" x="0.0" y="3" width="375" height="164"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yO0-hY-OdW">
-                                                        <size key="itemSize" width="92" height="145"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="itemSize" width="92" height="88"/>
+                                                        <size key="headerReferenceSize" width="50" height="50"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NowShowingCell" id="ocq-EC-kXX" customClass="NowShowingCell" customModule="The_Movie_DB2" customModuleProvider="target">
-                                                            <rect key="frame" x="5" y="10" width="92" height="145"/>
+                                                            <rect key="frame" x="55" y="38" width="92" height="88"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="92" height="88"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-Q2-jhz">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-Q2-jhz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -81,6 +81,16 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
+                                                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="TND-uk-r2f">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="164"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7q-mj-pxy">
+                                                                <rect key="frame" x="2" y="67" width="46" height="30"/>
+                                                                <state key="normal" title="Button"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </collectionReusableView>
                                                     <connections>
                                                         <outlet property="dataSource" destination="3Tb-AB-nuu" id="SYd-jA-Hwu"/>
                                                         <outlet property="delegate" destination="3Tb-AB-nuu" id="K7w-A3-qhB"/>
@@ -99,7 +109,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PosterRow" rowHeight="292" id="bTF-H4-5Eb" customClass="PosterRow" customModule="The_Movie_DB2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="279" width="375" height="292"/>
+                                        <rect key="frame" x="0.0" y="284" width="375" height="292"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTF-H4-5Eb" id="4i0-n4-EFb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="292"/>
@@ -175,7 +185,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComingSoonRow" rowHeight="165" id="qSq-0p-rwS" customClass="ComingSoonRow" customModule="The_Movie_DB2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="571" width="375" height="165"/>
+                                        <rect key="frame" x="0.0" y="576" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSq-0p-rwS" id="H89-YG-ysP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
@@ -185,13 +195,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="XCL-mH-p2c">
                                                         <size key="itemSize" width="92" height="145"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="headerReferenceSize" width="50" height="50"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ComingSoonCell" id="h57-ws-GKW" customClass="ComingSoonCell" customModule="The_Movie_DB2" customModuleProvider="target">
-                                                            <rect key="frame" x="5" y="10" width="92" height="145"/>
+                                                            <rect key="frame" x="55" y="10" width="92" height="145"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
@@ -215,6 +225,10 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
+                                                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zkg-iu-a2W">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="165"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </collectionReusableView>
                                                     <connections>
                                                         <outlet property="dataSource" destination="3Tb-AB-nuu" id="uKn-WD-rjG"/>
                                                         <outlet property="delegate" destination="3Tb-AB-nuu" id="Cfe-Gq-U15"/>
@@ -234,7 +248,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PopularRow" rowHeight="165" id="vDB-u9-9gh" customClass="PopularRow" customModule="The_Movie_DB2" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="736" width="375" height="165"/>
+                                        <rect key="frame" x="0.0" y="741" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vDB-u9-9gh" id="uXf-4Z-BAt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
@@ -244,13 +258,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="gu5-lo-Z3g">
                                                         <size key="itemSize" width="92" height="145"/>
-                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="headerReferenceSize" width="50" height="50"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PopularCell" id="ycq-lN-DFt" customClass="PopularCell" customModule="The_Movie_DB2" customModuleProvider="target">
-                                                            <rect key="frame" x="5" y="10" width="92" height="145"/>
+                                                            <rect key="frame" x="55" y="10" width="92" height="145"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="145"/>
@@ -273,6 +287,10 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
+                                                    <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MKG-BS-mKW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="165"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </collectionReusableView>
                                                     <connections>
                                                         <outlet property="dataSource" destination="3Tb-AB-nuu" id="Cag-Tw-XvW"/>
                                                         <outlet property="delegate" destination="3Tb-AB-nuu" id="2qZ-BU-ViC"/>

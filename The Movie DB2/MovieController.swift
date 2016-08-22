@@ -126,20 +126,8 @@ extension MovieController:UITableViewDataSource{
             posterCell.collectionView.tag = indexPath.section+100
             posterCell.collectionView.reloadData()
             return posterCell
-        }else if indexPath.section == 1{
-            
+        }else{
             let movieCell = tableView.dequeueReusableCellWithIdentifier("NowShowingRow", forIndexPath: indexPath) as! NowShowingRow
-            movieCell.collectionView.tag = indexPath.section+100
-            movieCell.collectionView.reloadData()
-            return movieCell
-        }else if indexPath.section == 2{
-        
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("ComingSoonRow", forIndexPath: indexPath) as! ComingSoonRow
-            movieCell.collectionView.tag = indexPath.section+100
-            movieCell.collectionView.reloadData()
-            return movieCell
-        }else {
-            let movieCell = tableView.dequeueReusableCellWithIdentifier("PopularRow", forIndexPath: indexPath) as! PopularRow
             movieCell.collectionView.tag = indexPath.section+100
             movieCell.collectionView.reloadData()
             return movieCell
@@ -274,18 +262,29 @@ extension MovieController:UICollectionViewDataSource{
             return cell
         }else if collectionView.tag == 102{
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ComingSoonCell", forIndexPath: indexPath) as! ComingSoonCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
             let URL = comingSoonMovies![indexPath.row].moviePosterUrl
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else{
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PopularCell", forIndexPath: indexPath) as! PopularCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
             let URL = popularMovies![indexPath.row].moviePosterUrl
             print(URL)
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+      
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath)
+        
+        return headerView
+
+        
     }
 
 }

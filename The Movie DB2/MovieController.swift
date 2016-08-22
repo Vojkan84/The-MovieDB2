@@ -184,6 +184,7 @@ extension MovieController:UITableViewDelegate{
         seeAllButton.setTitle("See All", forState: .Normal)
         seeAllButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         seeAllButton.backgroundColor = UIColor.clearColor()
+            seeAllButton.addTarget(self, action: #selector(performSegue(_:)), forControlEvents: .TouchUpInside)
             
             
         view.addSubview(movieListLabel)
@@ -277,15 +278,7 @@ extension MovieController:UICollectionViewDataSource{
         
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        
-      
-        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "Header", forIndexPath: indexPath)
-        
-        return headerView
-
-        
-    }
+  
 
 }
 extension MovieController:UICollectionViewDelegateFlowLayout{
@@ -363,6 +356,18 @@ extension MovieController{
     }
     
     
+
+}
+
+//segues
+extension MovieController{
+    
+    func performSegue(sender:UIButton){
+    
+        self.performSegueWithIdentifier("seeAllSegue", sender: sender)
+    }
+
+     
 
 }
 

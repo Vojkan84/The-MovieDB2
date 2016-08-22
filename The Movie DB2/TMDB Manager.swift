@@ -165,7 +165,7 @@ class TMDBMenager {
                         
                     }
                     result(movies: movies, error: nil)
-                    print(movies)
+//                    print(movies)
                     
                     
                     
@@ -193,7 +193,7 @@ class TMDBMenager {
                     print(json)
                     for item in json["results"].arrayValue{
                         
-                        let movieTitle = item["original_title"].stringValue
+                        let movieTitle = item["original_name"].stringValue
                         let movieId = item["id"].stringValue
                         let moviePosterPath = item["poster_path"].stringValue
                         let voteAverage = round(1000*item["vote_average"].doubleValue)/1000
@@ -244,7 +244,7 @@ class TMDBMenager {
                     print(json)
                     for item in json["results"].arrayValue{
                         
-                        let movieTitle = item["original_title"].stringValue
+                        let movieTitle = item["original_name"].stringValue
                         let movieId = item["id"].stringValue
                         let moviePosterPath = item["poster_path"].stringValue
                         let voteAverage = round(1000*item["vote_average"].doubleValue)/1000
@@ -270,7 +270,7 @@ class TMDBMenager {
                         
                     }
                     result(tvShows: tvShows, error: nil)
-                    print(tvShows)
+//                    print(tvShows)
                     
                     
                     
@@ -295,7 +295,7 @@ class TMDBMenager {
                     print(json)
                     for item in json["results"].arrayValue{
                         
-                        let movieTitle = item["original_title"].stringValue
+                        let movieTitle = item["original_name"].stringValue
                         let movieId = item["id"].stringValue
                         let moviePosterPath = item["poster_path"].stringValue
                         let voteAverage = round(1000*item["vote_average"].doubleValue)/1000
@@ -321,7 +321,7 @@ class TMDBMenager {
                         
                     }
                     result(tvShows: tvShows, error: nil)
-                    print(tvShows)
+//                    print(tvShows)
                     
                     
                     

@@ -9,6 +9,7 @@ target 'The Movie DB2’ do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
   pod 'AlamofireImage', '~> 2.0'
+  pod 'RealmSwift'
   
 
 end

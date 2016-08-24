@@ -7,33 +7,34 @@
 //
 
 import Foundation
+import Realm
 
 
-struct Movie {
+class Movie:RLMObject{
     
-    var movieTitle:String
-    var movieID:String
-    var youTubeKey:String?
-    var voteAverage: Double
-    var overview:String
-    var releaseDate:String
-    var genreIds :[String]
-    var genreNames:String?{
+    dynamic var movieTitle:String = ""
+    dynamic var movieID:String = ""
+    dynamic var youTubeKey:String?
+    dynamic var voteAverage: Double = 0.0
+    dynamic var overview:String = ""
+    dynamic var releaseDate:String = ""
+    dynamic var genreIds :[String] = []
+    dynamic var genreNames:String?{
         return convertGenreIDsToNames()
     }
     
-    var moviePosterPath:String?
-    var backdropPath:String?
-    var moviePosterUrl:NSURL?{
+    dynamic var moviePosterPath :String? 
+    dynamic var backdropPath:String?
+    dynamic var moviePosterUrl:NSURL?{
         
-        guard let posterPath = self.moviePosterPath else{return nil}
+         let posterPath = "https://image.tmdb.org/t/p/w780"+"\(self.moviePosterPath)" 
         
         return NSURL(string:posterPath)
         
     }
-    var backdropUrl:NSURL?{
+    dynamic var backdropUrl:NSURL?{
         
-        guard let backdropPath = self.backdropPath else {return nil}
+        let backdropPath = "https://image.tmdb.org/t/p/w1280"+"\(self.backdropPath)" 
         return NSURL(string:backdropPath)
     }
     func convertGenreIDsToNames()->String{
@@ -87,6 +88,8 @@ struct Movie {
         }
         return genreLocalNames.joinWithSeparator(",")
     }
+    
+
     
     
 }

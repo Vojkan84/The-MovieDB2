@@ -8,12 +8,14 @@ PODS:
   - RealmSwift (1.0.2):
     - Realm (= 1.0.2)
   - SwiftyJSON (2.3.2)
+  - SwiftyOAuth (0.4.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - AlamofireImage (~> 2.0)
-  - RealmSwift
+  - RealmSwift (~> 1.0.2)
   - SwiftyJSON
+  - SwiftyOAuth (~> 0.1)
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
@@ -21,7 +23,8 @@ SPEC CHECKSUMS:
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyOAuth: 6fa3e4fe2154a046ef6e56f02a1ab6c6d240d606
 
-PODFILE CHECKSUM: 53383592bab8d8561cc5379c60679eda261f339f
+PODFILE CHECKSUM: 33ae2217e1681664968c2f39dda4c8036dcdb6c0
 
 COCOAPODS: 1.0.1

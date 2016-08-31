@@ -11,7 +11,11 @@ import Alamofire
 import SwiftyJSON
 import Realm
 
-class TMDBMenager {
+class TMDB {
+    
+    static let shaedInstance = TMDB()
+    
+    
  
 //    static let sharedManager = TMDBMenager()
 //    
@@ -336,8 +340,94 @@ class TMDBMenager {
 //        }
 //    }
 //    
-//    
+//  
+    func fetchNowShowingMovies(result:(jasonResult:AnyObject?,error:ErrorType?)->Void){
+    
+      getRequest(forPath: APIPath.nowShowingMovies, result: result)
+    }
 
     
+}
+
+extension TMDB {
+    
+    private enum APIPath:URLRequestConvertible {
+        
+        case nowShowingMovies
+        case popularMovies
+        case coomingSoonMovies
+        case showingTodayTVShows
+        case topRatedTVShows
+        case popularTVShows
+        case searchPerson(byName:String)
+        case searchTVShow(byTitle:String)
+        case searchMovie(byTitle:String)
+        
+        var fullURL:NSURL{
+            //base URL
+            let URL = NSURL(string: "https://api.themoviedb.org/3/")!
+            
+            switch self {
+            case .nowShowingMovies:
+                return URL.URLByAppendingPathComponent("movie/now_playing?api_key=1a8cf68cea1be9ce3938eb5a6024d19a")
+            case .coomingSoonMovies:
+                return URL.URLByAppendingPathComponent("movie/upcoming?")
+            case .popularMovies :
+                return URL.URLByAppendingPathComponent("movie/popular?")
+            case .popularTVShows :
+                return URL.URLByAppendingPathComponent("tv/popular?")
+            case .showingTodayTVShows:
+                return URL.URLByAppendingPathComponent("tv/airing today?")
+            case .topRatedTVShows :
+                return URL.URLByAppendingPathComponent("tv/top rated?")
+            case .searchPerson:
+                return URL.URLByAppendingPathComponent("search/person?")
+            case .searchMovie:
+                return URL.URLByAppendingPathComponent("search/movie?")
+            case .searchTVShow:
+                return URL.URLByAppendingPathComponent("search/tv?")
+          
+            }
+        }
+        var parametars :[String:AnyObject]{
+            var params = [String:AnyObject]()
+            
+            switch self{
+                case .searchPerson(let name):
+                params["name"] = name
+            default:
+                break
+            }
+            return params
+        }
+        var URLRequest:NSMutableURLRequest{
+            
+            let mutableURLRequest = NSMutableURLRequest(URL: self.fullURL)
+            
+            var params = self.parametars
+            
+            let encoding = Alamofire.ParameterEncoding.URL
+            let encodingResult = encoding.encode(mutableURLRequest, parameters: params)
+            return encodingResult.0
+        }
+    
+    }
+    
+    private func getRequest(forPath path:APIPath,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+        
+        let mutableURLRequest = path.URLRequest
+        mutableURLRequest.HTTPMethod = Alamofire.Method.GET.rawValue
+        req
+        request(mutableURLRequest).validate().responseJSON { (response) in
+            
+            switch response.result{
+            case.Success(let jsonResult):
+                return result(jsonResult: jsonResult, error: nil)
+            case.Failure(let error):
+                result(jsonResult: nil, error: error)
+            }
+
+        }
+    }
 }
 

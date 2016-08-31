@@ -67,33 +67,33 @@ class TVShowController: UIViewController {
     
     func fetchData(){
     
-        TMDBMenager.sharedManager.fetchPopularTVShows { (tvShows, error) in
-            
-            if error != nil{
-                return
-            }else{
-                self.popularTVShows = tvShows
-                self.tableView.reloadData()
-            }
-            TMDBMenager.sharedManager.fetchTopRatedTVShows({ (tvShows, error) in
-                
-                if error != nil{
-                    return
-                }else {
-                    self.topRatedTVShows = tvShows
-                    self.tableView.reloadData()
-                }
-                TMDBMenager.sharedManager.fetchShowingTodayTVShows({ (tvShows, error) in
-                    if error != nil{
-                        return
-                    }else{
-                        self.showingTodayTVShows = tvShows
-                        self.tableView.reloadData()
-                    }
-                })
-            })
-        }
-    
+//        TMDBMenager.sharedManager.fetchPopularTVShows { (tvShows, error) in
+//            
+//            if error != nil{
+//                return
+//            }else{
+//                self.popularTVShows = tvShows
+//                self.tableView.reloadData()
+//            }
+//            TMDBMenager.sharedManager.fetchTopRatedTVShows({ (tvShows, error) in
+//                
+//                if error != nil{
+//                    return
+//                }else {
+//                    self.topRatedTVShows = tvShows
+//                    self.tableView.reloadData()
+//                }
+//                TMDBMenager.sharedManager.fetchShowingTodayTVShows({ (tvShows, error) in
+//                    if error != nil{
+//                        return
+//                    }else{
+//                        self.showingTodayTVShows = tvShows
+//                        self.tableView.reloadData()
+//                    }
+//                })
+//            })
+//        }
+//    
     
     }
     

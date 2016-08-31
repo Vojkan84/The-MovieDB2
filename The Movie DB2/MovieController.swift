@@ -49,35 +49,40 @@ class MovieController: UIViewController{
     }
     
     func fetchData(){
-    
-        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+        
+        TMDB.shaedInstance.fetchNowShowingMovies { (jasonResult, error) in
+            print(jasonResult)
             
-            if let err = error {
-                print(err)
-            }else{
-                self.nowShowingMovies = movies
-                self.tableView.reloadData()
-                
-            }
-            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
-                
-                if let err = error{
-                    print(err)
-                }else{
-                    self.comingSoonMovies = movies
-                    self.tableView.reloadData()
-                }
-                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
-                    
-                    if let err = error{
-                        print(err)
-                    }else{
-                        self.popularMovies = movies
-                        self.tableView.reloadData()
-                    }
-                })
-            })
         }
+    
+//        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+//            
+//            if let err = error {
+//                print(err)
+//            }else{
+//                self.nowShowingMovies = movies
+//                self.tableView.reloadData()
+//                
+//            }
+//            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
+//                
+//                if let err = error{
+//                    print(err)
+//                }else{
+//                    self.comingSoonMovies = movies
+//                    self.tableView.reloadData()
+//                }
+//                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
+//                    
+//                    if let err = error{
+//                        print(err)
+//                    }else{
+//                        self.popularMovies = movies
+//                        self.tableView.reloadData()
+//                    }
+//                })
+//            })
+//        }
 
     }
     func setupDataForPosterRow(){

@@ -9,13 +9,24 @@ PODS:
     - Realm (= 1.0.2)
   - SwiftyJSON (2.3.2)
   - SwiftyOAuth (0.4.1)
+  - TMDBSwift (0.1.9)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - AlamofireImage (~> 2.0)
   - RealmSwift (~> 1.0.2)
   - SwiftyJSON
-  - SwiftyOAuth (~> 0.1)
+  - SwiftyOAuth (from `https://github.com/delba/SwiftyOAuth.git`)
+  - TMDBSwift
+
+EXTERNAL SOURCES:
+  SwiftyOAuth:
+    :git: https://github.com/delba/SwiftyOAuth.git
+
+CHECKOUT OPTIONS:
+  SwiftyOAuth:
+    :commit: d670a13f5c70b7c49d2aca3f5b22fa628cffc981
+    :git: https://github.com/delba/SwiftyOAuth.git
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
@@ -24,7 +35,8 @@ SPEC CHECKSUMS:
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyOAuth: 6fa3e4fe2154a046ef6e56f02a1ab6c6d240d606
+  TMDBSwift: 210e0fee779fa8b94171a74d717887cf7bc5aba2
 
-PODFILE CHECKSUM: 33ae2217e1681664968c2f39dda4c8036dcdb6c0
+PODFILE CHECKSUM: 1766616954c3ab3eac4090fc57a40852f4d01c54
 
 COCOAPODS: 1.0.1

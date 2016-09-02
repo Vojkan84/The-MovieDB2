@@ -10,7 +10,8 @@ target 'The Movie DB2’ do
   pod 'SwiftyJSON'
   pod 'AlamofireImage', '~> 2.0'
   pod 'RealmSwift’   ,  '~> 1.0.2’	
-  pod 'SwiftyOAuth', '~> 0.1'	
+  pod 'SwiftyOAuth', :git => 'https://github.com/delba/SwiftyOAuth.git'	
+  pod "TMDBSwift"
 
   
 

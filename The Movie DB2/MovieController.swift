@@ -50,10 +50,10 @@ class MovieController: UIViewController{
     
     func fetchData(){
         
-        TMDB.shaedInstance.fetchNowShowingMovies { (jasonResult, error) in
-            print(jasonResult)
-            
-        }
+        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
+//      
+//        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
+   
     
 //        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
 //            

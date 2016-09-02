@@ -66,6 +66,10 @@ class TVShowController: UIViewController {
     }
     
     func fetchData(){
+        
+        TMDB.shaedInstance.fetchTVShowCredits(forTVShowID: "62560") { (jsonResult, error) in
+            print(jsonResult)
+        }
     
 //        TMDBMenager.sharedManager.fetchPopularTVShows { (tvShows, error) in
 //            

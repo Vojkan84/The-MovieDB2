@@ -29,6 +29,7 @@
 		E8E0149F1D7AEE600083C3DA /* ProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */; };
 		E8E014A21D7B067E0083C3DA /* TabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E014A11D7B067E0083C3DA /* TabBarControllerDelegate.swift */; };
 		E8E014A41D7C32BA0083C3DA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E014A31D7C32BA0083C3DA /* ProfileController.swift */; };
+		E8E014A61D7C3E310083C3DA /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E014A51D7C3E310083C3DA /* SignUpController.swift */; };
 		F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigationController.swift; sourceTree = "<group>"; };
 		E8E014A11D7B067E0083C3DA /* TabBarControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerDelegate.swift; sourceTree = "<group>"; };
 		E8E014A31D7C32BA0083C3DA /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		E8E014A51D7C3E310083C3DA /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			children = (
 				E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */,
 				E8E014A31D7C32BA0083C3DA /* ProfileController.swift */,
+				E8E014A51D7C3E310083C3DA /* SignUpController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				E82F7E831D62DC0B00590791 /* AppDelegate.swift in Sources */,
 				E82F7E9F1D64C92E00590791 /* TMDB Manager.swift in Sources */,
 				E883DBE01D658C25009210DE /* NowShowingCell.swift in Sources */,
+				E8E014A61D7C3E310083C3DA /* SignUpController.swift in Sources */,
 				E82F7E9D1D634C5A00590791 /* PosterRowPhotoCell.swift in Sources */,
 				E81AAC0E1D6B183800308D5F /* TVVideoCell.swift in Sources */,
 				E81AAC0C1D6B17CF00308D5F /* TVPosterCell.swift in Sources */,

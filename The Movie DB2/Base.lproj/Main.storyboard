@@ -446,6 +446,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etc-wJ-suk">
                                 <rect key="frame" x="337" y="72" width="22" height="22"/>
                                 <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="Ep3-Au-h71" eventType="touchUpInside" id="vgt-be-PMT"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TIp-BR-wig">
                                 <rect key="frame" x="47" y="319" width="282" height="30"/>
@@ -470,6 +473,9 @@
                                         <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="KFb-KA-bZK" kind="show" id="ONV-rG-ohn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK2-Jv-ADs">
                                 <rect key="frame" x="188" y="411" width="111" height="30"/>
@@ -543,13 +549,52 @@
                         <outlet property="LoginButton" destination="dK2-Jv-ADs" id="yRh-tm-jog"/>
                         <outlet property="closeButton" destination="etc-wJ-suk" id="OhE-p8-gCJ"/>
                         <outlet property="passwordTextField" destination="AKg-LR-kdr" id="F6y-mi-AiH"/>
-                        <outlet property="signUpButton" destination="jKb-NL-AXN" id="Jle-n6-ani"/>
                         <outlet property="usernameTextField" destination="TIp-BR-wig" id="AsD-ko-VpU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enL-I8-S3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1787.5" y="1062.5"/>
+            <point key="canvasLocation" x="-1935.5" y="1051.5"/>
+        </scene>
+        <!--Sign Up Controller-->
+        <scene sceneID="1Yg-8I-bqN">
+            <objects>
+                <viewController id="y9U-Qv-bv6" customClass="SignUpController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fuI-bY-j5v"/>
+                        <viewControllerLayoutGuide type="bottom" id="KwN-af-Riv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y81-q1-3oh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nu2-b3-ZfN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nu2-b3-ZfN" firstAttribute="top" secondItem="Y81-q1-3oh" secondAttribute="topMargin" id="Cck-KM-CyD"/>
+                            <constraint firstItem="Nu2-b3-ZfN" firstAttribute="leading" secondItem="Y81-q1-3oh" secondAttribute="leading" id="FKY-QF-5Tz"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Nu2-b3-ZfN" secondAttribute="bottom" id="HsF-3H-Ydr"/>
+                            <constraint firstItem="Nu2-b3-ZfN" firstAttribute="top" secondItem="fuI-bY-j5v" secondAttribute="bottom" id="N27-VF-6Cp"/>
+                            <constraint firstAttribute="trailing" secondItem="Nu2-b3-ZfN" secondAttribute="trailing" id="UNg-Zq-RVC"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="N27-VF-6Cp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="fED-Np-YIg"/>
+                    <connections>
+                        <outlet property="webView" destination="Nu2-b3-ZfN" id="32g-1B-f9y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Zl-op-PNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-965.5" y="1051.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vsW-4m-nyL">
@@ -664,6 +709,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2c-cI-ugY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2376.5" y="1051.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bkp-D3-uFb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KFb-KA-bZK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cpw-6I-I2M">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="y9U-Qv-bv6" kind="relationship" relationship="rootViewController" id="pkK-80-ePw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aeO-ua-FDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1427.5" y="1051.5"/>
         </scene>
     </scenes>
     <resources>

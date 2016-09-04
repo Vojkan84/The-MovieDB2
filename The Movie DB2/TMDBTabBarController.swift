@@ -8,13 +8,17 @@
 
 import UIKit
 
-class TMDBTabBarController: UITabBarController,UINavigationControllerDelegate {
+class TMDBTabBarController: UITabBarController,UINavigationControllerDelegate,UITabBarControllerDelegate {
     
     override func viewDidLoad() {
+            
         
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().barTintColor = UIColor.blackColor()
         
     }
+    
+    
+    
 
 }

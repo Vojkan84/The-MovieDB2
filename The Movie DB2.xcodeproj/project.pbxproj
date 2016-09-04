@@ -28,6 +28,7 @@
 		E883DBE81D65D75F009210DE /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883DBE71D65D75F009210DE /* PopularCell.swift */; };
 		E8E0149F1D7AEE600083C3DA /* ProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */; };
 		E8E014A21D7B067E0083C3DA /* TabBarControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E014A11D7B067E0083C3DA /* TabBarControllerDelegate.swift */; };
+		E8E014A41D7C32BA0083C3DA /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E014A31D7C32BA0083C3DA /* ProfileController.swift */; };
 		F31DE62BA35FEFD1EFEFE5A5 /* Pods_The_Movie_DB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CAE6D3566D144C7639473D /* Pods_The_Movie_DB2.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		E883DBE71D65D75F009210DE /* PopularCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigationController.swift; sourceTree = "<group>"; };
 		E8E014A11D7B067E0083C3DA /* TabBarControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerDelegate.swift; sourceTree = "<group>"; };
+		E8E014A31D7C32BA0083C3DA /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */,
+				E8E014A31D7C32BA0083C3DA /* ProfileController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			files = (
 				E883DBDE1D65812A009210DE /* Data Model.swift in Sources */,
 				E82F7E971D62E78E00590791 /* MovieController.swift in Sources */,
+				E8E014A41D7C32BA0083C3DA /* ProfileController.swift in Sources */,
 				E8601F491D6842C900E2ED6A /* TMDBNavigationController.swift in Sources */,
 				E883DBE81D65D75F009210DE /* PopularCell.swift in Sources */,
 				E81AAC0A1D6B179B00308D5F /* TVVideoRow.swift in Sources */,

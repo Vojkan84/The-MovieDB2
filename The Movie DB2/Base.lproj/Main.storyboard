@@ -434,7 +434,7 @@
         <!--Profile-->
         <scene sceneID="Wev-g4-BQE">
             <objects>
-                <viewController id="Ep3-Au-h71" sceneMemberID="viewController">
+                <viewController id="Ep3-Au-h71" customClass="ProfileController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ipm-F9-LFG"/>
                         <viewControllerLayoutGuide type="bottom" id="4SD-HE-2yr"/>
@@ -539,6 +539,13 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="y7v-6T-dFH"/>
+                    <connections>
+                        <outlet property="LoginButton" destination="dK2-Jv-ADs" id="yRh-tm-jog"/>
+                        <outlet property="closeButton" destination="etc-wJ-suk" id="OhE-p8-gCJ"/>
+                        <outlet property="passwordTextField" destination="AKg-LR-kdr" id="F6y-mi-AiH"/>
+                        <outlet property="signUpButton" destination="jKb-NL-AXN" id="Jle-n6-ani"/>
+                        <outlet property="usernameTextField" destination="TIp-BR-wig" id="AsD-ko-VpU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enL-I8-S3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

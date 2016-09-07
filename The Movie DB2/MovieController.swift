@@ -11,10 +11,12 @@ import RealmSwift
 
 class MovieController: UIViewController{
     
+    let realm = try! Realm()
+    
     @IBOutlet weak var tableView: UITableView!
-    var nowShowingMovies:[Movie]?
-    var comingSoonMovies:[Movie]?
-    var popularMovies:[Movie]?{
+    var nowShowingMovies:Results<Movie>?
+    var comingSoonMovies:Results<Movie>?
+    var popularMovies:Results<Movie>?{
         didSet{
             setupDataForPosterRow()
         }
@@ -47,47 +49,39 @@ class MovieController: UIViewController{
     
     func fetchData(){
         
-    MovieService.sharedInstace.fetchNowShowingMoviesFromAPI { (movies, error) in
-        if let err = error{
-            print(err)
-        }else{
-            self.nowShowingMovies = movies
-            self.tableView.reloadData()
+        MovieService.sharedInstace.fetchNowShowingMoviesFromAPI { (movies, error) in
+            if let err = error{
+                print(err)
+            }else{
+                for movie in movies!{
+                    MovieService.sharedInstace.saveMovie(movie)
+                }
+                self.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
+                self.tableView.reloadData()
+            }
+            MovieService.sharedInstace.fetchPopularMoviesFromAPI({ (movies, error) in
+                if let err = error{
+                    print(err)
+                }else{
+                    for movie in movies!{
+                        MovieService.sharedInstace.saveMovie(movie)
+                    }
+                    self.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
+                    self.tableView.reloadData()
+                }
+                MovieService.sharedInstace.fetchComingSoonMoviesFromAPI({ (movies, error) in
+                    if let err = error{
+                        print(err)
+                    }else{
+                        for movie in movies!{
+                            MovieService.sharedInstace.saveMovie(movie)
+                        }
+                        self.comingSoonMovies = MovieService.sharedInstace.loadMovies(fromList: "coming_soon")
+                        self.tableView.reloadData()
+                    }
+                })
+            })
         }
-        }
-        //
-        //        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
-        
-        
-        //        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
-        //
-        //            if let err = error {
-        //                print(err)
-        //            }else{
-        //                self.nowShowingMovies = movies
-        //                self.tableView.reloadData()
-        //
-        //            }
-        //            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
-        //
-        //                if let err = error{
-        //                    print(err)
-        //                }else{
-        //                    self.comingSoonMovies = movies
-        //                    self.tableView.reloadData()
-        //                }
-        //                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
-        //
-        //                    if let err = error{
-        //                        print(err)
-        //                    }else{
-        //                        self.popularMovies = movies
-        //                        self.tableView.reloadData()
-        //                    }
-        //                })
-        //            })
-        //        }
-        
     }
     func setupDataForPosterRow(){
         
@@ -198,7 +192,6 @@ extension MovieController:UITableViewDelegate{
             view.addSubview(movieListLabel)
             view.addSubview(seeAllButton)
             
-            
             let mLLBottomConstraint =  NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: movieListLabel, attribute: .Bottom, multiplier: 1, constant: 4)
             let mLLLeadingConstraint = NSLayoutConstraint(item: movieListLabel, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1, constant: 4)
             let seeAllButtonBottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: seeAllButton, attribute: .Bottom, multiplier: 1, constant: -1)
@@ -267,7 +260,6 @@ extension MovieController:UICollectionViewDataSource{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
             let URL = nowShowingMovies![indexPath.row].moviePosterUrl
-//            let URL = NSURL(string: URLString)
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else if collectionView.tag == 102{
@@ -284,11 +276,7 @@ extension MovieController:UICollectionViewDataSource{
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }
-        
     }
-    
-    
-    
 }
 extension MovieController:UICollectionViewDelegateFlowLayout{
     
@@ -296,10 +284,8 @@ extension MovieController:UICollectionViewDelegateFlowLayout{
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if collectionView.tag == 100{
-            
             let itemWidth = collectionView.bounds.size.width
             let itemHeight = collectionView.bounds.size.height
-            
             return CGSize(width: itemWidth, height: itemHeight)
         }
         
@@ -318,15 +304,10 @@ extension MovieController:UICollectionViewDelegateFlowLayout{
 extension MovieController{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        
         let posterRow = self.view.viewWithTag(100) as? UICollectionView
-        
         if posterRow != nil{
-            
             if scrollView != posterRow {return}
-            
             let contentOffSetWhenFullyScrolledRight = posterRow!.frame.size.width * CGFloat(self.posterRowMovies!.count - 1)
-            
             // when scrollView is fully scrolled to right
             if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
                 let newIndexPath = NSIndexPath(forItem: 1, inSection: 0)
@@ -363,9 +344,6 @@ extension MovieController{
         timer.invalidate()
         startTimer()
     }
-    
-    
-    
 }
 
 //segues
@@ -375,9 +353,6 @@ extension MovieController{
         
         self.performSegueWithIdentifier("seeAllSegue", sender: sender)
     }
-    
-    
-    
 }
 
 

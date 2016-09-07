@@ -9,7 +9,6 @@
 import UIKit
 
 class PosterRowPhotoCell: UICollectionViewCell {
-    
 
     @IBOutlet weak var photoView: UIImageView!
     

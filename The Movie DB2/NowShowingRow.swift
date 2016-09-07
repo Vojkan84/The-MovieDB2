@@ -13,12 +13,10 @@ class NowShowingRow: UITableViewCell {
     
     
     @IBOutlet weak var collectionView: UICollectionView!
-
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-   
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

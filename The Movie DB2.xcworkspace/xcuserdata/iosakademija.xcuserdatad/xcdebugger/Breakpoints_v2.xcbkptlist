@@ -39,11 +39,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "The Movie DB2/TMDB Manager.swift"
-            timestampString = "494516953.581047"
+            timestampString = "494841910.676786"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "TMDB"
             landmarkType = "3">
          </BreakpointContent>
@@ -54,13 +54,157 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "The Movie DB2/TMDB Manager.swift"
-            timestampString = "494514156.924841"
+            filePath = "The Movie DB2/SignUpController.swift"
+            timestampString = "494708460.273189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "signUp()"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "observeValueForKeyPath(_:ofObject:change:context:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/ProfileController.swift"
+            timestampString = "494769547.0134"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "LoginButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/Data Manager.swift"
+            timestampString = "494840685.917188"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "fetchNowShowingMovies(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.DataManager.fetchNowShowingMovies ((movies : Swift.Optional&lt;Swift.Array&lt;The_Movie_DB2.Movie&gt;&gt;, error : Swift.Optional&lt;Swift.ErrorType&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/Data%20Manager.swift"
+                  timestampString = "494885977.192366"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "83">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.DataManager.(fetchNowShowingMovies ((movies : Swift.Optional&lt;Swift.Array&lt;The_Movie_DB2.Movie&gt;&gt;, error : Swift.Optional&lt;Swift.ErrorType&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/Data%20Manager.swift"
+                  timestampString = "494885977.192616"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "181">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/Data Manager.swift"
+            timestampString = "494852878.282565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "fetchNowShowingMovies(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/Data Manager.swift"
+            timestampString = "494853688.063508"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "fetchNowShowingMovies(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.DataManager.(fetchNowShowingMovies ((movies : Swift.Optional&lt;Swift.Array&lt;The_Movie_DB2.Movie&gt;&gt;, error : Swift.Optional&lt;Swift.ErrorType&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/Data%20Manager.swift"
+                  timestampString = "494885977.194874"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "1337">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.DataManager.(fetchNowShowingMovies ((movies : Swift.Optional&lt;Swift.Array&lt;The_Movie_DB2.Movie&gt;&gt;, error : Swift.Optional&lt;Swift.ErrorType&gt;) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/Data%20Manager.swift"
+                  timestampString = "494885977.195153"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "126">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/TMDB Manager.swift"
+            timestampString = "494841893.014091"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "fetchNowShowingMovies(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -71,13 +215,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "The Movie DB2/TMDB Manager.swift"
-            timestampString = "494515179.219744"
+            timestampString = "494841937.004044"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "validateUser(withUsername:password:)"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "getRequest(forPath:result:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/TMDB Manager.swift"
+            timestampString = "494841948.65184"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "getRequest(forPath:result:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/TMDB Manager.swift"
+            timestampString = "494841986.014279"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "getRequest(forPath:result:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "The Movie DB2/MovieController.swift"
+            timestampString = "494852323.968244"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "fetchData()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.MovieController.fetchData () -&gt; ()"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/MovieController.swift"
+                  timestampString = "494885977.198847"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "The_Movie_DB2.MovieController.(fetchData () -&gt; ()).(closure #1)"
+                  moduleName = "The Movie DB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosakademija/Projects/The%20Movie%20DB2/The%20Movie%20DB2/MovieController.swift"
+                  timestampString = "494885977.199034"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

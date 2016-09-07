@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MovieController: UIViewController{
     
@@ -27,6 +28,7 @@ class MovieController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
     
         
@@ -50,7 +52,16 @@ class MovieController: UIViewController{
     
     func fetchData(){
         
-        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
+      DataManager.sharedManager.fetchNowShowingMovies { (movies, error) in
+        
+        if let err = error{
+            print(err)
+        }else{
+            self.nowShowingMovies = movies
+            self.tableView.reloadData()
+        }
+//
+        }
 //      
 //        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
    
@@ -262,7 +273,8 @@ extension MovieController:UICollectionViewDataSource{
         }else if collectionView.tag == 101{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
-            let URL = nowShowingMovies![indexPath.row].moviePosterUrl
+            let URLString = nowShowingMovies![indexPath.row].moviePosterPath
+            let URL = NSURL(string: URLString!)
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else if collectionView.tag == 102{

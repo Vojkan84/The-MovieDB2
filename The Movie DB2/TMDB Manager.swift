@@ -11,66 +11,67 @@ import Alamofire
 import SwiftyOAuth
 import SwiftyJSON
 
-//extension Provider{
-//
-//    public static func TMDB(ClientID ClientID:String,clientSecret:String,redirectUrl:String)->Provider{
-//
-//        let provider = Provider(clientID: ClientID,
-//                                clientSecret: clientSecret,
-//                                authorizeURL:"https://www.themoviedb.org/authenticate" ,
-//                                tokenURL:"http://api.themoviedb.org/3/authentication/token/new" ,
-//                                redirectURL: redirectUrl)
-//        return provider
-//    }
-//
-//}
 
 
 class TMDB {
     
     static let shaedInstance = TMDB()
     
-    var apiKey = "1a8cf68cea1be9ce3938eb5a6024d19a"
+    private var apiKey = "1a8cf68cea1be9ce3938eb5a6024d19a"
     
-    var token:String?
-    var sesionID:String?
+    private var token:[String:String]?{
+        
+        didSet{
+            if let accessToken = self.token{
+                DefaultsKey.acessToken.save(accessToken)
+            }
+        }
+    }
+    private var sesionID:[String:String]?{
+        didSet{
+            if let sesionID = self.sesionID{
+                DefaultsKey.sesiionId.save(sesionID)
+            }
+        }
+    }
     
 
     
     
  
 
-    func fetchNowShowingMovies(result:(jasonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchNowShowingMovies(result:(jsonResult:JSON?,error:ErrorType?)->Void){
+        
         getRequest(forPath: APIPath.nowShowingMovies, result: result)
     }
-    func searchPerson(byName name:String,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func searchPerson(byName name:String,result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.searchPerson(byName: name), result: result)
     }
-    func searchMovie(byTitle title:String,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func searchMovie(byTitle title:String,result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.searchMovie(byTitle: title), result: result)
     }
-    func searchTVShow(byTitle title:String,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func searchTVShow(byTitle title:String,result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.searchTVShow(byTitle: title), result: result)
     }
-    func fetchPopularMovies(result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchPopularMovies(result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.popularMovies, result: result)
     }
-    func fetchComingSoonMovies(result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchComingSoonMovies(result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.coomingSoonMovies, result: result)
     }
-    func fetchShowingTodayTVShows(result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchShowingTodayTVShows(result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.showingTodayTVShows, result: result)
     }
-    func fetchTopRatedTVShows(result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchTopRatedTVShows(result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.topRatedTVShows, result: result)
     }
-    func fetchPopularTVShows(result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchPopularTVShows(result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.popularTVShows, result: result)
     }
-    func fetchCredits(forMovieID movieID:String,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchCredits(forMovieID movieID:String,result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.credits(forMovieID: movieID), result: result)
     }
-    func fetchTVShowCredits(forTVShowID tvShowID:String,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    func fetchTVShowCredits(forTVShowID tvShowID:String,result:(jsonResult:JSON?,error:ErrorType?)->Void){
         getRequest(forPath: APIPath.tvShowCredits(forTVShowID: tvShowID), result: result)
     }
     func signUp(){
@@ -79,53 +80,92 @@ class TMDB {
             UIApplication.sharedApplication().openURL(url)
         }
     }
-//    func validateUser(withUsername username:String,password:String){
-//        
-//        let url =  "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(apiKey)&request_token=a53847aa97d859289308cad093f6cc1764b756b6&username=\(username)&password=\(password)"
-//        request(.GET, url).validate().responseJSON { (respond) in
-//            switch respond.result{
-//            case .Success(let jsonResult):
-//                token = jsonResult["request_token"]
-//            case.Failure(let error):
-//                print(error)
-//            }
-//            
-//        }
-//        
-//    }
+    
+    func loginWithUsername(username:String,and password:String){
+        
+        guard let _ = self.token else{
+            
+            let url = "https://api.themoviedb.org/3/authentication/token/new?api_key=\(apiKey)"
+            request(.GET, url).validate().responseJSON { (response) in
+                switch response.result{
+                case .Success(let jsonResult):
+                    
+                    let result = JSON(jsonResult)
+                    self.token = ["AcessToken":result["request_token"].stringValue]
+                    self.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
+                    
+                    print(self.token)
+                case .Failure(let error):
+                    self.token = nil
+                    print(error)
+                }
+            }
+            return
+        }
+        validateUser(withUsername: username, password:password)
+    }
+
     func validateUser(withUsername username:String,password:String){
         
-        let url = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(apiKey)&request_token=77e07a959e2d24e5ca19f6e1ba515297401c8be8&username=\(username)&password=\(password)"
-        request(.GET, url).validate().responseJSON { (respose) in
-            switch respose.result{
-            case .Success(let jsonResult):
-                
-                print(jsonResult)
-                let resolt = JSON(jsonResult)
-                self.token = resolt["request_token"].stringValue
-                
-            case .Failure(let error):
-                print(error)
-            }
-            let url = "https://api.themoviedb.org/3/authentication/session/new?api_key=\(self.apiKey)&request_token=\(self.token)"
+        if let tok = self.token!["AcessToken"]{
             
-            request(.GET, url).validate().responseJSON{ (response) in
-                switch respose.result{
+            let url = "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=\(self.apiKey)&request_token=\(tok)&username=\(username)&password=\(password)"
+            request(.GET, url).validate().responseJSON { (response) in
+                switch response.result{
                 case .Success(let jsonResult):
+                    self.getSessionID()
                     print(jsonResult)
-                    let resolt = JSON(jsonResult)
-                    self.sesionID = resolt["session_id"].stringValue
                 case .Failure(let error):
                     print(error)
                 }
             }
         }
-        
     }
+    
+    func getSessionID(){
+        
+        if let tok = self.token!["AcessToken"]{
+            
+            let url = "https://api.themoviedb.org/3/authentication/session/new?api_key=1a8cf68cea1be9ce3938eb5a6024d19a&request_token=\(tok)"
+            
+            request(.GET, url).validate().responseJSON { (response) in
+                switch response.result{
+                case .Success(let jsonResult):
+                    let result = JSON(jsonResult)
+                    print(jsonResult)
+                    self.sesionID = ["sesion_id":result["sesion_id"].stringValue]
+                case .Failure(let error):
+                    self.sesionID = nil
+                    print(error)
+                }
+            }
+        }
+    }
+   
+    
 
     
     
     
+}
+
+// MARK: User Defaults
+extension TMDB {
+    private enum DefaultsKey:String{
+        
+        case acessToken = "AcessToken"
+        case sesiionId = "session_id"
+        
+        func save(value:[String:String]){
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setValue(value, forKey: String(self))
+        }
+        func fetch () ->String?{
+            let defaults = NSUserDefaults.standardUserDefaults()
+            return defaults.stringForKey(String(self))
+        }
+    }
+
 }
 
 extension TMDB {
@@ -201,7 +241,8 @@ extension TMDB {
         
     }
     
-    private func getRequest(forPath path:APIPath,result:(jsonResult:AnyObject?,error:ErrorType?)->Void){
+    private func getRequest(forPath path:APIPath,result:(jsonResult:JSON?,error:ErrorType?)->Void){
+        
         let mutableURLRequest = path.URLRequest
         
         var params = path.parametars
@@ -218,13 +259,19 @@ extension TMDB {
         request(fullMutableURLRequest).validate().responseJSON { (response) in
             
             switch response.result{
-            case.Success(let jsonResult):
-                return result(jsonResult: jsonResult, error: nil)
-            case.Failure(let error):
+                
+            case .Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    result(jsonResult: json, error: nil)
+                }
+            case .Failure(let error):
                 result(jsonResult: nil, error: error)
+                
+                
             }
-            
         }
     }
 }
+
 

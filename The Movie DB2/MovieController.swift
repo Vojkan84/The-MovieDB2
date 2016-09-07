@@ -25,26 +25,21 @@ class MovieController: UIViewController{
     
     var movieLists = ["Poster","Now Showing","Coming Soon","Popular"]
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-    
-        
-         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         navigationController?.navigationBar.barTintColor = UIColor.blackColor()
         navigationController?.navigationBar.tintColor = UIColor.blackColor()
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         
-       
-        
         fetchData()
         startTimer()
-
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("MEMORY WARNING")
@@ -52,49 +47,47 @@ class MovieController: UIViewController{
     
     func fetchData(){
         
-      DataManager.sharedManager.fetchNowShowingMovies { (movies, error) in
-        
+    MovieService.sharedInstace.fetchNowShowingMoviesFromAPI { (movies, error) in
         if let err = error{
             print(err)
         }else{
             self.nowShowingMovies = movies
             self.tableView.reloadData()
         }
-//
         }
-//      
-//        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
-   
-    
-//        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
-//            
-//            if let err = error {
-//                print(err)
-//            }else{
-//                self.nowShowingMovies = movies
-//                self.tableView.reloadData()
-//                
-//            }
-//            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
-//                
-//                if let err = error{
-//                    print(err)
-//                }else{
-//                    self.comingSoonMovies = movies
-//                    self.tableView.reloadData()
-//                }
-//                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
-//                    
-//                    if let err = error{
-//                        print(err)
-//                    }else{
-//                        self.popularMovies = movies
-//                        self.tableView.reloadData()
-//                    }
-//                })
-//            })
-//        }
-
+        //
+        //        TMDB.shaedInstance.validateUser(withUsername: "SpasicVojkan", password: "1Tihavodabregroni")
+        
+        
+        //        TMDBMenager.sharedManager.fetchNowShowingMovies { (movies, error) in
+        //
+        //            if let err = error {
+        //                print(err)
+        //            }else{
+        //                self.nowShowingMovies = movies
+        //                self.tableView.reloadData()
+        //
+        //            }
+        //            TMDBMenager.sharedManager.fetchComingSoonMovies({ (movies, error) in
+        //
+        //                if let err = error{
+        //                    print(err)
+        //                }else{
+        //                    self.comingSoonMovies = movies
+        //                    self.tableView.reloadData()
+        //                }
+        //                TMDBMenager.sharedManager.fetchPopularMovies({ (movies, error) in
+        //
+        //                    if let err = error{
+        //                        print(err)
+        //                    }else{
+        //                        self.popularMovies = movies
+        //                        self.tableView.reloadData()
+        //                    }
+        //                })
+        //            })
+        //        }
+        
     }
     func setupDataForPosterRow(){
         
@@ -109,8 +102,8 @@ class MovieController: UIViewController{
                 }
             }
         }
-    
-    
+        
+        
         let firstItem = expandedMovies.first
         let lastItem = expandedMovies.last
         expandedMovies.insert(lastItem!, atIndex: 0)
@@ -118,9 +111,9 @@ class MovieController: UIViewController{
         self.posterRowMovies = expandedMovies
         
     }
-
     
-
+    
+    
 }
 
 
@@ -147,10 +140,10 @@ extension MovieController:UITableViewDataSource{
             movieCell.collectionView.reloadData()
             return movieCell
         }
-       
+        
         
     }
-  
+    
 }
 
 extension MovieController:UITableViewDelegate{
@@ -182,40 +175,40 @@ extension MovieController:UITableViewDelegate{
         if section == 0{
             return nil
         }else{
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width,height: 40))
-        view.backgroundColor = UIColor.blackColor()
             
-        let movieListLabel = UILabel()
-        movieListLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieListLabel.text = movieLists[section]
-        movieListLabel.backgroundColor = UIColor.blackColor()
-        movieListLabel.font = UIFont.systemFontOfSize(18)
-        movieListLabel.textColor = UIColor.lightGrayColor()
-        
-        let seeAllButton = UIButton()
-        seeAllButton.translatesAutoresizingMaskIntoConstraints = false
-        seeAllButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-        seeAllButton.setTitle("See All", forState: .Normal)
-        seeAllButton.titleLabel?.font = UIFont.systemFontOfSize(14)
-        seeAllButton.backgroundColor = UIColor.clearColor()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width,height: 40))
+            view.backgroundColor = UIColor.blackColor()
+            
+            let movieListLabel = UILabel()
+            movieListLabel.translatesAutoresizingMaskIntoConstraints = false
+            movieListLabel.text = movieLists[section]
+            movieListLabel.backgroundColor = UIColor.blackColor()
+            movieListLabel.font = UIFont.systemFontOfSize(18)
+            movieListLabel.textColor = UIColor.lightGrayColor()
+            
+            let seeAllButton = UIButton()
+            seeAllButton.translatesAutoresizingMaskIntoConstraints = false
+            seeAllButton.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+            seeAllButton.setTitle("See All", forState: .Normal)
+            seeAllButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+            seeAllButton.backgroundColor = UIColor.clearColor()
             seeAllButton.addTarget(self, action: #selector(performSegue(_:)), forControlEvents: .TouchUpInside)
             
             
-        view.addSubview(movieListLabel)
-        view.addSubview(seeAllButton)
+            view.addSubview(movieListLabel)
+            view.addSubview(seeAllButton)
             
-        
-        let mLLBottomConstraint =  NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: movieListLabel, attribute: .Bottom, multiplier: 1, constant: 4)
-        let mLLLeadingConstraint = NSLayoutConstraint(item: movieListLabel, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1, constant: 4)
-        let seeAllButtonBottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: seeAllButton, attribute: .Bottom, multiplier: 1, constant: -1)
-        let seeAllButtonTrailingConstraint = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: seeAllButton, attribute: .Trailing, multiplier: 1, constant: 8)
+            
+            let mLLBottomConstraint =  NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: movieListLabel, attribute: .Bottom, multiplier: 1, constant: 4)
+            let mLLLeadingConstraint = NSLayoutConstraint(item: movieListLabel, attribute: .Leading, relatedBy: .Equal, toItem: view, attribute: .Leading, multiplier: 1, constant: 4)
+            let seeAllButtonBottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: seeAllButton, attribute: .Bottom, multiplier: 1, constant: -1)
+            let seeAllButtonTrailingConstraint = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: seeAllButton, attribute: .Trailing, multiplier: 1, constant: 8)
             
             view.addConstraint(mLLBottomConstraint)
             view.addConstraint(mLLLeadingConstraint)
             view.addConstraint(seeAllButtonBottomConstraint)
             view.addConstraint(seeAllButtonTrailingConstraint)
-        return view
+            return view
         }
         
     }
@@ -223,7 +216,7 @@ extension MovieController:UITableViewDelegate{
 }
 
 extension MovieController:UICollectionViewDataSource{
-
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch collectionView.tag {
@@ -256,11 +249,11 @@ extension MovieController:UICollectionViewDataSource{
             return 0
         }
         
-   
-
-
+        
+        
+        
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 100{
@@ -294,12 +287,12 @@ extension MovieController:UICollectionViewDataSource{
         
     }
     
-  
-
+    
+    
 }
 extension MovieController:UICollectionViewDelegateFlowLayout{
     
-
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if collectionView.tag == 100{
@@ -309,16 +302,16 @@ extension MovieController:UICollectionViewDelegateFlowLayout{
             
             return CGSize(width: itemWidth, height: itemHeight)
         }
-   
+        
         let itemsPerRow : CGFloat = 3
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         let itemWidth = (collectionView.bounds.size.width - 4*layout.minimumInteritemSpacing)/itemsPerRow
         let itemHeight = collectionView.bounds.size.height
         return CGSize(width: itemWidth, height: itemHeight)
-      
+        
         
     }
-        
+    
 }
 // Scrolling system for posterRow
 
@@ -331,9 +324,9 @@ extension MovieController{
         if posterRow != nil{
             
             if scrollView != posterRow {return}
-        
+            
             let contentOffSetWhenFullyScrolledRight = posterRow!.frame.size.width * CGFloat(self.posterRowMovies!.count - 1)
-        
+            
             // when scrollView is fully scrolled to right
             if scrollView.contentOffset.x == contentOffSetWhenFullyScrolledRight{
                 let newIndexPath = NSIndexPath(forItem: 1, inSection: 0)
@@ -347,7 +340,7 @@ extension MovieController{
             }
             // restart timer
             restartTimer()
-
+            
         }
         
         
@@ -372,19 +365,19 @@ extension MovieController{
     }
     
     
-
+    
 }
 
 //segues
 extension MovieController{
     
     func performSegue(sender:UIButton){
-    
+        
         self.performSegueWithIdentifier("seeAllSegue", sender: sender)
     }
-
-     
-
+    
+    
+    
 }
 
 

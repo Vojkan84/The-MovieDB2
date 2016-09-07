@@ -26,11 +26,11 @@ class Movie:Object{
 //        return convertGenreIDsToNames()
 //    }
     
-    dynamic var moviePosterPath :String? 
+    dynamic var moviePosterPath = ""
     dynamic var backdropPath:String?
     dynamic var moviePosterUrl:NSURL?{
         
-         let posterPath = "https://image.tmdb.org/t/p/w780"+"\(self.moviePosterPath)" 
+         let posterPath = "https://image.tmdb.org/t/p/w342"+"\(self.moviePosterPath)" 
         
         return NSURL(string:posterPath)
         

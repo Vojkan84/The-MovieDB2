@@ -32,9 +32,10 @@ extension MovieService{
     func fetchNowShowingMoviesFromAPI(result:(movies:[Movie]?,error:NSError?)->Void){
         
         var movies:[Movie]=[]
-        request(.GET, "https://api.themoviedb.org/3/movie/now_playing?\(apiKey)").validate().responseJSON { (response) in
+        request(.GET, "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
+                
                 if let value = response.result.value{
                     let json = JSON(value)
                     print("JSON: \(json)")
@@ -59,8 +60,9 @@ extension MovieService{
                             movie.youTubeKey = nil
                             movie.voteAverage = voteAverage
                             movie.overview = overview
+                            movie.moviePosterPath = moviePosterPath
                             movie.releaseDate = realiseDate
-                            moviePosterPath = "https://image.tmdb.org/t/p/w342\(moviePosterPath)"
+                        
                         movies.append(movie)
                         
                     }

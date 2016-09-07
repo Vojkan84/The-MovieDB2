@@ -266,8 +266,8 @@ extension MovieController:UICollectionViewDataSource{
         }else if collectionView.tag == 101{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
-            let URLString = nowShowingMovies![indexPath.row].moviePosterPath
-            let URL = NSURL(string: URLString!)
+            let URL = nowShowingMovies![indexPath.row].moviePosterUrl
+//            let URL = NSURL(string: URLString)
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else if collectionView.tag == 102{

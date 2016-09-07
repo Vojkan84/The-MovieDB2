@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class MovieService{
     
+    
     // singlton
     static let sharedInstace = MovieService()
     

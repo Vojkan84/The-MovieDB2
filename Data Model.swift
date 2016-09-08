@@ -23,6 +23,7 @@ class Movie:Object{
     
     dynamic var movieTitle:String = ""
     dynamic var movieID:String = ""
+    dynamic var apiPage = 0.0
     dynamic var movieList:String = ""
     dynamic var youTubeKey:String?
     dynamic var voteAverage: Double = 0.0

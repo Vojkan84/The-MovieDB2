@@ -349,8 +349,21 @@ extension MovieController{
 extension MovieController{
     
     func performSegue(sender:UIButton){
-        
-        self.performSegueWithIdentifier("seeAllSegue", sender: sender)
+        let position:CGPoint = sender.convertPoint(CGPointZero, toView: self.tableView)
+        if let indexPath = self.tableView.indexPathForRowAtPoint(position){
+            let section = indexPath.section
+            switch section{
+            case 0:
+                self.performSegueWithIdentifier("showPopularMovies", sender: sender)
+            case 1:
+                self.performSegueWithIdentifier("showNowShowingMovies", sender: sender)
+            case 2:
+                self.performSegueWithIdentifier("showComingSoonMovies", sender: sender)
+            case 3:
+                self.performSegueWithIdentifier("showPopularMovies", sender: sender)
+            default:break
+            }
+        }
     }
 }
 

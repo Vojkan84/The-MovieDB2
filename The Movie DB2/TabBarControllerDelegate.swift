@@ -10,7 +10,6 @@ import UIKit
 
 class TabBarControllerDelegate: NSObject,UITabBarControllerDelegate{
     
-    
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         
         if viewController is ProfileNavigationController{

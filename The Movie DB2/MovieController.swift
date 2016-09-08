@@ -253,19 +253,19 @@ extension MovieController:UICollectionViewDataSource{
             
         }else if collectionView.tag == 101{
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let URL = nowShowingMovies![indexPath.row].moviePosterUrl
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else if collectionView.tag == 102{
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let URL = comingSoonMovies![indexPath.row].moviePosterUrl
             cell.photoView.af_setImageWithURL(URL!)
             return cell
         }else{
             
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingCell", forIndexPath: indexPath) as! NowShowingCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let URL = popularMovies![indexPath.row].moviePosterUrl
             print(URL)
             cell.photoView.af_setImageWithURL(URL!)

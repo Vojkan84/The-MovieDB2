@@ -1,15 +1,15 @@
 //
-//  MovieListRowCell.swift
+//  NowShowingCell.swift
 //  The Movie DB2
 //
-//  Created by Vojkan Spasic on 8/18/16.
+//  Created by Vojkan Spasic on 9/8/16.
 //  Copyright © 2016 Vojkan Spasic. All rights reserved.
 //
 
 import UIKit
 
-class NowShowingCell: UICollectionViewCell {
+class NowShowingCell:UICollectionViewCell{
+
 
     @IBOutlet weak var photoView: UIImageView!
-    
 }

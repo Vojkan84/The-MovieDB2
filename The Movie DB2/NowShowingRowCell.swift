@@ -1,5 +1,5 @@
 //
-//  PopularCell.swift
+//  MovieListRowCell.swift
 //  The Movie DB2
 //
 //  Created by Vojkan Spasic on 8/18/16.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class PopularCell: UICollectionViewCell {
+class NowShowingRowCell: UICollectionViewCell {
 
     @IBOutlet weak var photoView: UIImageView!
+    
 }

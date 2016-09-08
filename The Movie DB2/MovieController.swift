@@ -44,7 +44,7 @@ class MovieController: UIViewController{
     }
     
     func fetchData(){
-        MovieService.sharedInstace.fetchNowShowingMoviesFromAPI { (movies, error) in
+        MovieService.sharedInstace.fetchNowShowingMoviesFromAPI(page: 1) { (movies, error) in
             if let err = error{
                 print(err)
             }else{

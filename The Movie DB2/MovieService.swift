@@ -24,7 +24,7 @@ class MovieService{
 extension MovieService{
     
     //     Otprilike bi ovako dohvato listu filmova,closure bi vratio ili filmove ili gresku
-    func fetchNowShowingMoviesFromAPI(result:(movies:[Movie]?,error:NSError?)->Void){
+    func fetchNowShowingMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
         request(.GET, "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
@@ -108,6 +108,7 @@ extension MovieService{
     
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
+            let apiPage = json["page"].doubleValue
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue
             let movieId = item["id"].stringValue
@@ -125,6 +126,7 @@ extension MovieService{
             let movie = Movie()
             movie.movieTitle = movieTitle
             movie.movieID = movieId
+            movie.apiPage = apiPage
             movie.youTubeKey = nil
             movie.voteAverage = voteAverage
             movie.overview = overview

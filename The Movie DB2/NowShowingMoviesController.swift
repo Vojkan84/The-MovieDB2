@@ -20,6 +20,8 @@ class NowShowingMoviesController:UIViewController{
         super.viewDidLoad()
         
         self.title = "Now Showing"
+        
+        self.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
 
     }
     
@@ -43,7 +45,20 @@ extension NowShowingMoviesController:UICollectionViewDataSource{
         cell.photoView.af_setImageWithURL(URL!)
         return cell
     }
+}
 
+extension NowShowingMoviesController:UICollectionViewDelegate{
     
-
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    
+        let itemsPerRow : CGFloat = 3
+        let itemsPerColumn:CGFloat = 3
+        
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        let itemWidth = (collectionView.bounds.size.width - 2*layout.minimumInteritemSpacing)/itemsPerRow
+        let itemHeight = (collectionView.bounds.size.height - 4*layout.minimumLineSpacing)/itemsPerColumn
+        return CGSize(width: itemWidth, height: itemHeight)
+    
+    }
+    
 }

@@ -381,7 +381,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="E9m-Ww-2LK" id="Wkh-cs-FAc"/>
-                        <segue destination="U3V-IP-QWR" kind="show" identifier="showNowShoowingMovies" id="hAo-wA-1VT"/>
+                        <segue destination="U3V-IP-QWR" kind="show" identifier="showNowShowingMovies" id="hAo-wA-1VT"/>
                         <segue destination="b5S-xh-nIs" kind="show" identifier="showComingSoonMovies" id="FF8-nQ-B69"/>
                         <segue destination="7Ye-4o-xxL" kind="show" identifier="showPopularMovies" id="Rb4-Ym-Dge"/>
                     </connections>
@@ -421,8 +421,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WIh-7g-z0R">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R37-L4-lqV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="R37-L4-lqV">
                                     <size key="itemSize" width="106" height="118"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -465,7 +465,13 @@
                             <constraint firstItem="WIh-7g-z0R" firstAttribute="top" secondItem="krk-YS-kh6" secondAttribute="bottom" id="ThP-GU-mYc"/>
                             <constraint firstItem="WIh-7g-z0R" firstAttribute="leading" secondItem="bJj-JZ-QD5" secondAttribute="leading" id="Xss-xc-OvI"/>
                             <constraint firstAttribute="trailing" secondItem="WIh-7g-z0R" secondAttribute="trailing" id="eKu-Tc-IRg"/>
+                            <constraint firstItem="WIh-7g-z0R" firstAttribute="top" secondItem="bJj-JZ-QD5" secondAttribute="topMargin" id="fe5-Q8-p0N"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ThP-GU-mYc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

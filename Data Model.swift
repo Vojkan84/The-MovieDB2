@@ -9,6 +9,12 @@
 import Foundation
 import RealmSwift
 
+class Genre:Object{
+
+    dynamic var id:String = ""
+    dynamic var name:String = ""
+}
+
 
 
 

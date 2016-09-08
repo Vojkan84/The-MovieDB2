@@ -20,7 +20,7 @@ class MovieService{
     private var apiKey = "1a8cf68cea1be9ce3938eb5a6024d19a"
     
 }
-
+//Networking
 extension MovieService{
     
     //     Otprilike bi ovako dohvato listu filmova,closure bi vratio ili filmove ili gresku
@@ -80,7 +80,7 @@ extension MovieService{
             }
         }
     }
-    private func parseMovieJson(json:JSON)->[Movie]{
+        private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue
@@ -112,7 +112,6 @@ extension MovieService{
     }
     // ovde snimam pojedinacni film u bazu
     func saveMovie(movie:Movie){
-        
         let realm = try! Realm()
         try! realm.write{
             realm.add(movie,update: true)

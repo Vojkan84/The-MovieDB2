@@ -48,7 +48,6 @@ class MovieController: UIViewController{
     }
     
     func fetchData(){
-        
         MovieService.sharedInstace.fetchNowShowingMoviesFromAPI { (movies, error) in
             if let err = error{
                 print(err)

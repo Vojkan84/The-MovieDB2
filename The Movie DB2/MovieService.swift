@@ -80,7 +80,33 @@ extension MovieService{
             }
         }
     }
-        private func parseMovieJson(json:JSON)->[Movie]{
+    func fetchListOfMovieGenres(result:(genres:[Genre]?,error:NSError?)->Void){
+        var genres:[Genre] = []
+        request(.GET, "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)").validate().responseJSON { (response) in
+            switch response.result{
+            case .Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    for item in json["genres"].arrayValue{
+                        let id = item["id"].stringValue
+                        let name = item["name"].stringValue
+                        
+                        let genre = Genre()
+                        genre.id = id
+                        genre.name = name
+                        genres.append(genre)
+                    }
+                    print(genres)
+                    result(genres: genres, error: nil)
+                }
+            case .Failure(let error):
+                result(genres: nil, error: error)
+                print (error)
+            }
+        }
+    }
+    
+    private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue

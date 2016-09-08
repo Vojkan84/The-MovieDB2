@@ -32,10 +32,6 @@ class MovieController: UIViewController{
         super.viewDidLoad()
         
         print(Realm.Configuration.defaultConfiguration.fileURL)
-        
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
-        navigationController?.navigationBar.tintColor = UIColor.blackColor()
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0)
         
         fetchData()
@@ -353,8 +349,6 @@ extension MovieController{
         if let indexPath = self.tableView.indexPathForRowAtPoint(position){
             let section = indexPath.section
             switch section{
-            case 0:
-                self.performSegueWithIdentifier("showPopularMovies", sender: sender)
             case 1:
                 self.performSegueWithIdentifier("showNowShowingMovies", sender: sender)
             case 2:

@@ -10,5 +10,12 @@ import UIKit
 import RealmSwift
 
 class PopularMoviesController:UIViewController{
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Popular"
+       
+    }
 
 }

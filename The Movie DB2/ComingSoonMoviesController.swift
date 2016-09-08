@@ -10,5 +10,13 @@ import UIKit
 import RealmSwift
 
 class ComingSoonMoviesController:UIViewController{
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Coming Soon"
+        
+
+    }
 
 }

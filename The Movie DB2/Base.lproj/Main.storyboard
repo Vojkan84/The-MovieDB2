@@ -382,13 +382,13 @@
                     <connections>
                         <outlet property="tableView" destination="E9m-Ww-2LK" id="Wkh-cs-FAc"/>
                         <segue destination="U3V-IP-QWR" kind="show" identifier="showNowShoowingMovies" id="hAo-wA-1VT"/>
-                        <segue destination="b5S-xh-nIs" kind="show" identifier="showPopularMovies" id="FF8-nQ-B69"/>
-                        <segue destination="7Ye-4o-xxL" kind="show" identifier="showComingSoonMovies" id="Rb4-Ym-Dge"/>
+                        <segue destination="b5S-xh-nIs" kind="show" identifier="showComingSoonMovies" id="FF8-nQ-B69"/>
+                        <segue destination="7Ye-4o-xxL" kind="show" identifier="showPopularMovies" id="Rb4-Ym-Dge"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCT-bn-osd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1895.5" y="-2202.5"/>
+            <point key="canvasLocation" x="-1895.5" y="-2152.5"/>
         </scene>
         <!--Coming Soon Movies Controller-->
         <scene sceneID="G40-vd-1cB">
@@ -666,7 +666,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDy-CE-Wil" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2338.5" y="-2202.5"/>
+            <point key="canvasLocation" x="-2365.5" y="-2152.5"/>
         </scene>
         <!--TV Shows-->
         <scene sceneID="ohX-uZ-Zxq">

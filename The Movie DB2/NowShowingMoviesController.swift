@@ -13,4 +13,11 @@ class NowShowingMoviesController:UIViewController{
     
     var nowShowingMovies:Results<Movie>?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Now Showing"
+
+    }
+    
 }

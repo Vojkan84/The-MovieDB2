@@ -1,5 +1,5 @@
 //
-//  NowPlayingMoviesController.swift
+//  PopularMoviesController.swift
 //  The Movie DB2
 //
 //  Created by Vojkan Spasic on 9/8/16.
@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 
-class NowShowingMoviesController:UIViewController{
-    
-    var nowShowingMovies:Results<Movie>?
-    
+class PopularMoviesController:UIViewController{
+
 }

@@ -14,16 +14,17 @@ class MovieController: UIViewController{
     let realm = try! Realm()
     
     @IBOutlet weak var tableView: UITableView!
-    var nowShowingMovies:Results<Movie>?
-    var comingSoonMovies:Results<Movie>?
-    var popularMovies:Results<Movie>?{
+    var nowShowingMovies:[Movie]?
+    var comingSoonMovies:[Movie]?
+    var popularMovies:[Movie]?{
         didSet{
             setupDataForPosterRow()
         }
     }
+    var posterRowMovies:[Movie]?
     var timer = NSTimer()
     var indexPathsForPosterROw = NSIndexPath(forItem: 0, inSection: 0)
-    var posterRowMovies:[Movie]?
+    
     
     var movieLists = ["Poster","Now Showing","Coming Soon","Popular"]
     
@@ -51,31 +52,55 @@ class MovieController: UIViewController{
                 for movie in movies!{
                     MovieService.sharedInstace.saveMovie(movie)
                 }
-                self.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
+                
+                let movies = self.realm.objects(Movie.self).filter("movieList = 'now_playing' AND moviePosterPath != '' ")
+                var first20Movies:[Movie] = []
+                for i in 0..<20{
+                    let movie = movies[i]
+                    first20Movies.append(movie)
+                    self.nowShowingMovies = first20Movies
+                    
+                }
                 self.tableView.reloadData()
             }
-            MovieService.sharedInstace.fetchPopularMoviesFromAPI({ (movies, error) in
+            MovieService.sharedInstace.fetchPopularMoviesFromAPI(page:1){ (movies, error) in
                 if let err = error{
                     print(err)
                 }else{
                     for movie in movies!{
                         MovieService.sharedInstace.saveMovie(movie)
                     }
-                    self.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
+                    
+                    let movies = self.realm.objects(Movie.self).filter("movieList = 'popular' AND moviePosterPath != '' ")
+                    var first20Movies:[Movie] = []
+                    for i in 0..<20{
+                        let movie = movies[i]
+                        first20Movies.append(movie)
+                        self.popularMovies = first20Movies
+                        
+                    }
                     self.tableView.reloadData()
                 }
-                MovieService.sharedInstace.fetchComingSoonMoviesFromAPI({ (movies, error) in
+                MovieService.sharedInstace.fetchComingSoonMoviesFromAPI(page:1){ (movies, error) in
                     if let err = error{
                         print(err)
                     }else{
                         for movie in movies!{
                             MovieService.sharedInstace.saveMovie(movie)
                         }
-                        self.comingSoonMovies = MovieService.sharedInstace.loadMovies(fromList: "coming_soon")
+                        
+                        let movies = self.realm.objects(Movie.self).filter("movieList = 'coming_soon' AND moviePosterPath != '' ")
+                        var first20Movies:[Movie] = []
+                        for i in 0..<20{
+                            let movie = movies[i]
+                            first20Movies.append(movie)
+                            self.comingSoonMovies = first20Movies
+                            
+                        }
                         self.tableView.reloadData()
                     }
-                })
-            })
+                }
+            }
         }
     }
     func setupDataForPosterRow(){
@@ -198,6 +223,9 @@ extension MovieController:UITableViewDelegate{
             view.addConstraint(seeAllButtonTrailingConstraint)
             return view
         }
+        
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
@@ -358,6 +386,32 @@ extension MovieController{
             default:break
             }
         }
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "movieToMovieDetail"{
+            let collectionViewCell = sender as! UICollectionViewCell
+            let collectionView = collectionViewCell.superview as! UICollectionView
+            let position:CGPoint = collectionViewCell.convertPoint(CGPointZero, toView: collectionView)
+            if let indexPath = collectionView.indexPathForItemAtPoint(position){
+                switch collectionView.tag {
+                case 100:
+                    let movieDetailController = segue.destinationViewController as! MovieDetailController
+                    movieDetailController.movie = popularMovies![indexPath.item]
+                case 101:
+                    let movieDetailController = segue.destinationViewController as! MovieDetailController
+                    movieDetailController.movie = nowShowingMovies![indexPath.item]
+                case 102:
+                    let movieDetailController = segue.destinationViewController as! MovieDetailController
+                    movieDetailController.movie = comingSoonMovies![indexPath.item]
+                case 103:
+                    let movieDetailController = segue.destinationViewController as! MovieDetailController
+                    movieDetailController.movie = popularMovies![indexPath.item]
+                default:break
+                }
+            }
+        }
+        
     }
 }
 

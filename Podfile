@@ -12,6 +12,7 @@ target 'The Movie DB2’ do
   pod 'RealmSwift’   ,  '~> 1.0.2’	
   pod 'SwiftyOAuth', :git => 'https://github.com/delba/SwiftyOAuth.git'	
   pod "TMDBSwift"
+  pod 'CCBottomRefreshControl'
 
   
 

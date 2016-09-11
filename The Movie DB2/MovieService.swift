@@ -25,7 +25,7 @@ extension MovieService{
     
     //     Otprilike bi ovako dohvato listu filmova,closure bi vratio ili filmove ili gresku
     func fetchNowShowingMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)").validate().responseJSON { (response) in
+        request(.GET, "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -44,8 +44,8 @@ extension MovieService{
     }
     
     
-    func fetchPopularMoviesFromAPI(result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)").validate().responseJSON { (response) in
+    func fetchPopularMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
+        request(.GET, "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -62,8 +62,8 @@ extension MovieService{
             }
         }
     }
-    func fetchComingSoonMoviesFromAPI(result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)").validate().responseJSON { (response) in
+    func fetchComingSoonMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
+        request(.GET, "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -108,6 +108,7 @@ extension MovieService{
     
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
+        
             let apiPage = json["page"].doubleValue
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue
@@ -140,6 +141,7 @@ extension MovieService{
     }
     // ovde snimam pojedinacni film u bazu
     func saveMovie(movie:Movie){
+        
         let realm = try! Realm()
         try! realm.write{
             realm.add(movie,update: true)
@@ -147,8 +149,9 @@ extension MovieService{
     }
     // ovde ucitavam listu filmova iz baze, nisam siguran da je nacin filtriranja dobar(filtriram pod pretpostavkom da sam film entitetu dodelio atribut movieList.Nisam do sada koristio notifikacije a pretpostavlja da bi model sa controller-om trebao da komunicira preko notifikacija tako da ova funkcija vraca Results<Movie> ne znam kako bi njih pretvorio u niz filmova koji mi treba da bi ga iskoristio kao data source.
     func loadMovies(fromList list:String)->Results<Movie>{
+        
         let realm = try! Realm()
-        let movies = realm.objects(Movie.self).filter("movieList == '\(list)'")
+        let movies = realm.objects(Movie.self).filter("movieList = '\(list)'")
         return movies
     }
 }

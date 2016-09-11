@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
+import AlamofireImage
+import CCBottomRefreshControl
 
 class PosterRowPhotoCell: UICollectionViewCell {
 

@@ -14,6 +14,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CCBottomRefreshControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-The Movie DB2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +62,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F6EE6C8B076DB24E05165C92462D255</key>
+		<key>07A5C9CAB726822DE5FA6B0A449D38FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5AE9B90D549129E975FD32B807E0801C</key>
+		<key>1657930304B84232F19A0D421D9E1A8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>66C041ED72B7CEC9D39A76C50E35C983</key>
+		<key>3A9C77A0ED957CA07BC32310D6D670E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B949227F0F5328D2B5A7FBD8270E95E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3C0589EFE40C1A99034BDCF30AF2DC6A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,17 +92,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C50B01142534B6ECD344C74E63AF6523</key>
+		<key>DD1559592F5FECF5E008347EC681DF67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C9B60DCD517F68FA1D6A6CBC4EA464A9</key>
+		<key>ECDF54B19F70393F7CF4DA8B290089EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE1A3EA8E882DE841F0AF23ABA9532CC</key>
+		<key>F6E667DB320C7C0900BF1CEA832F3D25</key>
 		<dict>
 			<key>primary</key>
 			<true/>

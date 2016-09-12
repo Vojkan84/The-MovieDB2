@@ -32,6 +32,7 @@ class Movie:Object{
     dynamic var genreIds:String = ""
     dynamic var moviePosterPath:String?
     dynamic var backdropPath:String?
+    dynamic var credits:Credits?
     
     dynamic var genreNames:String?{
         let ids = genreIds.componentsSeparatedByString(",")

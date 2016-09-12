@@ -9,9 +9,9 @@
 import Foundation
 import RealmSwift
 
-class Credits {
+class Credits:Object {
     
     dynamic var id:Int = 0
     let casts = List<Cast>()
-    let crewMembers = List<Crew>()
+    let crew = List<CrewMember>()
 }

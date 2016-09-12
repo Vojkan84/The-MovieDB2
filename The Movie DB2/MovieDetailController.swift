@@ -16,12 +16,11 @@ class MovieDetailController:UIViewController{
     @IBOutlet weak var photoView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(movie?.moviePosterUrl)
+    
         let URL = movie?.moviePosterUrl
         self.photoView.af_setImageWithURL(URL!)
         
         
-        
-        
+    
     }
 }

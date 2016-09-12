@@ -312,7 +312,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="88"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-Q2-jhz">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2RC-u5-BmW">
+                                                                        <rect key="frame" x="10" y="33" width="72" height="21"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KJO-CR-FgA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="92" height="88"/>
                                                                     </imageView>
                                                                 </subviews>
@@ -320,13 +326,23 @@
                                                             </view>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="NO3-Q2-jhz" firstAttribute="leading" secondItem="ocq-EC-kXX" secondAttribute="leading" id="1pb-Qi-E8Q"/>
-                                                                <constraint firstItem="NO3-Q2-jhz" firstAttribute="top" secondItem="ocq-EC-kXX" secondAttribute="top" id="7xo-hF-PFw"/>
-                                                                <constraint firstAttribute="trailing" secondItem="NO3-Q2-jhz" secondAttribute="trailing" id="ZQx-RF-SZw"/>
-                                                                <constraint firstAttribute="bottom" secondItem="NO3-Q2-jhz" secondAttribute="bottom" id="tWh-BJ-WLG"/>
+                                                                <constraint firstItem="2RC-u5-BmW" firstAttribute="centerY" secondItem="ocq-EC-kXX" secondAttribute="centerY" id="H7K-gr-kqS"/>
+                                                                <constraint firstItem="KJO-CR-FgA" firstAttribute="top" secondItem="ocq-EC-kXX" secondAttribute="top" id="PSb-N9-EhH"/>
+                                                                <constraint firstAttribute="trailing" secondItem="KJO-CR-FgA" secondAttribute="trailing" id="PXI-qE-2pX"/>
+                                                                <constraint firstAttribute="trailing" secondItem="2RC-u5-BmW" secondAttribute="trailing" constant="10" id="Yt8-L7-mw9"/>
+                                                                <constraint firstItem="2RC-u5-BmW" firstAttribute="leading" secondItem="ocq-EC-kXX" secondAttribute="leading" constant="10" id="bEg-Xj-ohu"/>
+                                                                <constraint firstItem="KJO-CR-FgA" firstAttribute="leading" secondItem="ocq-EC-kXX" secondAttribute="leading" id="l2x-vG-JrL"/>
+                                                                <constraint firstItem="2RC-u5-BmW" firstAttribute="centerX" secondItem="ocq-EC-kXX" secondAttribute="centerX" id="sMu-je-TIT"/>
+                                                                <constraint firstAttribute="bottom" secondItem="KJO-CR-FgA" secondAttribute="bottom" id="uiJ-9z-5oa"/>
                                                             </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="sMu-je-TIT"/>
+                                                                </mask>
+                                                            </variation>
                                                             <connections>
-                                                                <outlet property="photoView" destination="NO3-Q2-jhz" id="WRC-4G-Vp0"/>
+                                                                <outlet property="photoView" destination="KJO-CR-FgA" id="kbJ-C5-s5c"/>
+                                                                <outlet property="titleLabel" destination="2RC-u5-BmW" id="Uqs-Gk-n8O"/>
                                                                 <segue destination="oC9-A7-cMJ" kind="show" identifier="movieToMovieDetail" id="KHF-JY-3ss"/>
                                                             </connections>
                                                         </collectionViewCell>
@@ -978,6 +994,6 @@
         <image name="lock" width="15" height="15"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qxp-kO-aMk"/>
+        <segue reference="KHF-JY-3ss"/>
     </inferredMetricsTieBreakers>
 </document>

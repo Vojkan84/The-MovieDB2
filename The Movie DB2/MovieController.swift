@@ -6,6 +6,9 @@
 //  Copyright © 2016 Vojkan Spasic. All rights reserved.
 //
 
+
+// TO DO - ucrtaj labelu ispod imageView-a u nultom redu tabele
+
 import UIKit
 import RealmSwift
 
@@ -53,8 +56,10 @@ class MovieController: UIViewController{
                     MovieService.sharedInstace.saveMovie(movie)
                 }
                 
-                let movies = self.realm.objects(Movie.self).filter("movieList = 'now_playing' AND moviePosterPath != '' ")
+                let movies = self.realm.objects(Movie.self).filter("movieList = 'now_playing'")
                 var first20Movies:[Movie] = []
+                
+                print(movies)
                 for i in 0..<20{
                     let movie = movies[i]
                     first20Movies.append(movie)
@@ -67,11 +72,13 @@ class MovieController: UIViewController{
                 if let err = error{
                     print(err)
                 }else{
+                    print(movies)
+                    
                     for movie in movies!{
                         MovieService.sharedInstace.saveMovie(movie)
                     }
                     
-                    let movies = self.realm.objects(Movie.self).filter("movieList = 'popular' AND moviePosterPath != '' ")
+                    let movies = self.realm.objects(Movie.self).filter("movieList = 'popular'")
                     var first20Movies:[Movie] = []
                     for i in 0..<20{
                         let movie = movies[i]
@@ -89,7 +96,7 @@ class MovieController: UIViewController{
                             MovieService.sharedInstace.saveMovie(movie)
                         }
                         
-                        let movies = self.realm.objects(Movie.self).filter("movieList = 'coming_soon' AND moviePosterPath != '' ")
+                        let movies = self.realm.objects(Movie.self).filter("movieList = 'coming_soon'")
                         var first20Movies:[Movie] = []
                         for i in 0..<20{
                             let movie = movies[i]
@@ -282,21 +289,38 @@ extension MovieController:UICollectionViewDataSource{
         }else if collectionView.tag == 101{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
-            let URL = nowShowingMovies![indexPath.row].moviePosterUrl
-            cell.photoView.af_setImageWithURL(URL!)
+            let movie = nowShowingMovies![indexPath.row]
+            let URL = movie.moviePosterUrl
+            cell.titleLabel?.text? = movie.movieTitle
+            cell.photoView?.af_setImageWithURL(URL!,
+                                               placeholderImage: UIImage(named:"default"),
+                                               filter: nil,
+                                               imageTransition: .CrossDissolve(0.2)
+            )
             return cell
         }else if collectionView.tag == 102{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
-            let URL = comingSoonMovies![indexPath.row].moviePosterUrl
-            cell.photoView.af_setImageWithURL(URL!)
+            let movie = comingSoonMovies![indexPath.row]
+            let URL = movie.moviePosterUrl
+            cell.titleLabel?.text? = movie.movieTitle
+            cell.photoView?.af_setImageWithURL(URL!,
+                                               placeholderImage: UIImage(named:"default"),
+                                               filter: nil,
+                                               imageTransition: .CrossDissolve(0.2)
+            )
             return cell
         }else{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
-            let URL = popularMovies![indexPath.row].moviePosterUrl
-            print(URL)
-            cell.photoView.af_setImageWithURL(URL!)
+            let movie = popularMovies![indexPath.row]
+            let URL = movie.moviePosterUrl
+            cell.titleLabel.text = movie.movieTitle
+            cell.photoView.af_setImageWithURL(URL!,
+                                              placeholderImage:UIImage(named:"default"),
+                                              filter: nil,
+                                              imageTransition:.CrossDissolve(0.2)
+            )
             return cell
         }
     }

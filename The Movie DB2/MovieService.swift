@@ -112,7 +112,7 @@ extension MovieService{
             let apiPage = json["page"].doubleValue
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue
-            let movieId = item["id"].stringValue
+            let movieId = item["id"].intValue
             let moviePosterPath = item["poster_path"].stringValue
             let voteAverage = round(1000*item["vote_average"].doubleValue)/1000
             let overview = item["overview"].stringValue

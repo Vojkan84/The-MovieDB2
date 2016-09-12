@@ -105,6 +105,56 @@ extension MovieService{
             }
         }
     }
+    func fetchCreditsForMovie(movieId id:Int,result:(credits:Credits?,error:NSError?)->Void){
+        
+        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/credits?api_key=\(apiKey))").validate().responseJSON { (response) in
+            switch response.result{
+            case .Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    let id = json["id"].intValue
+                    let credits = Credits()
+                    credits.id = id
+                    for item in json["cast"].arrayValue{
+                        let castId = item["cast_id"].intValue
+                        let character = item["character"].stringValue
+                        let id = item["id"].intValue
+                        let name = item["name"].stringValue
+                        let order = item["order"].intValue
+                        let profilePath = item["profile_path"].stringValue
+                        let cast = Cast()
+                        cast.id = castId
+                        cast.character = character
+                        cast.id = id
+                        cast.name = name
+                        cast.order = order
+                        cast.profilePath = profilePath
+                        credits.casts.append(cast)
+                    }
+                    for item in json["crew"].arrayValue{
+                        let creditId = item["credit_id"].stringValue
+                        let department = item["depatment"].stringValue
+                        let id = item["id"].intValue
+                        let job = item["job"].stringValue
+                        let name = item["name"].stringValue
+                        let profilePath = item["profile_path"].stringValue
+                        let crewMember = CrewMember()
+                        crewMember.creditId = creditId
+                        crewMember.department = department
+                        crewMember.id = id
+                        crewMember.job = job
+                        crewMember.name = name
+                        crewMember.profilePath = profilePath
+                        credits.crew.append(crewMember)
+                    }
+                    result(credits: credits, error: nil)
+                }
+            case .Failure(let error):
+                    result(credits: nil, error: error)
+                print(error)
+            }
+        }
+    }
     
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
@@ -154,6 +204,7 @@ extension MovieService{
         let movies = realm.objects(Movie.self).filter("movieList = '\(list)'")
         return movies
     }
+    
 }
 
 

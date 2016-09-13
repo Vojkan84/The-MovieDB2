@@ -11,7 +11,12 @@ import RealmSwift
 
 class Credits:Object {
     
+    override class func primaryKey()->String{
+        return "id"
+    }
+
     dynamic var id:Int = 0
     let casts = List<Cast>()
     let crew = List<CrewMember>()
-}
+    
+    }

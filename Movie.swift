@@ -23,9 +23,8 @@ class Movie:Object{
     
     dynamic var movieTitle:String = ""
     dynamic var movieID:Int = 0
-    dynamic var apiPage = 0.0
+    dynamic var apiPage:Int = 0
     dynamic var movieList:String = ""
-    dynamic var youTubeKey:String?
     dynamic var voteAverage: Double = 0.0
     dynamic var overview:String = ""
     dynamic var releaseDate:String = ""
@@ -33,6 +32,8 @@ class Movie:Object{
     dynamic var moviePosterPath:String?
     dynamic var backdropPath:String?
     dynamic var credits:Credits?
+    dynamic var album:MovieAlbum?
+    var videos = List<Video>()
     
     dynamic var genreNames:String?{
         let ids = genreIds.componentsSeparatedByString(",")

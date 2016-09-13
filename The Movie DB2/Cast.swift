@@ -10,6 +10,11 @@ import Foundation
 import RealmSwift
 
 class Cast:Object{
+
+    override class func primaryKey()->String{
+    
+        return "creditId"
+    }
     
     dynamic var castId:Int = 0
     dynamic var character:String = ""
@@ -18,5 +23,6 @@ class Cast:Object{
     dynamic var name:String = ""
     dynamic var order:Int = 0
     dynamic var profilePath:String = ""
+    
     
 }

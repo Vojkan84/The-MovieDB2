@@ -11,10 +11,17 @@ import RealmSwift
 
 class CrewMember:Object{
     
+    
+    override class func primaryKey()->String{
+        return "creditId"
+    }
+    
     dynamic var creditId:String = ""
     dynamic var department:String = ""
     dynamic var id:Int = 0
     dynamic var job:String = ""
     dynamic var name:String = ""
     dynamic var profilePath:String = ""
+    
+    
 }

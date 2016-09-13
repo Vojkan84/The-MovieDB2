@@ -107,7 +107,7 @@ extension MovieService{
     }
     func fetchCreditsForMovie(movieId id:Int,result:(credits:Credits?,error:NSError?)->Void){
         
-        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/credits?api_key=\(apiKey))").validate().responseJSON { (response) in
+        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/credits?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -118,6 +118,7 @@ extension MovieService{
                     for item in json["cast"].arrayValue{
                         let castId = item["cast_id"].intValue
                         let character = item["character"].stringValue
+                        let creditId = item["credit_id"].stringValue
                         let id = item["id"].intValue
                         let name = item["name"].stringValue
                         let order = item["order"].intValue
@@ -125,6 +126,7 @@ extension MovieService{
                         let cast = Cast()
                         cast.id = castId
                         cast.character = character
+                        cast.creditId = creditId
                         cast.id = id
                         cast.name = name
                         cast.order = order
@@ -133,7 +135,7 @@ extension MovieService{
                     }
                     for item in json["crew"].arrayValue{
                         let creditId = item["credit_id"].stringValue
-                        let department = item["depatment"].stringValue
+                        let department = item["department"].stringValue
                         let id = item["id"].intValue
                         let job = item["job"].stringValue
                         let name = item["name"].stringValue
@@ -150,16 +152,79 @@ extension MovieService{
                     result(credits: credits, error: nil)
                 }
             case .Failure(let error):
-                    result(credits: nil, error: error)
+                result(credits: nil, error: error)
                 print(error)
             }
         }
     }
     
+    func fetchMovieAlbum(movieId id:Int,result:(album:MovieAlbum?,error:NSError?)->Void){
+        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/images?api_key=\(apiKey)").validate().responseJSON { (response) in
+            switch response.result{
+            case .Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    
+                    let id = json["id"].intValue
+                    let movieAlbum = MovieAlbum()
+                    movieAlbum.id = id
+                    for item in json["backdrops"].arrayValue{
+                        let aspectRatio = item["ascpect_ratio"].doubleValue
+                        let filePath = item["file_path"].stringValue
+                        let height = item["height"].intValue
+                        //  let iso6391 = item["iso_639_0"].stringValue
+                        let voteAverage = item["vote_average"].doubleValue
+                        let voteCount = item["vote_count"].intValue
+                        let width = item["width"].intValue
+                        let backdrop = Backdrop()
+                        backdrop.aspectRatio = aspectRatio
+                        backdrop.filePath = filePath
+                        backdrop.height = height
+                        backdrop.voteAverage = voteAverage
+                        backdrop.voteCount = voteCount
+                        backdrop.width = width
+                        movieAlbum.backdrops.append(backdrop)
+                    }
+                    result(album: movieAlbum, error: nil)
+                }
+            case .Failure(let error):
+                result(album: nil, error: error)
+            }
+        }
+    }
+    
+    func fetchMovieVideos(movieID id:Int,result:(videos:[Video]?,error:NSError?)->Void){
+        
+        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/videos?api_key=\(apiKey)").validate().responseJSON { (response) in
+            switch response.result{
+            case . Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    var videos = [Video]()
+                    for item in json["results"].arrayValue{
+                        let video = Video()
+                        video.id = item["id"].stringValue
+                        video.key = item["key"].stringValue
+                        video.name = item["name"].stringValue
+                        video.site = item["site"].stringValue
+                        video.size = item["size"].intValue
+                        video.type = item["type"].stringValue
+                        videos.append(video)
+                    }
+                    result(videos: videos, error: nil)
+                }
+            case .Failure(let error):
+                result(videos: nil, error: error)
+                
+            }
+        }
+        
+    }
+    
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []
         
-            let apiPage = json["page"].doubleValue
+        let apiPage = json["page"].intValue
         for item in json["results"].arrayValue{
             let movieTitle = item["original_title"].stringValue
             let movieId = item["id"].intValue
@@ -178,7 +243,6 @@ extension MovieService{
             movie.movieTitle = movieTitle
             movie.movieID = movieId
             movie.apiPage = apiPage
-            movie.youTubeKey = nil
             movie.voteAverage = voteAverage
             movie.overview = overview
             movie.moviePosterPath = moviePosterPath

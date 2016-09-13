@@ -33,6 +33,9 @@
 		E881BD8F1D869F87001ED040 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD8E1D869F87001ED040 /* Credits.swift */; };
 		E881BD911D86A03D001ED040 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD901D86A03D001ED040 /* Cast.swift */; };
 		E881BD931D86A1C3001ED040 /* CrewMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD921D86A1C3001ED040 /* CrewMember.swift */; };
+		E881BD971D87FE3C001ED040 /* Backdrops.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD961D87FE3C001ED040 /* Backdrops.swift */; };
+		E881BD991D882203001ED040 /* MovieAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD981D882203001ED040 /* MovieAlbum.swift */; };
+		E881BD9B1D882649001ED040 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = E881BD9A1D882649001ED040 /* Video.swift */; };
 		E883DBDE1D65812A009210DE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883DBDD1D65812A009210DE /* Movie.swift */; };
 		E883DBE01D658C25009210DE /* NowShowingRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E883DBDF1D658C25009210DE /* NowShowingRowCell.swift */; };
 		E8E0149F1D7AEE600083C3DA /* ProfileNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */; };
@@ -75,6 +78,9 @@
 		E881BD8E1D869F87001ED040 /* Credits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		E881BD901D86A03D001ED040 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		E881BD921D86A1C3001ED040 /* CrewMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrewMember.swift; sourceTree = "<group>"; };
+		E881BD961D87FE3C001ED040 /* Backdrops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backdrops.swift; sourceTree = "<group>"; };
+		E881BD981D882203001ED040 /* MovieAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieAlbum.swift; sourceTree = "<group>"; };
+		E881BD9A1D882649001ED040 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		E883DBDD1D65812A009210DE /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Movie.swift; path = ../Movie.swift; sourceTree = "<group>"; };
 		E883DBDF1D658C25009210DE /* NowShowingRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowShowingRowCell.swift; sourceTree = "<group>"; };
 		E8E0149E1D7AEE600083C3DA /* ProfileNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileNavigationController.swift; sourceTree = "<group>"; };
@@ -188,6 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				E883DBDD1D65812A009210DE /* Movie.swift */,
+				E881BD961D87FE3C001ED040 /* Backdrops.swift */,
+				E881BD9A1D882649001ED040 /* Video.swift */,
+				E881BD981D882203001ED040 /* MovieAlbum.swift */,
 				E881BD8E1D869F87001ED040 /* Credits.swift */,
 				E881BD901D86A03D001ED040 /* Cast.swift */,
 				E881BD921D86A1C3001ED040 /* CrewMember.swift */,
@@ -330,9 +339,11 @@
 				E881BD8F1D869F87001ED040 /* Credits.swift in Sources */,
 				E883DBDE1D65812A009210DE /* Movie.swift in Sources */,
 				E82F7E971D62E78E00590791 /* MovieController.swift in Sources */,
+				E881BD971D87FE3C001ED040 /* Backdrops.swift in Sources */,
 				E8E014A41D7C32BA0083C3DA /* ProfileController.swift in Sources */,
 				E881BD891D8420EF001ED040 /* MovieDetailController.swift in Sources */,
 				E8601F491D6842C900E2ED6A /* TMDBNavigationController.swift in Sources */,
+				E881BD9B1D882649001ED040 /* Video.swift in Sources */,
 				E81AAC0A1D6B179B00308D5F /* TVVideoRow.swift in Sources */,
 				E8E014AA1D7F2CD70083C3DA /* MovieService.swift in Sources */,
 				E8E014A81D7DF1460083C3DA /* Data Manager.swift in Sources */,
@@ -354,6 +365,7 @@
 				E881BD811D817F1E001ED040 /* PopularMoviesController.swift in Sources */,
 				E883DBE01D658C25009210DE /* NowShowingRowCell.swift in Sources */,
 				E82F7E9D1D634C5A00590791 /* PosterRowPhotoCell.swift in Sources */,
+				E881BD991D882203001ED040 /* MovieAlbum.swift in Sources */,
 				E81AAC0E1D6B183800308D5F /* TVVideoCell.swift in Sources */,
 				E81AAC0C1D6B17CF00308D5F /* TVPosterCell.swift in Sources */,
 				E82F7E9B1D6304FB00590791 /* PosterRow.swift in Sources */,
@@ -419,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -459,7 +471,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

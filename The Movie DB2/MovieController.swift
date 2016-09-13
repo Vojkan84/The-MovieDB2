@@ -14,16 +14,17 @@ import RealmSwift
 
 class MovieController: UIViewController{
     
-    let realm = try! Realm()
+    
     
     @IBOutlet weak var tableView: UITableView!
-    var nowShowingMovies:[Movie]?
-    var comingSoonMovies:[Movie]?
-    var popularMovies:[Movie]?{
+    var nowShowingMovies:Results<Movie>?
+    var comingSoonMovies:Results<Movie>?
+    var popularMovies:Results<Movie>?{
         didSet{
             setupDataForPosterRow()
         }
     }
+    
     var posterRowMovies:[Movie]?
     var timer = NSTimer()
     var indexPathsForPosterROw = NSIndexPath(forItem: 0, inSection: 0)
@@ -48,63 +49,52 @@ class MovieController: UIViewController{
     }
     
     func fetchData(){
-        MovieService.sharedInstace.fetchNowShowingMoviesFromAPI(page: 1) { (movies, error) in
+        MovieService.sharedInstace.fetchNowShowingMoviesFromAPI(page: 1) { [weak self](movies, error) in
+            
             if let err = error{
                 print(err)
             }else{
+                let realm = try! Realm()
+             
+                let nowShowingMoviesToken = realm.addNotificationBlock({ [weak self](notification, realm) in
+                    self?.nowShowingMovies = realm.objects(Movie.self).filter("movieList = 'now_playing' AND apiPage = 1")
+                    self!.tableView.reloadData()
+                    
+                    })
                 for movie in movies!{
                     MovieService.sharedInstace.saveMovie(movie)
                 }
+                nowShowingMoviesToken.stop()
                 
-                let movies = self.realm.objects(Movie.self).filter("movieList = 'now_playing'")
-                var first20Movies:[Movie] = []
-                
-                print(movies)
-                for i in 0..<20{
-                    let movie = movies[i]
-                    first20Movies.append(movie)
-                    self.nowShowingMovies = first20Movies
-                    
-                }
-                self.tableView.reloadData()
             }
             MovieService.sharedInstace.fetchPopularMoviesFromAPI(page:1){ (movies, error) in
                 if let err = error{
                     print(err)
                 }else{
-                    print(movies)
-                    
+                    let realm = try! Realm()
+                  
+                   let popularMoviesToken = realm.addNotificationBlock({[weak self](notification, realm) in
+                        self!.popularMovies = realm.objects(Movie.self).filter("movieList = 'popular' AND apiPage = 1")
+                        self!.tableView.reloadData()
+                        })
                     for movie in movies!{
                         MovieService.sharedInstace.saveMovie(movie)
                     }
-                    
-                    let movies = self.realm.objects(Movie.self).filter("movieList = 'popular'")
-                    var first20Movies:[Movie] = []
-                    for i in 0..<20{
-                        let movie = movies[i]
-                        first20Movies.append(movie)
-                        self.popularMovies = first20Movies
-                        
-                    }
-                    self.tableView.reloadData()
+                    popularMoviesToken.stop()
                 }
                 MovieService.sharedInstace.fetchComingSoonMoviesFromAPI(page:1){ (movies, error) in
                     if let err = error{
                         print(err)
                     }else{
+                        let realm = try! Realm()
+                        let commingSoonMoviesToken = realm.addNotificationBlock({[weak self] (notification, realm) in
+                            self!.comingSoonMovies = realm.objects(Movie.self).filter("movieList = 'coming_soon' AND apiPage = 1")
+                            self!.tableView.reloadData()
+                            })
                         for movie in movies!{
                             MovieService.sharedInstace.saveMovie(movie)
                         }
-                        
-                        let movies = self.realm.objects(Movie.self).filter("movieList = 'coming_soon'")
-                        var first20Movies:[Movie] = []
-                        for i in 0..<20{
-                            let movie = movies[i]
-                            first20Movies.append(movie)
-                            self.comingSoonMovies = first20Movies
-                            
-                        }
-                        self.tableView.reloadData()
+                        commingSoonMoviesToken.stop()
                     }
                 }
             }
@@ -420,17 +410,18 @@ extension MovieController{
             if let indexPath = collectionView.indexPathForItemAtPoint(position){
                 switch collectionView.tag {
                 case 100:
+                    
                     let movieDetailController = segue.destinationViewController as! MovieDetailController
-                    movieDetailController.movie = popularMovies![indexPath.item]
+                    movieDetailController.movieId = popularMovies![indexPath.item].movieID
                 case 101:
                     let movieDetailController = segue.destinationViewController as! MovieDetailController
-                    movieDetailController.movie = nowShowingMovies![indexPath.item]
+                    movieDetailController.movieId = nowShowingMovies![indexPath.item].movieID
                 case 102:
                     let movieDetailController = segue.destinationViewController as! MovieDetailController
-                    movieDetailController.movie = comingSoonMovies![indexPath.item]
+                    movieDetailController.movieId = comingSoonMovies![indexPath.item].movieID
                 case 103:
                     let movieDetailController = segue.destinationViewController as! MovieDetailController
-                    movieDetailController.movie = popularMovies![indexPath.item]
+                    movieDetailController.movieId = popularMovies![indexPath.item].movieID
                 default:break
                 }
             }

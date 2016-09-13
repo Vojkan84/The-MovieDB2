@@ -12,7 +12,7 @@ import RealmSwift
 class PopularMoviesController:UIViewController{
     
     
-    let realm = try! Realm()
+    
     var popularMovies:Results<Movie>?
     var refreshControl = UIRefreshControl()
     var currentPage : Double = 1
@@ -31,8 +31,7 @@ class PopularMoviesController:UIViewController{
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         self.collectionView.bottomRefreshControl = refreshControl
         
-        self.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
-        
+        let realm = try! Realm()
         notificationToken = realm.addNotificationBlock({[weak self] (notification, realm) in
             self!.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
             self!.collectionView.reloadData()
@@ -108,7 +107,7 @@ extension PopularMoviesController{
             let cell = sender as! UICollectionViewCell
             let position = cell.convertPoint(CGPointZero, toView: collectionView)
             if let indexPath = collectionView.indexPathForItemAtPoint(position){
-                movieDetailController.movie = self.popularMovies![indexPath.item]
+                movieDetailController.movieId = self.popularMovies![indexPath.item].movieID
             }
         }
     }

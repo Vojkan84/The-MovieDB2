@@ -11,7 +11,7 @@ import RealmSwift
 
 class ComingSoonMoviesController:UIViewController{
     
-    let realm = try! Realm()
+    
     var comingSoonMovies:Results<Movie>?
     var refreshControl = UIRefreshControl()
     var currentPage : Double = 1
@@ -29,13 +29,13 @@ class ComingSoonMoviesController:UIViewController{
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         self.collectionView.bottomRefreshControl = refreshControl
         
-        self.comingSoonMovies = MovieService.sharedInstace.loadMovies(fromList: "coming_soon")
-        
+        let realm = try! Realm()
         notificationToken = realm.addNotificationBlock({[weak self] (notification, realm) in
             self!.comingSoonMovies = MovieService.sharedInstace.loadMovies(fromList: "coming_soon")
             self!.collectionView.reloadData()
             })
-
+        
+        
     }
     func loadNextPage(){
         self.currentPage += 1
@@ -106,7 +106,7 @@ extension ComingSoonMoviesController{
             let cell = sender as! UICollectionViewCell
             let position = cell.convertPoint(CGPointZero, toView: collectionView)
             if let indexPath = collectionView.indexPathForItemAtPoint(position){
-                movieDetailController.movie = self.comingSoonMovies![indexPath.item]
+                movieDetailController.movieId = self.comingSoonMovies![indexPath.item].movieID
             }
         }
     }

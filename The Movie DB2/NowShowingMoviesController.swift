@@ -14,7 +14,7 @@ import CCBottomRefreshControl
 class NowShowingMoviesController:UIViewController{
     
     
-    let realm = try! Realm()
+    
     var nowShowingMovies:Results<Movie>?
     var refreshControl = UIRefreshControl()
     var currentPage : Double = 1
@@ -33,15 +33,11 @@ class NowShowingMoviesController:UIViewController{
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         self.collectionView.bottomRefreshControl = refreshControl
         
-        self.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
-        
+        let realm = try! Realm()
         notificationToken = realm.addNotificationBlock({[weak self] (notification, realm) in
             self!.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
             self!.collectionView.reloadData()
             })
-        
-        
-        
     }
     
     func loadNextPage(){
@@ -107,14 +103,14 @@ extension NowShowingMoviesController:UICollectionViewDelegate{
 }
 // segues
 extension NowShowingMoviesController{
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showMovieDetail"{
             let movieDetailController = segue.destinationViewController as! MovieDetailController
             let cell = sender as! UICollectionViewCell
             let position = cell.convertPoint(CGPointZero, toView: collectionView)
             if let indexPath = collectionView.indexPathForItemAtPoint(position){
-                movieDetailController.movie = self.nowShowingMovies![indexPath.item]
+                movieDetailController.movieId = self.nowShowingMovies![indexPath.item].movieID
             }
         }
     }

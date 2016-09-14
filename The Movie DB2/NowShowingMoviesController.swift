@@ -34,10 +34,17 @@ class NowShowingMoviesController:UIViewController{
         self.collectionView.bottomRefreshControl = refreshControl
         
         let realm = try! Realm()
+        self.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
         notificationToken = realm.addNotificationBlock({[weak self] (notification, realm) in
-            self!.nowShowingMovies = MovieService.sharedInstace.loadMovies(fromList: "now_playing")
             self!.collectionView.reloadData()
             })
+       
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        notificationToken?.stop()
+        
     }
     
     func loadNextPage(){

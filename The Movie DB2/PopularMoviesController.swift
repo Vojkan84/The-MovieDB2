@@ -32,8 +32,8 @@ class PopularMoviesController:UIViewController{
         self.collectionView.bottomRefreshControl = refreshControl
         
         let realm = try! Realm()
+        self.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
         notificationToken = realm.addNotificationBlock({[weak self] (notification, realm) in
-            self!.popularMovies = MovieService.sharedInstace.loadMovies(fromList: "popular")
             self!.collectionView.reloadData()
             })
         
@@ -49,6 +49,10 @@ class PopularMoviesController:UIViewController{
                 }
             }
         }
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        notificationToken?.stop()
     }
     
     func refresh(refreshControl: UIRefreshControl) {

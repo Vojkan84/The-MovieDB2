@@ -17,5 +17,9 @@ class Backdrop:Object{
     dynamic var voteAverage:Double = 0
     dynamic var voteCount:Int = 0
     dynamic var width:Int = 0
+    dynamic var url:NSURL?{
+         let path = "https://image.tmdb.org/t/p/w342\(filePath)"
+         return NSURL(string: path)
+    }
 
 }

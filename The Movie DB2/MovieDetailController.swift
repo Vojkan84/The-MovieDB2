@@ -12,6 +12,8 @@ import RealmSwift
 
 class MovieDetailController:UIViewController{
     
+    
+    var headerNames = ["Paralax","Photos","Trailer","Director","Cast"]
     var movieId:Int?
     var movie:Results<Movie>?{
         didSet{
@@ -33,7 +35,7 @@ class MovieDetailController:UIViewController{
             else{
                 
                 let realm = try! Realm()
-                let movie = realm.objects(Movie.self).filter("movieID = \(self!.movieId!) ")
+
                 MovieService.sharedInstace.fetchMovieAlbum(movieId:self!.movieId!){(album, error) in
                     if let err = error{
                         print(err)
@@ -63,7 +65,7 @@ extension MovieDetailController:UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 6
+        return headerNames.count
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -71,7 +73,27 @@ extension MovieDetailController:UITableViewDataSource{
     }
  
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = UITableViewCell()
+        cell.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        return cell
     }
     
+}
+extension MovieDetailController:UITableViewDelegate{
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0{
+            return (tableView.bounds.height - navigationController!.navigationBar.bounds.height)/2
+        }
+        return tableView.rowHeight
+    }
+
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.min
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return headerNames[section]
+    }
 }

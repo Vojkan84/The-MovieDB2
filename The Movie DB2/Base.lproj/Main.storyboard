@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fNY-D6-lDq">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -563,12 +562,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IsO-kZ-0gC">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="MxJ-dn-BBH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="oC9-A7-cMJ" id="y1P-GD-2Nl"/>
+                                    <outlet property="delegate" destination="oC9-A7-cMJ" id="NPM-kk-4Vd"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IsO-kZ-0gC" firstAttribute="top" secondItem="JSd-5D-Q3L" secondAttribute="bottom" id="0Zp-43-9LU"/>
                             <constraint firstItem="FWt-Zn-yDm" firstAttribute="top" secondItem="IsO-kZ-0gC" secondAttribute="bottom" id="GTn-1k-Pac"/>
+                            <constraint firstItem="MxJ-dn-BBH" firstAttribute="top" secondItem="JSd-5D-Q3L" secondAttribute="bottom" id="Wue-a5-q7a"/>
+                            <constraint firstItem="MxJ-dn-BBH" firstAttribute="leading" secondItem="hCo-Xw-kmf" secondAttribute="leading" id="axY-6D-CQ8"/>
+                            <constraint firstItem="FWt-Zn-yDm" firstAttribute="top" secondItem="MxJ-dn-BBH" secondAttribute="bottom" id="jVr-IM-2WT"/>
                             <constraint firstItem="IsO-kZ-0gC" firstAttribute="leading" secondItem="hCo-Xw-kmf" secondAttribute="leading" id="o6O-V4-c8V"/>
+                            <constraint firstAttribute="trailing" secondItem="MxJ-dn-BBH" secondAttribute="trailing" id="rHG-lK-3kh"/>
                             <constraint firstAttribute="trailing" secondItem="IsO-kZ-0gC" secondAttribute="trailing" id="xXY-Uj-DGD"/>
                         </constraints>
                     </view>

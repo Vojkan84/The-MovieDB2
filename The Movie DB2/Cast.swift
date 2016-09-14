@@ -12,7 +12,6 @@ import RealmSwift
 class Cast:Object{
 
     override class func primaryKey()->String{
-    
         return "creditId"
     }
     

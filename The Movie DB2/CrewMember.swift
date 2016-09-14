@@ -11,7 +11,6 @@ import RealmSwift
 
 class CrewMember:Object{
     
-    
     override class func primaryKey()->String{
         return "creditId"
     }

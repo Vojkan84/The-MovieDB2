@@ -13,6 +13,7 @@ target 'The Movie DB2’ do
   pod 'SwiftyOAuth', :git => 'https://github.com/delba/SwiftyOAuth.git'	
   pod "TMDBSwift"
   pod 'CCBottomRefreshControl'
+  pod "XCDYouTubeKit", "~> 2.5"
 
   
 

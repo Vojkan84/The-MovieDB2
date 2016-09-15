@@ -13,6 +13,7 @@ PODS:
   - SwiftyJSON (2.3.2)
   - SwiftyOAuth (0.4.1)
   - TMDBSwift (0.1.9)
+  - XCDYouTubeKit (2.5.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyOAuth (from `https://github.com/delba/SwiftyOAuth.git`)
   - TMDBSwift
+  - XCDYouTubeKit (~> 2.5)
 
 EXTERNAL SOURCES:
   SwiftyOAuth:
@@ -42,7 +44,8 @@ SPEC CHECKSUMS:
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyOAuth: 6fa3e4fe2154a046ef6e56f02a1ab6c6d240d606
   TMDBSwift: 210e0fee779fa8b94171a74d717887cf7bc5aba2
+  XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
 
-PODFILE CHECKSUM: 8f1fc0b40ba211f96c1469cce904a066a4b24e63
+PODFILE CHECKSUM: 35b4ab41987fd4b23ffaee8cc9e5d38480427246
 
 COCOAPODS: 1.0.1

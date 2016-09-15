@@ -1,5 +1,5 @@
 //
-//  MovieDetailPhotoCell.swift
+//  MovieDetailVideoRow.swift
 //  The Movie DB2
 //
 //  Created by Vojkan Spasic on 9/14/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailPhotoCell:UICollectionViewCell{
-    @IBOutlet weak var photoView: UIImageView!
-}
+class MovieDetailVideRow:UITableViewCell{
 
+    @IBOutlet weak var collectionView: UICollectionView!
+}

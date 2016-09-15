@@ -9,6 +9,8 @@
 import UIKit
 import AlamofireImage
 import RealmSwift
+import XCDYouTubeKit
+
 
 class MovieDetailController:UIViewController{
     
@@ -27,6 +29,11 @@ class MovieDetailController:UIViewController{
     @IBOutlet weak var photoView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nib = UINib(nibName: "HeaderView", bundle: nil)
+        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        
+       
         
         MovieService.sharedInstace.fetchCreditsForMovie(movieId: movieId!) {
             (credits, error) in
@@ -105,8 +112,14 @@ extension MovieDetailController:UITableViewDataSource{
             cell.collectionView.tag = indexPath.section+200
             cell.collectionView.reloadData()
             return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("MovieDetailVideoRow",forIndexPath:indexPath) as! MovieDetailVideRow
+            cell.collectionView.tag = indexPath.section+200
+            cell.collectionView.reloadData()
+            return cell
         default:break
         }
+        
         return UITableViewCell()
         
     }
@@ -119,6 +132,8 @@ extension MovieDetailController:UITableViewDelegate{
             return (tableView.bounds.height - navigationController!.navigationBar.bounds.height)/2 - 44
         case 1:
             return (tableView.bounds.height - navigationController!.navigationBar.bounds.height-44)/3
+        case 2:
+            return (tableView.bounds.height - navigationController!.navigationBar.bounds.height-44)/3
         default:
             return tableView.rowHeight
         }
@@ -128,6 +143,14 @@ extension MovieDetailController:UITableViewDelegate{
             return tableView.bounds.height/1.6
         }
         return tableView.sectionHeaderHeight
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section != 0{
+            let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier("HeaderView") as! HeaderView
+            header.titleLabel.text! = self.sectionNames[section]
+            return header
+        }
+        return UIView()
     }
     
     
@@ -144,8 +167,9 @@ extension MovieDetailController:UICollectionViewDataSource{
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 201:
-            
             return (movie?.first?.album?.backdrops.count)!
+        case 202:
+            return (movie?.first?.videos.count)!
         default:
             return 0
         }
@@ -159,6 +183,16 @@ extension MovieDetailController:UICollectionViewDataSource{
             cell.photoView.af_setImageWithURL(url!,
                                               placeholderImage: UIImage(named: "default"),
                                               imageTransition: .CrossDissolve(0.2))
+            return cell
+        case 202:
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieDetailVideoCell", forIndexPath: indexPath) as! MovieDetailVideoCell
+            let video = self.movie?.first?.videos[indexPath.row]
+            
+            let youTubeKey = video!.key
+            cell.youTubeKey = youTubeKey
+            cell.thumbnailImageView.af_setImageWithURL(video!.thumbnailUrl!)
+            
             return cell
         default:
             break
@@ -175,7 +209,15 @@ extension MovieDetailController:UICollectionViewDelegateFlowLayout{
             let itemHeight = collectionView.bounds.size.height
             return CGSize(width: itemWidth, height: itemHeight)
         }
+        if collectionView.tag == 202{
+            
+            let itemWidth = collectionView.bounds.size.width/4*3
+            let itemHeight = collectionView.bounds.size.height
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
+        
      return CGSize(width: 0, height: 0)
     }
 
 }
+

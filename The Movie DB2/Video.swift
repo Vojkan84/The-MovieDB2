@@ -21,4 +21,8 @@ class Video:Object{
     dynamic var site:String = ""
     dynamic var size:Int = 0
     dynamic var type:String = ""
+    dynamic var thumbnailUrl:NSURL?{
+        
+        return NSURL(string: "https://img.youtube.com/vi/\(key)/hqdefault.jpg")
+    }
 }

@@ -14,7 +14,7 @@ target 'The Movie DB2’ do
   pod "TMDBSwift"
   pod 'CCBottomRefreshControl'
   pod "XCDYouTubeKit", "~> 2.5"
-
+  pod 'MBProgressHUD', '~> 1.0.0'
   
 
 end

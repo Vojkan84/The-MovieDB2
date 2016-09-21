@@ -12,8 +12,7 @@ class HeaderView:UITableViewHeaderFooterView{
 
     @IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {
-        
-        self.contentView.backgroundColor = UIColor(white: 0.1, alpha: 0.95)
+
         
     }
 }

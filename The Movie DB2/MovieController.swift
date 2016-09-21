@@ -55,7 +55,7 @@ class MovieController: UIViewController{
                 print(err)
             }else{
                 let realm = try! Realm()
-             
+                
                 let nowShowingMoviesToken = realm.addNotificationBlock({ [weak self](notification, realm) in
                     self?.nowShowingMovies = realm.objects(Movie.self).filter("movieList = 'now_playing' AND apiPage = 1")
                     self!.tableView.reloadData()
@@ -72,8 +72,8 @@ class MovieController: UIViewController{
                     print(err)
                 }else{
                     let realm = try! Realm()
-                  
-                   let popularMoviesToken = realm.addNotificationBlock({[weak self](notification, realm) in
+                    
+                    let popularMoviesToken = realm.addNotificationBlock({[weak self](notification, realm) in
                         self!.popularMovies = realm.objects(Movie.self).filter("movieList = 'popular' AND apiPage = 1")
                         self!.tableView.reloadData()
                         })
@@ -273,45 +273,65 @@ extension MovieController:UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PHOTOCELL", forIndexPath: indexPath) as! PosterRowPhotoCell
             let URL = posterRowMovies![indexPath.row].backdropUrl
             cell.photoView.af_setImageWithURL(URL!)
-            cell.titleTextField.text = posterRowMovies![indexPath.row].movieTitle
+            cell.titleTextField.text! = posterRowMovies![indexPath.row].movieTitle
             return cell
             
         }else if collectionView.tag == 101{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let movie = nowShowingMovies![indexPath.row]
-            let URL = movie.moviePosterUrl
-            cell.titleLabel?.text? = movie.movieTitle
-            cell.photoView?.af_setImageWithURL(URL!,
-                                               placeholderImage: UIImage(named:"default"),
-                                               filter: nil,
-                                               imageTransition: .CrossDissolve(0.2)
-            )
+            if let URL = movie.moviePosterUrl{
+                cell.titleLabel?.hidden = true
+                cell.photoView?.af_setImageWithURL(URL,
+                                                   placeholderImage: UIImage(named:"default"),
+                                                   filter: nil,
+                                                   imageTransition: .CrossDissolve(0.2)
+                )
+            }else{
+                
+                cell.titleLabel.hidden = false
+                cell.titleLabel.text! = movie.movieTitle
+                cell.photoView.image = UIImage(named: "default")
+            }
             return cell
+            
         }else if collectionView.tag == 102{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let movie = comingSoonMovies![indexPath.row]
-            let URL = movie.moviePosterUrl
-            cell.titleLabel?.text? = movie.movieTitle
-            cell.photoView?.af_setImageWithURL(URL!,
-                                               placeholderImage: UIImage(named:"default"),
-                                               filter: nil,
-                                               imageTransition: .CrossDissolve(0.2)
-            )
+            if let URL = movie.moviePosterUrl{
+                cell.titleLabel?.hidden = true
+                cell.photoView?.af_setImageWithURL(URL,
+                                                   placeholderImage: UIImage(named:"default"),
+                                                   filter: nil,
+                                                   imageTransition: .CrossDissolve(0.2)
+                )
+            }else{
+                cell.titleLabel.hidden = false
+                cell.titleLabel.text! = movie.movieTitle
+                cell.photoView.image = UIImage(named: "default")
+            }
             return cell
+            
+    
         }else{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NowShowingRowCell", forIndexPath: indexPath) as! NowShowingRowCell
             let movie = popularMovies![indexPath.row]
-            let URL = movie.moviePosterUrl
-            cell.titleLabel.text = movie.movieTitle
-            cell.photoView.af_setImageWithURL(URL!,
-                                              placeholderImage:UIImage(named:"default"),
-                                              filter: nil,
-                                              imageTransition:.CrossDissolve(0.2)
-            )
+            if let URL = movie.moviePosterUrl{
+                cell.titleLabel?.hidden = true
+                cell.photoView?.af_setImageWithURL(URL,
+                                                   placeholderImage: UIImage(named:"default"),
+                                                   filter: nil,
+                                                   imageTransition: .CrossDissolve(0.2)
+                )
+            }else{
+                cell.titleLabel.hidden = false
+                cell.titleLabel.text! = movie.movieTitle
+                cell.photoView.image = UIImage(named: "default")
+            }
             return cell
+            
         }
     }
 }

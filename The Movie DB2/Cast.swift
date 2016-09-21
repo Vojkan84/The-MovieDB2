@@ -22,6 +22,9 @@ class Cast:Object{
     dynamic var name:String = ""
     dynamic var order:Int = 0
     dynamic var profilePath:String = ""
-    
+    dynamic var profileImagelUrl:NSURL?{
+        
+        return NSURL(string: "https://image.tmdb.org/t/p/w342\(profilePath)")
+    }
     
 }

@@ -74,17 +74,24 @@ extension ComingSoonMoviesController:UICollectionViewDataSource{
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let movie = comingSoonMovies![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ComingSoonCell", forIndexPath: indexPath) as! ComingSoonCell
-        let URL = movie.moviePosterUrl
-        cell.titleLabel?.text? = movie.movieTitle
-        cell.photoView?.af_setImageWithURL(
-            URL!,
-            placeholderImage: UIImage(named:"default"),
-            filter: nil,
-            imageTransition: .CrossDissolve(0.2))
+        let movie = comingSoonMovies![indexPath.row]
+        if let URL = movie.moviePosterUrl{
+            cell.titleLabel?.hidden = true
+            cell.photoView?.af_setImageWithURL(URL,
+                                               placeholderImage: UIImage(named:"default"),
+                                               filter: nil,
+                                               imageTransition: .CrossDissolve(0.2)
+            )
+        }else{
+            cell.titleLabel.hidden = false
+            cell.titleLabel.text! = movie.movieTitle
+            cell.photoView.image = UIImage(named: "default")
+        }
         return cell
+        
     }
+
 }
 
 extension ComingSoonMoviesController:UICollectionViewDelegate{

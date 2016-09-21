@@ -5,6 +5,7 @@ PODS:
   - CCBottomRefreshControl (0.5.1):
     - Masonry (~> 0.6.2)
   - Masonry (0.6.4)
+  - MBProgressHUD (1.0.0)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
   - Realm/Headers (1.0.2)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - AlamofireImage (~> 2.0)
   - CCBottomRefreshControl
+  - MBProgressHUD (~> 1.0.0)
   - RealmSwift (~> 1.0.2)
   - SwiftyJSON
   - SwiftyOAuth (from `https://github.com/delba/SwiftyOAuth.git`)
@@ -39,6 +41,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
@@ -46,6 +49,6 @@ SPEC CHECKSUMS:
   TMDBSwift: 210e0fee779fa8b94171a74d717887cf7bc5aba2
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
 
-PODFILE CHECKSUM: 35b4ab41987fd4b23ffaee8cc9e5d38480427246
+PODFILE CHECKSUM: 4fa19b904c55f0a2e04417d89d5eee825ff3d645
 
 COCOAPODS: 1.0.1

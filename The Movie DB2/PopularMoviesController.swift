@@ -75,18 +75,23 @@ extension PopularMoviesController:UICollectionViewDataSource{
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let movie = popularMovies![indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PopularCell", forIndexPath: indexPath) as! PopularCell
-        let URL = movie.moviePosterUrl
-        cell.titleLabel?.text? = movie.movieTitle
-        cell.photoView?.af_setImageWithURL(
-            URL!,
-            placeholderImage: UIImage(named:"default"),
-            filter: nil,
-            imageTransition: .CrossDissolve(0.2))
+        let movie = popularMovies![indexPath.row]
+        if let URL = movie.moviePosterUrl{
+            cell.titleLabel?.hidden = true
+            cell.photoView?.af_setImageWithURL(URL,
+                                               placeholderImage: UIImage(named:"default"),
+                                               filter: nil,
+                                               imageTransition: .CrossDissolve(0.2)
+            )
+        }else{
+            cell.titleLabel.hidden = false
+            cell.titleLabel.text! = movie.movieTitle
+            cell.photoView.image = UIImage(named: "default")
+        }
         return cell
-    }
-}
+        
+    }}
 
 extension PopularMoviesController:UICollectionViewDelegate{
     

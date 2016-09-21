@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CF139E6D10D944915385DD0E7A5CECDD'
+               BlueprintIdentifier = 'B11AE8D2761CDAB414FA3AFBF6CAF2FA'
                BlueprintName = 'SwiftyOAuth'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SwiftyOAuth.framework'>

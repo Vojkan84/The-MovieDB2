@@ -21,6 +21,10 @@ class CrewMember:Object{
     dynamic var job:String = ""
     dynamic var name:String = ""
     dynamic var profilePath:String = ""
-    
+    dynamic var profileImagelUrl:NSURL?{
+        
+        return NSURL(string: "https://image.tmdb.org/t/p/w342\(profilePath)")
+    }
+
     
 }

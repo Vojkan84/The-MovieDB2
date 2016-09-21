@@ -10,6 +10,9 @@ import UIKit
 import AlamofireImage
 import RealmSwift
 import XCDYouTubeKit
+import MBProgressHUD
+
+
 
 
 class MovieDetailController:UIViewController{
@@ -17,11 +20,12 @@ class MovieDetailController:UIViewController{
     
     var sectionNames = ["MovieDetail","Photos","Trailer","Director","Cast"]
     var movieId:Int?
+    var viewIsOnScrean:Bool = false
+    var loader:MBProgressHUD?
     var movie:Results<Movie>?{
         didSet{
-            
-            let URL = movie?.first?.moviePosterUrl
-            self.photoView.af_setImageWithURL(URL!)
+                let URL = movie?.first?.moviePosterUrl
+                self.photoView.af_setImageWithURL(URL!)
         }
     }
     
@@ -29,11 +33,18 @@ class MovieDetailController:UIViewController{
     @IBOutlet weak var photoView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         
+        loader = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        loader!.backgroundView.color = UIColor.clearColor()
+      
+
+    
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         let nib = UINib(nibName: "HeaderView", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "HeaderView")
         
-       
+        
         
         MovieService.sharedInstace.fetchCreditsForMovie(movieId: movieId!) {
             (credits, error) in
@@ -57,18 +68,15 @@ class MovieDetailController:UIViewController{
                                 let movieToken = realm.addNotificationBlock({ (notification, realm) in
                                     
                                     self!.movie = realm.objects(Movie.self).filter("movieID = \(self!.movieId!) ")
-                                    print(self!.movie)
                                     self!.tableView.reloadData()
+                                    self!.loader!.hideAnimated(true)
                                 })
                                 
                                 try! realm.write{
                                     
                                     realm.create(Movie.self, value:["movieID":self!.movieId!, "credits":credits!, "album":album!, "videos":videos!],update:true)
-                                    print(self!.movie)
                                 }
-                            
                                 movieToken.stop()
-                        
                             }
                         }
                     }
@@ -76,24 +84,52 @@ class MovieDetailController:UIViewController{
             }
         }
     }
+
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        viewIsOnScrean = true
+            self.tableView.backgroundView?.backgroundColor = UIColor.clearColor()
+            self.tableView.backgroundColor = UIColor.clearColor()
+            self.tableView.reloadData()
+        
+        
+    }
+    override func viewDidDisappear(animated: Bool) {
+        viewIsOnScrean = false
+    }
+    
+   
+    
+    
 }
+
+
 
 extension MovieDetailController:UITableViewDataSource{
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return sectionNames.count
+        if movie != nil && viewIsOnScrean{
+            return sectionNames.count
+        }
+   
+        return 0
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        if movie != nil && viewIsOnScrean{
+            return 1
+        }
+        
+        return 0
     }
+    
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if movie == nil{
-            return UITableViewCell()
-        }
         switch indexPath.section{
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("MovieLegendRow", forIndexPath: indexPath) as! MovieLegendRow
@@ -117,10 +153,22 @@ extension MovieDetailController:UITableViewDataSource{
             cell.collectionView.tag = indexPath.section+200
             cell.collectionView.reloadData()
             return cell
-        default:break
+        case 3:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("MovieDetailDirectorRow", forIndexPath: indexPath) as! MovieDetailDirectorRow
+            cell.collectionView.tag = indexPath.section+200
+            cell.collectionView.reloadData()
+            return cell
+            
+        default:
+            break
         }
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieDetailCastRow", forIndexPath: indexPath) as! MovieDetailCatsRow
+        cell.collectionView.tag = indexPath.section + 200
+        cell.collectionView.reloadData()
+        return cell
         
-        return UITableViewCell()
+        
         
     }
 }
@@ -129,14 +177,26 @@ extension MovieDetailController:UITableViewDelegate{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section{
         case 0:
-            return (tableView.bounds.height - navigationController!.navigationBar.bounds.height)/2 - 44
+            return UITableViewAutomaticDimension
         case 1:
-            return (tableView.bounds.height - navigationController!.navigationBar.bounds.height-44)/3
+            return (tableView.bounds.height - 88)/3
         case 2:
-            return (tableView.bounds.height - navigationController!.navigationBar.bounds.height-44)/3
+            return (tableView.bounds.height - 88)/3
+        case 3:
+            return (tableView.bounds.height - 88)/4
+        case 4:
+            return (tableView.bounds.height - 88)/4
+            
         default:
             return tableView.rowHeight
         }
+        
+    }
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0{
+            return UITableViewAutomaticDimension
+        }
+        return tableView.rowHeight
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0{
@@ -170,35 +230,72 @@ extension MovieDetailController:UICollectionViewDataSource{
             return (movie?.first?.album?.backdrops.count)!
         case 202:
             return (movie?.first?.videos.count)!
+        case 203:
+            return 1
+        case 204:
+            return (movie?.first?.credits?.casts.count)!
         default:
             return 0
         }
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        switch collectionView.tag{
-        case 201:
+        if  collectionView.tag == 201{
+            
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieDetailPhotoCell", forIndexPath: indexPath) as! MovieDetailPhotoCell
             let url = movie?.first?.album?.backdrops[indexPath.item].url
             cell.photoView.af_setImageWithURL(url!,
                                               placeholderImage: UIImage(named: "default"),
                                               imageTransition: .CrossDissolve(0.2))
             return cell
-        case 202:
+        }
+        if collectionView.tag == 202{
             
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieDetailVideoCell", forIndexPath: indexPath) as! MovieDetailVideoCell
-            let video = self.movie?.first?.videos[indexPath.row]
+            let video = self.movie?.first?.videos[indexPath.item]
             
             let youTubeKey = video!.key
             cell.youTubeKey = youTubeKey
             cell.thumbnailImageView.af_setImageWithURL(video!.thumbnailUrl!)
-            
             return cell
-        default:
-            break
         }
-        return UICollectionViewCell()
+        if collectionView.tag == 203{
+            
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieDetailDirectorCell", forIndexPath: indexPath) as!MovieDetailDirectorCell
+            let crew = movie?.first?.credits?.crew
+            for crewMember in crew!{
+                
+                if crewMember.job == "Director"{
+                    
+                    let url = crewMember.profileImagelUrl
+                    cell.photoView?.af_setImageWithURL(url!,
+                                                       placeholderImage: UIImage(named:"default"),
+                                                       filter: nil,
+                                                       imageTransition: .CrossDissolve(0.2)
+                        
+                    )
+                    cell.nameLabel.text = crewMember.name
+                    return cell
+                }
+                
+            }
+        }
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieDetailCastCell", forIndexPath: indexPath) as! MovieDetailCastCell
+        let actor = movie?.first?.credits?.casts[indexPath.item]
+        let url = actor?.profileImagelUrl
+        cell.photoView?.af_setImageWithURL(url!,
+                                           placeholderImage: UIImage(named:"default"),
+                                           filter: nil,
+                                           imageTransition: .CrossDissolve(0.2)
+            
+        )
+        cell.nameLabel.text = actor!.name
+        return cell
+        
+        
     }
+    
     
 }
 extension MovieDetailController:UICollectionViewDelegateFlowLayout{
@@ -207,17 +304,29 @@ extension MovieDetailController:UICollectionViewDelegateFlowLayout{
         if collectionView.tag == 201{
             let itemWidth = collectionView.bounds.size.width/4*3
             let itemHeight = collectionView.bounds.size.height
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             return CGSize(width: itemWidth, height: itemHeight)
         }
         if collectionView.tag == 202{
             
             let itemWidth = collectionView.bounds.size.width/4*3
             let itemHeight = collectionView.bounds.size.height
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             return CGSize(width: itemWidth, height: itemHeight)
         }
-        
-     return CGSize(width: 0, height: 0)
+        if collectionView.tag == 203{
+            let itemWidth = collectionView.bounds.width/4
+            let itemHeight = collectionView.bounds.size.height
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
+     
+            let itemWidth = collectionView.bounds.width/4
+            let itemHeight = collectionView.bounds.size.height
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            return CGSize(width: itemWidth, height: itemHeight)
+           
     }
-
+    
 }
 

@@ -41,10 +41,15 @@ class Movie:Object{
     }
     
     dynamic var moviePosterUrl:NSURL?{
-        if let path = moviePosterPath{
+        
+        if let path = moviePosterPath {
+            if moviePosterPath!.containsString(".jpg"){
             let posterPath = "https://image.tmdb.org/t/p/w342\(path)"
+                
             return NSURL(string:posterPath)
+            }
         }
+        
         return nil
     }
     

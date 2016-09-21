@@ -11,4 +11,8 @@ import UIKit
 class MovieDetailVideRow:UITableViewCell{
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func awakeFromNib() {
+    
+    }
 }

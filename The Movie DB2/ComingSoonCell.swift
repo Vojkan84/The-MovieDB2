@@ -12,4 +12,8 @@ class ComingSoonCell:UICollectionViewCell{
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
+    
+    override func awakeFromNib() {
+       
+    }
 }

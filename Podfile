@@ -15,6 +15,7 @@ target 'The Movie DB2’ do
   pod 'CCBottomRefreshControl'
   pod "XCDYouTubeKit", "~> 2.5"
   pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'VGParallaxHeader'
   
 
 end

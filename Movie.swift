@@ -15,6 +15,7 @@ class Genre:Object{
     dynamic var name:String = ""
 }
 
+
 class Movie:Object{
     
     override class func primaryKey() -> String {
@@ -60,6 +61,8 @@ class Movie:Object{
         }
         return nil
     }
+    
+    // TO DO - ENUM
     
     func convertGenreIDsToNames(genreIds:[String])->String{
     

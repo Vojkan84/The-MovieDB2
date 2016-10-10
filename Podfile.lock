@@ -6,6 +6,7 @@ PODS:
     - Masonry (~> 0.6.2)
   - Masonry (0.6.4)
   - MBProgressHUD (1.0.0)
+  - PureLayout (3.0.2)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
   - Realm/Headers (1.0.2)
@@ -14,6 +15,8 @@ PODS:
   - SwiftyJSON (2.3.2)
   - SwiftyOAuth (0.4.1)
   - TMDBSwift (0.1.9)
+  - VGParallaxHeader (0.0.6):
+    - PureLayout
   - XCDYouTubeKit (2.5.3)
 
 DEPENDENCIES:
@@ -25,6 +28,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyOAuth (from `https://github.com/delba/SwiftyOAuth.git`)
   - TMDBSwift
+  - VGParallaxHeader
   - XCDYouTubeKit (~> 2.5)
 
 EXTERNAL SOURCES:
@@ -42,13 +46,15 @@ SPEC CHECKSUMS:
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyOAuth: 6fa3e4fe2154a046ef6e56f02a1ab6c6d240d606
   TMDBSwift: 210e0fee779fa8b94171a74d717887cf7bc5aba2
+  VGParallaxHeader: 1213aba58c9b0aea84f9e81ad526fde57aa4fe48
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
 
-PODFILE CHECKSUM: 4fa19b904c55f0a2e04417d89d5eee825ff3d645
+PODFILE CHECKSUM: 012868626a4e0aa093afcca424d072a9f2fb2e1f
 
 COCOAPODS: 1.0.1

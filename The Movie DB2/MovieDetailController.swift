@@ -11,6 +11,15 @@ import AlamofireImage
 import RealmSwift
 import XCDYouTubeKit
 import MBProgressHUD
+import VGParallaxHeader
+
+
+protocol MovieDetailControllerDelegate{
+    
+    func movieDetailControllerDidScrollToTop()
+    func movieDetailControllerDidScrollToBottom()
+    func movieDetailControllerContentOffSetYIsNegative()
+}
 
 
 
@@ -24,25 +33,36 @@ class MovieDetailController:UIViewController{
     var loader:MBProgressHUD?
     var movie:Results<Movie>?{
         didSet{
-                let URL = movie?.first?.moviePosterUrl
-                self.photoView.af_setImageWithURL(URL!)
+            let URL = movie?.first?.moviePosterUrl
+            self.photoView.af_setImageWithURL(URL!)
         }
     }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var photoView: UIImageView!
+    
+    var firstRowHeaderView:FirstRowHeaderView?
+    var movieDetailControllerDelegate:MovieDetailControllerDelegate?
+    var lastContentOffSet = CGPointZero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         
         loader = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         loader!.backgroundView.color = UIColor.clearColor()
-      
-
-    
+        
+        
+        
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        let nib = UINib(nibName: "HeaderView", bundle: nil)
-        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        
+        let headerView = UINib(nibName: "HeaderView", bundle: nil)
+        tableView.registerNib(headerView, forHeaderFooterViewReuseIdentifier: "HeaderView")
+        
+        firstRowHeaderView  = NSBundle.mainBundle().loadNibNamed("FirstRowHeaderView", owner: self, options: nil)[0] as? FirstRowHeaderView
+        tableView.setParallaxHeaderView(firstRowHeaderView, mode: .Fill, height: 300)
+        self.movieDetailControllerDelegate = firstRowHeaderView
+        
         
         
         
@@ -84,15 +104,21 @@ class MovieDetailController:UIViewController{
             }
         }
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        firstRowHeaderView?.bounds.size.height = 500
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         
         viewIsOnScrean = true
-            self.tableView.backgroundView?.backgroundColor = UIColor.clearColor()
-            self.tableView.backgroundColor = UIColor.clearColor()
-            self.tableView.reloadData()
+        self.tableView.backgroundView?.backgroundColor = UIColor.clearColor()
+        self.tableView.backgroundColor = UIColor.clearColor()
+        self.tableView.reloadData()
         
         
     }
@@ -100,7 +126,7 @@ class MovieDetailController:UIViewController{
         viewIsOnScrean = false
     }
     
-   
+    
     
     
 }
@@ -114,7 +140,7 @@ extension MovieDetailController:UITableViewDataSource{
         if movie != nil && viewIsOnScrean{
             return sectionNames.count
         }
-   
+        
         return 0
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,9 +225,11 @@ extension MovieDetailController:UITableViewDelegate{
         return tableView.rowHeight
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         if section == 0{
-            return tableView.bounds.height/1.6
+            return CGFloat.min
         }
+        
         return tableView.sectionHeaderHeight
     }
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -210,7 +238,8 @@ extension MovieDetailController:UITableViewDelegate{
             header.titleLabel.text! = self.sectionNames[section]
             return header
         }
-        return UIView()
+        
+        return nil
     }
     
     
@@ -219,9 +248,13 @@ extension MovieDetailController:UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return nil
+        }
         return sectionNames[section]
     }
 }
+
 extension MovieDetailController:UICollectionViewDataSource{
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -238,6 +271,7 @@ extension MovieDetailController:UICollectionViewDataSource{
             return 0
         }
     }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if  collectionView.tag == 201{
@@ -320,13 +354,43 @@ extension MovieDetailController:UICollectionViewDelegateFlowLayout{
             collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             return CGSize(width: itemWidth, height: itemHeight)
         }
-     
-            let itemWidth = collectionView.bounds.width/4
-            let itemHeight = collectionView.bounds.size.height
-            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-            return CGSize(width: itemWidth, height: itemHeight)
-           
+        
+        let itemWidth = collectionView.bounds.width/4
+        let itemHeight = collectionView.bounds.size.height
+        collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        return CGSize(width: itemWidth, height: itemHeight)
+        
     }
     
 }
+extension MovieDetailController{
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        self.tableView.shouldPositionParallaxHeader()
+        firstRowHeaderView?.contentView.backgroundColor = UIColor.blueColor()
+        print("\(self.tableView.contentOffset.y)")
+        
+        if tableView.contentOffset.y > 0{
+            
+            let currentOffSet = scrollView.contentOffset
+            if currentOffSet.y > lastContentOffSet.y{
+                
+                movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop()
+            }else{
+                movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom()
+            }
+                lastContentOffSet = currentOffSet
+        }else{
+            
+            movieDetailControllerDelegate?.movieDetailControllerContentOffSetYIsNegative()
+        }
+        
+    }
+    
+    
+    
+    
+}
+
 

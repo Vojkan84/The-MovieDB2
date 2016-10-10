@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PureLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -59,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>VGParallaxHeader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XCDYouTubeKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,11 +77,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>00BC13A9D7C3FE6769C40C9281979D71</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>05094CC4A047119F7ADC14EE74C4881C</key>
 		<dict>
 			<key>primary</key>
@@ -82,7 +87,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60B57E22E3F7E151ED0033ED0D5A84A3</key>
+		<key>5ACA4AD978A9BB45D442FA055DB2991D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,22 +97,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>984C7A983C299D00711538028D40CADB</key>
+		<key>7D3A1A9B1869E9583845C2EE9F9D3695</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A089931813FB27ACC1397A5300174935</key>
+		<key>846647B1CAEDB24FEC4210D74E3FAAA4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B11AE8D2761CDAB414FA3AFBF6CAF2FA</key>
+		<key>8D2942CED60562BB9C710874E171C3C2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA527576EB83A682780C7CA34AD5BD54</key>
+		<key>B118A311FB9C78DF298255D23D133065</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C644106199898DBC65EC0EE9834746B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3FF44DEE96C827EC3170AD81C121571</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8C5997DA1DC94F1D2012F0E6AD2BE40</key>
+		<key>EE23910DCBEC0CEFDA7D16AA598EB0E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F63FDBFD3D87CACF7B4CF22782C3E7C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

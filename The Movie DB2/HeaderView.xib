@@ -20,7 +20,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.098075713087248328" alpha="0.9475484913793103" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="wiZ-lp-H8F" secondAttribute="trailing" id="TVz-LU-4Wp"/>
                         <constraint firstAttribute="bottom" secondItem="wiZ-lp-H8F" secondAttribute="bottom" id="VSY-eg-y5g"/>

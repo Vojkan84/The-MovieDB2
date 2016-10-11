@@ -11,21 +11,24 @@ import UIKit
 class FirstRowHeaderView:HeaderView,MovieDetailControllerDelegate{
     
     @IBOutlet weak var stickyView: UIView!
+
+    @IBOutlet weak var headerContentView: UIView!
     
-    
-    func movieDetailControllerDidScrollToTop(){
+    func movieDetailControllerDidScrollToTop(paralaxHeaderProgress:CGFloat){
         
         stickyView.hidden = true
         stickyView.bounds = CGRect(x: 0, y: 0, width: stickyView.bounds.size.width, height: stickyView.bounds.size.height)
+        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1-paralaxHeaderProgress)
     }
-    func movieDetailControllerDidScrollToBottom(){
+    func movieDetailControllerDidScrollToBottom(paralaxHeaderProgress:CGFloat){
         
-//        stickyView.hidden = false
+        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1-paralaxHeaderProgress)
         
         
     }
     func movieDetailControllerContentOffSetYIsNegative(){
      stickyView.hidden = false
+   
     }
 
 

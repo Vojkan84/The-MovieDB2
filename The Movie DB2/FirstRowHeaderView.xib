@@ -21,7 +21,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.011691810344827587" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Dvm-ML-a99" secondAttribute="trailing" id="PY7-eQ-iqH"/>
                         <constraint firstItem="Dvm-ML-a99" firstAttribute="leading" secondItem="ie0-dD-3tQ" secondAttribute="leading" id="pjf-Pl-7eA"/>
@@ -36,6 +36,7 @@
                 <constraint firstAttribute="trailing" secondItem="ie0-dD-3tQ" secondAttribute="trailing" id="dO1-wI-wsW"/>
             </constraints>
             <connections>
+                <outlet property="headerContentView" destination="ie0-dD-3tQ" id="Kk9-f1-555"/>
                 <outlet property="stickyView" destination="Dvm-ML-a99" id="Ams-cM-g3n"/>
             </connections>
             <point key="canvasLocation" x="292" y="259"/>

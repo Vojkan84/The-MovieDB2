@@ -16,8 +16,8 @@ import VGParallaxHeader
 
 protocol MovieDetailControllerDelegate{
     
-    func movieDetailControllerDidScrollToTop()
-    func movieDetailControllerDidScrollToBottom()
+    func movieDetailControllerDidScrollToTop(paralaxHeaderProgress:CGFloat)
+    func movieDetailControllerDidScrollToBottom(paralaxHeaderProgress:CGFloat)
     func movieDetailControllerContentOffSetYIsNegative()
 }
 
@@ -45,6 +45,11 @@ class MovieDetailController:UIViewController{
     var movieDetailControllerDelegate:MovieDetailControllerDelegate?
     var lastContentOffSet = CGPointZero
     
+    var blurEffect = UIBlurEffect(style:  UIBlurEffectStyle.Light)
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +60,7 @@ class MovieDetailController:UIViewController{
         
         
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.tableView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
         
         let headerView = UINib(nibName: "HeaderView", bundle: nil)
         tableView.registerNib(headerView, forHeaderFooterViewReuseIdentifier: "HeaderView")
@@ -62,6 +68,7 @@ class MovieDetailController:UIViewController{
         firstRowHeaderView  = NSBundle.mainBundle().loadNibNamed("FirstRowHeaderView", owner: self, options: nil)[0] as? FirstRowHeaderView
         tableView.setParallaxHeaderView(firstRowHeaderView, mode: .Fill, height: 300)
         self.movieDetailControllerDelegate = firstRowHeaderView
+        
         
         
         
@@ -165,7 +172,11 @@ extension MovieDetailController:UITableViewDataSource{
             cell.overviewTextView.textColor = UIColor.whiteColor()
             cell.overviewTextView.text = movie!.overview
             cell.voteAverageTextField.text = String(movie!.voteAverage)
-            cell.backgroundColor = UIColor(white: 0.1, alpha: 0.95)
+            
+            let blureEffectView = UIVisualEffectView(effect: blurEffect)
+            blureEffectView.frame = cell.bounds
+            blureEffectView.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
+            cell.addSubview(blureEffectView)
             return cell
             
         case 1:
@@ -376,9 +387,15 @@ extension MovieDetailController{
             let currentOffSet = scrollView.contentOffset
             if currentOffSet.y > lastContentOffSet.y{
                 
-                movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop()
+                movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop(self.tableView.parallaxHeader.progress)
+                let visibleCells = tableView.visibleCells
+                for cell in visibleCells{
+                    cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+                }
+                
             }else{
-                movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom()
+                movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom(self.tableView.parallaxHeader.progress)
+                
             }
                 lastContentOffSet = currentOffSet
         }else{

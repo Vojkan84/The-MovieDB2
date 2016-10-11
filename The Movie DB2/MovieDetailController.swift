@@ -45,7 +45,7 @@ class MovieDetailController:UIViewController{
     var movieDetailControllerDelegate:MovieDetailControllerDelegate?
     var lastContentOffSet = CGPointZero
     
-    var blurEffect = UIBlurEffect(style:  UIBlurEffectStyle.Light)
+  
     
     
     
@@ -172,11 +172,6 @@ extension MovieDetailController:UITableViewDataSource{
             cell.overviewTextView.textColor = UIColor.whiteColor()
             cell.overviewTextView.text = movie!.overview
             cell.voteAverageTextField.text = String(movie!.voteAverage)
-            
-            let blureEffectView = UIVisualEffectView(effect: blurEffect)
-            blureEffectView.frame = cell.bounds
-            blureEffectView.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
-            cell.addSubview(blureEffectView)
             return cell
             
         case 1:
@@ -388,10 +383,10 @@ extension MovieDetailController{
             if currentOffSet.y > lastContentOffSet.y{
                 
                 movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop(self.tableView.parallaxHeader.progress)
-                let visibleCells = tableView.visibleCells
-                for cell in visibleCells{
-                    cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
-                }
+//                let visibleCells = tableView.visibleCells
+//                for cell in visibleCells{
+//                    cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+//                }
                 
             }else{
                 movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom(self.tableView.parallaxHeader.progress)

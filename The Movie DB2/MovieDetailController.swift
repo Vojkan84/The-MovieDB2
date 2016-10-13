@@ -40,12 +40,14 @@ class MovieDetailController:UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     
     var firstRowHeaderView:FirstRowHeaderView?
+    var headerView = FirstRowHeaderView?()
     var movieDetailControllerDelegate:MovieDetailControllerDelegate?
     var lastContentOffSet = CGPointZero
     
-  
+    
     
     
     
@@ -65,13 +67,9 @@ class MovieDetailController:UIViewController{
         let headerView = UINib(nibName: "HeaderView", bundle: nil)
         tableView.registerNib(headerView, forHeaderFooterViewReuseIdentifier: "HeaderView")
         
+        
         firstRowHeaderView  = NSBundle.mainBundle().loadNibNamed("FirstRowHeaderView", owner: self, options: nil)[0] as? FirstRowHeaderView
-        tableView.setParallaxHeaderView(firstRowHeaderView, mode: .Fill, height: 300)
         self.movieDetailControllerDelegate = firstRowHeaderView
-        
-        
-        
-        
         
         MovieService.sharedInstace.fetchCreditsForMovie(movieId: movieId!) {
             (credits, error) in
@@ -112,11 +110,7 @@ class MovieDetailController:UIViewController{
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        firstRowHeaderView?.bounds.size.height = 500
-    }
+    
     
     
     override func viewDidAppear(animated: Bool) {
@@ -126,11 +120,20 @@ class MovieDetailController:UIViewController{
         self.tableView.backgroundView?.backgroundColor = UIColor.clearColor()
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.reloadData()
+        if tableView.contentOffset.y != 0{
+            self.visualEffectView.hidden = false
+        }
         
         
     }
     override func viewDidDisappear(animated: Bool) {
         viewIsOnScrean = false
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.tableView.backgroundColor = UIColor.blackColor()
+        self.visualEffectView.hidden = true
+        
     }
     
     
@@ -202,6 +205,13 @@ extension MovieDetailController:UITableViewDataSource{
         
         
         
+    }
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0{
+            
+            
+            tableView.setParallaxHeaderView(self.firstRowHeaderView, mode: .Fill, height: UIScreen.mainScreen().bounds.height - cell.bounds.height - (navigationController?.navigationBar.bounds.height)! - 44 - UIApplication.sharedApplication().statusBarFrame.height)
+        }
     }
 }
 extension MovieDetailController:UITableViewDelegate{
@@ -374,28 +384,80 @@ extension MovieDetailController{
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         self.tableView.shouldPositionParallaxHeader()
-        firstRowHeaderView?.contentView.backgroundColor = UIColor.blueColor()
-        print("\(self.tableView.contentOffset.y)")
         
-        if tableView.contentOffset.y > 0{
+        let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+        if let movieLegendRow = tableView.cellForRowAtIndexPath(indexPath) as? MovieLegendRow{
             
-            let currentOffSet = scrollView.contentOffset
-            if currentOffSet.y > lastContentOffSet.y{
-                
-                movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop(self.tableView.parallaxHeader.progress)
-//                let visibleCells = tableView.visibleCells
-//                for cell in visibleCells{
-//                    cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
-//                }
-                
-            }else{
-                movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom(self.tableView.parallaxHeader.progress)
-                
-            }
+            var cellBackroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
+            var headerViewBackgroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
+            
+            
+            print("cell alpha \(cellBackroundColorAlpha)")
+            print( "header alpha \(firstRowHeaderView?.headerContentViewBackgroundColorAlpha)")
+           
+            if tableView.contentOffset.y > 0{
+        
+                let currentOffSet = scrollView.contentOffset
+                // if scrolling to top
+                if currentOffSet.y > lastContentOffSet.y{
+                    movieDetailControllerDelegate?.movieDetailControllerDidScrollToTop(self.tableView.parallaxHeader.progress)
+                    
+                    movieLegendRow.visualEffectView.hidden = true
+                   
+                    
+                    if firstRowHeaderView?.headerContentViewBackgroundColorAlpha > cellBackroundColorAlpha{
+                        self.visualEffectView.hidden = false
+                        firstRowHeaderView?.headerContentView.backgroundColor = UIColor.clearColor()
+                        for cell in tableView.visibleCells{
+                            cell.backgroundColor = UIColor.clearColor()
+                            if let firstRowCell = cell as? MovieLegendRow{
+                                firstRowCell.visualEffectView.hidden = true
+                            }
+                        }
+                        for view in tableView.subviews{
+                            if let header = view as? HeaderView{
+                                header.view.backgroundColor = UIColor.clearColor()
+                            }
+                        }
+                    }
+                    if firstRowHeaderView?.headerContentViewBackgroundColorAlpha < cellBackroundColorAlpha{
+                        for cell in tableView.visibleCells{
+                            cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: cellBackroundColorAlpha)
+                        }
+                        for view in tableView.subviews{
+                            if let header = view as? HeaderView{
+                                header.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: headerViewBackgroundColorAlpha)
+                            }
+                        }
+                    }
+                }else{
+                    // if scrolling to bottom
+                    movieDetailControllerDelegate?.movieDetailControllerDidScrollToBottom(self.tableView.parallaxHeader.progress)
+                    
+                    if firstRowHeaderView?.headerContentViewBackgroundColorAlpha < cellBackroundColorAlpha{
+                        self.visualEffectView.hidden = true
+                        
+                        for cell in tableView.visibleCells{
+                            cell.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: cellBackroundColorAlpha)
+                        }
+                        for view in tableView.subviews{
+                            if let header = view as? HeaderView{
+                                header.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: headerViewBackgroundColorAlpha)
+                            }
+                        }
+                    }
+                    
+                    if firstRowHeaderView?.headerContentViewBackgroundColorAlpha > cellBackroundColorAlpha{
+                        firstRowHeaderView?.headerContentView.backgroundColor = UIColor.clearColor()
+                        self.visualEffectView.hidden = false
+                    }
+
+                }
                 lastContentOffSet = currentOffSet
-        }else{
-            
-            movieDetailControllerDelegate?.movieDetailControllerContentOffSetYIsNegative()
+            }else{
+                movieDetailControllerDelegate?.movieDetailControllerContentOffSetYIsNegative()
+                movieLegendRow.visualEffectView.hidden = false
+            }
         }
         
     }

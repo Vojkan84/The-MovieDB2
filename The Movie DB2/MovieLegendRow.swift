@@ -17,4 +17,6 @@ class MovieLegendRow:UITableViewCell{
     @IBOutlet weak var voteAverageImageView: UIImageView!
     @IBOutlet weak var voteAverageTextField: UITextField!
     @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
 }

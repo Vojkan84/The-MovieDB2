@@ -11,6 +11,7 @@ import UIKit
 class HeaderView:UITableViewHeaderFooterView{
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var view: UIView!
     override func awakeFromNib() {
 
         

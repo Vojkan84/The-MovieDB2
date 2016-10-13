@@ -13,14 +13,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiC-jW-6fQ">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <subviews>
-                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g9-zN-bfH">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="umX-1W-DLO">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                            <blurEffect style="light"/>
-                        </visualEffectView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wiZ-lp-H8F">
                             <rect key="frame" x="8" y="0.0" width="592" height="44"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -30,13 +22,9 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="7g9-zN-bfH" secondAttribute="trailing" id="68E-zk-3p3"/>
                         <constraint firstAttribute="trailing" secondItem="wiZ-lp-H8F" secondAttribute="trailing" id="TVz-LU-4Wp"/>
                         <constraint firstAttribute="bottom" secondItem="wiZ-lp-H8F" secondAttribute="bottom" id="VSY-eg-y5g"/>
-                        <constraint firstItem="7g9-zN-bfH" firstAttribute="leading" secondItem="eiC-jW-6fQ" secondAttribute="leading" id="YsG-Y6-zMb"/>
-                        <constraint firstAttribute="bottom" secondItem="7g9-zN-bfH" secondAttribute="bottom" id="aI9-RX-J0h"/>
                         <constraint firstItem="wiZ-lp-H8F" firstAttribute="top" secondItem="eiC-jW-6fQ" secondAttribute="top" id="sSI-SY-o1W"/>
-                        <constraint firstItem="7g9-zN-bfH" firstAttribute="top" secondItem="eiC-jW-6fQ" secondAttribute="top" id="uTu-Zb-rdf"/>
                         <constraint firstItem="wiZ-lp-H8F" firstAttribute="leading" secondItem="eiC-jW-6fQ" secondAttribute="leading" constant="8" id="xTv-pz-HnI"/>
                     </constraints>
                 </view>
@@ -49,6 +37,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="View" destination="eiC-jW-6fQ" id="5JZ-y3-DOv"/>
                 <outlet property="titleLabel" destination="wiZ-lp-H8F" id="LdN-Rx-bpT"/>
             </connections>
             <point key="canvasLocation" x="373" y="-5"/>

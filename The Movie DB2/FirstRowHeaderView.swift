@@ -13,16 +13,19 @@ class FirstRowHeaderView:HeaderView,MovieDetailControllerDelegate{
     @IBOutlet weak var stickyView: UIView!
 
     @IBOutlet weak var headerContentView: UIView!
+    var headerContentViewBackgroundColorAlpha : CGFloat?
     
     func movieDetailControllerDidScrollToTop(paralaxHeaderProgress:CGFloat){
         
         stickyView.hidden = true
         stickyView.bounds = CGRect(x: 0, y: 0, width: stickyView.bounds.size.width, height: stickyView.bounds.size.height)
-        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1-paralaxHeaderProgress)
+        headerContentViewBackgroundColorAlpha = 1 - paralaxHeaderProgress
+        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: headerContentViewBackgroundColorAlpha!)
     }
     func movieDetailControllerDidScrollToBottom(paralaxHeaderProgress:CGFloat){
         
-        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1-paralaxHeaderProgress)
+        headerContentViewBackgroundColorAlpha = 1 - paralaxHeaderProgress
+        headerContentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: headerContentViewBackgroundColorAlpha!)
         
         
     }

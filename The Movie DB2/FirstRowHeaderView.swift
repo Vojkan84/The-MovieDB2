@@ -31,7 +31,6 @@ class FirstRowHeaderView:HeaderView,MovieDetailControllerDelegate{
     }
     func movieDetailControllerContentOffSetYIsNegative(){
      stickyView.hidden = false
-   
     }
 
 

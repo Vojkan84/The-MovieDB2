@@ -120,25 +120,22 @@ class MovieDetailController:UIViewController{
         self.tableView.backgroundView?.backgroundColor = UIColor.clearColor()
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.reloadData()
+        
         if tableView.contentOffset.y != 0{
             self.visualEffectView.hidden = false
         }
-        
-        
     }
+    
     override func viewDidDisappear(animated: Bool) {
         viewIsOnScrean = false
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.tableView.backgroundColor = UIColor.blackColor()
         self.visualEffectView.hidden = true
         
     }
-    
-    
-    
-    
 }
 
 
@@ -388,13 +385,9 @@ extension MovieDetailController{
         let indexPath = NSIndexPath(forItem: 0, inSection: 0)
         if let movieLegendRow = tableView.cellForRowAtIndexPath(indexPath) as? MovieLegendRow{
             
-            var cellBackroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
-            var headerViewBackgroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
+            let cellBackroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
+            let headerViewBackgroundColorAlpha = 0.8 - (1 - self.tableView.parallaxHeader.progress)
             
-            
-            print("cell alpha \(cellBackroundColorAlpha)")
-            print( "header alpha \(firstRowHeaderView?.headerContentViewBackgroundColorAlpha)")
-           
             if tableView.contentOffset.y > 0{
         
                 let currentOffSet = scrollView.contentOffset

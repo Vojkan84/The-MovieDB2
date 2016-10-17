@@ -1328,7 +1328,7 @@
             </objects>
             <point key="canvasLocation" x="-1895.5" y="1119.5"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="vsW-4m-nyL">
             <objects>
                 <viewController id="54u-AO-MKL" customClass="SearchController" customModule="The_Movie_DB2" customModuleProvider="target" sceneMemberID="viewController">
@@ -1340,7 +1340,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="fk2-Un-d7V"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="fk2-Un-d7V" userLabel="Search"/>
                     <navigationItem key="navigationItem" id="Lzu-wC-R6n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhU-o5-Yr6" userLabel="First Responder" sceneMemberID="firstResponder"/>

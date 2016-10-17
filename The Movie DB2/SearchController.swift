@@ -10,5 +10,7 @@ import UIKit
 
 class SearchController:UIViewController{
     
-
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 }

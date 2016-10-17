@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SearchController:UIViewController,UITableViewDataSource,UISearchBarDelegate{
+class SearchController:UIViewController,UITableViewDelegate,UISearchBarDelegate{
     
    
     var data = ["a","ab","abc","abcd","abcd","abcde","acdef","abcdefg"]
     var numbers = ["1","2","3","4","5"]
+    var names = ["pera","mika","zika","laza"]
     var filteredData = [String]()
     var searchBarActive:Bool = false
     
@@ -55,6 +56,10 @@ class SearchController:UIViewController,UITableViewDataSource,UISearchBarDelegat
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+ 
+}
+extension SearchController:UITableViewDataSource{
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchBarActive && searchBar.text != ""{
             return filteredData.count
@@ -75,4 +80,5 @@ class SearchController:UIViewController,UITableViewDataSource,UISearchBarDelegat
         return cell!
     }
 }
+
 

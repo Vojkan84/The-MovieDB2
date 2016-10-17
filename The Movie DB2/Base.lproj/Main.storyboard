@@ -1339,13 +1339,29 @@
                     <view key="view" contentMode="scaleToFill" id="Xrs-gl-Ir3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hMn-ej-UqY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="54u-AO-MKL" id="b9P-YL-6fG"/>
+                                    <outlet property="delegate" destination="54u-AO-MKL" id="0bY-aa-ERk"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hMn-ej-UqY" firstAttribute="top" secondItem="Xrs-gl-Ir3" secondAttribute="topMargin" id="87r-v5-BIZ"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="hMn-ej-UqY" secondAttribute="bottom" id="MxM-uQ-0lE"/>
+                            <constraint firstAttribute="trailing" secondItem="hMn-ej-UqY" secondAttribute="trailing" id="Yhq-79-SZA"/>
+                            <constraint firstItem="hMn-ej-UqY" firstAttribute="leading" secondItem="Xrs-gl-Ir3" secondAttribute="leading" id="iZu-Df-R4e"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" id="fk2-Un-d7V" userLabel="Search"/>
                     <navigationItem key="navigationItem" id="Lzu-wC-R6n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhU-o5-Yr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1895.5" y="-553.5"/>
+            <point key="canvasLocation" x="-2322.5" y="-577.5"/>
         </scene>
         <!--Movies-->
         <scene sceneID="QfF-Ze-qhK">

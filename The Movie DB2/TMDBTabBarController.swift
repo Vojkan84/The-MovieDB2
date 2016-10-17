@@ -17,7 +17,9 @@ class TMDBTabBarController: UITabBarController,UINavigationControllerDelegate,UI
         
     }
     
-    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
     
 
 }

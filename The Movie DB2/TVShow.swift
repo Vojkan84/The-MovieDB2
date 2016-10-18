@@ -24,7 +24,7 @@ class TVShow:Object{
     dynamic var firstAirDate:String = ""
     dynamic var genreIds:String = ""
     dynamic var voteCount:Int = 0
-    
+    dynamic var apiPage:Int = 0
     dynamic var genreNames:String?{
         let ids = genreIds.componentsSeparatedByString(",")
         return convertGenreIDsToNames(ids)

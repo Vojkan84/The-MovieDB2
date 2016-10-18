@@ -18,6 +18,7 @@ class MovieService{
     
     // api key koji mi treba za svaki API poziv
     private var apiKey = "1a8cf68cea1be9ce3938eb5a6024d19a"
+    private var baseUrl = "https://api.themoviedb.org/3/movie/"
     
 }
 //Networking
@@ -25,7 +26,7 @@ extension MovieService{
     
     //     Otprilike bi ovako dohvato listu filmova,closure bi vratio ili filmove ili gresku
     func fetchNowShowingMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)now_playing?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -45,7 +46,7 @@ extension MovieService{
     
     
     func fetchPopularMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)popular?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -63,7 +64,7 @@ extension MovieService{
         }
     }
     func fetchComingSoonMoviesFromAPI(page page:Double,result:(movies:[Movie]?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)upcoming?api_key=\(apiKey)&page=\(page)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -107,7 +108,7 @@ extension MovieService{
     }
     func fetchCreditsForMovie(movieId id:Int,result:(credits:Credits?,error:NSError?)->Void){
         
-        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/credits?api_key=\(apiKey)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)\(id)/credits?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -159,7 +160,7 @@ extension MovieService{
     }
     
     func fetchMovieAlbum(movieId id:Int,result:(album:MovieAlbum?,error:NSError?)->Void){
-        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/images?api_key=\(apiKey)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)\(id)/images?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case .Success:
                 if let value = response.result.value{
@@ -195,7 +196,7 @@ extension MovieService{
     
     func fetchMovieVideos(movieID id:Int,result:(videos:[Video]?,error:NSError?)->Void){
         
-        request(.GET, "https://api.themoviedb.org/3/movie/\(id)/videos?api_key=\(apiKey)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)\(id)/videos?api_key=\(apiKey)").validate().responseJSON { (response) in
             switch response.result{
             case . Success:
                 if let value = response.result.value{
@@ -220,6 +221,12 @@ extension MovieService{
         }
         
     }
+    
+//    func searchMoviesByText(text:String,result:(movies:[Movie]?,error:NSError?)->Void){
+//       
+//        request(.Get,
+//        
+//    }
     
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []

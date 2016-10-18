@@ -162,7 +162,6 @@
 		E81AAC021D6B159800308D5F /* TVShow */ = {
 			isa = PBXGroup;
 			children = (
-				E8213F541D789301009625CB /* Movie */,
 				E81AAC031D6B169F00308D5F /* TVShowController.swift */,
 				E81AAC051D6B170500308D5F /* TVPosterRow.swift */,
 				E81AAC0B1D6B17CF00308D5F /* TVPosterCell.swift */,
@@ -213,6 +212,7 @@
 		E82F7E811D62DC0B00590791 /* The Movie DB2 */ = {
 			isa = PBXGroup;
 			children = (
+				E8213F541D789301009625CB /* Movie */,
 				E81A99551DB4EDA6006A5205 /* Search */,
 				E81AAC021D6B159800308D5F /* TVShow */,
 				E8E014A01D7AEE6A0083C3DA /* Profile */,

@@ -90,7 +90,7 @@ extension SearchController:UITableViewDataSource{
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("SearchControllerCell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieAndTVShowSearchResultCell")
         let text:String
         if searchBarActive && searchBar.text != ""{
             text = filteredData[indexPath.row]

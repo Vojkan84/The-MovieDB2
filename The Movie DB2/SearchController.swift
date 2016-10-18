@@ -14,10 +14,11 @@ class SearchController:UIViewController,UISearchBarDelegate{
     
     var data = ["a","ab","abc"]
     var movies:[Movie]?
-    var tvShows = ["1","2","3","4","5"]
+    var tvShows:[TVShow]?
     var names = ["pera","mika","zika","laza"]
     var filteredData = [AnyObject]()
     var searchBarActive:Bool = false
+    var searchText:String?
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -33,10 +34,7 @@ class SearchController:UIViewController,UISearchBarDelegate{
         segmentedControl.addTarget(self, action: #selector(valueChanged), forControlEvents: UIControlEvents.ValueChanged)
         
     }
-    override func viewWillAppear(animated: Bool) {
-        
-        
-    }
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBarActive = true
         
@@ -53,40 +51,56 @@ class SearchController:UIViewController,UISearchBarDelegate{
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if segmentedControl.selectedSegmentIndex == 0{
-            var fData = filteredData as! [Movie]
-            MovieService.sharedInstace.searchMoviesByText(searchText, result: { (movies, error) in
-                
-                if let err = error{
-                    print(err)
-                }else{
-                    self.movies = movies
-                    self.filteredData = self.movies!
-                    self.tableView.reloadData()
-                }
-            })
+        self.searchText = searchText
+        if segmentedControl.selectedSegmentIndex == 0 && searchText != ""{
+            searchMovies(self.searchText!)
         }
-        //        filteredData = data.filter{ object in
-        //            return object.lowercaseString.containsString(searchText.lowercaseString)
-        //        }
-        //        if filteredData.count == 0{
-        //            searchBarActive = false
-        //        }else{
-        //            searchBarActive = true
-        //        }
-        tableView.reloadData()
+        if segmentedControl.selectedSegmentIndex == 1 && searchText != ""{
+            searchTVShows(self.searchText!)
+        }
+        self.tableView.reloadData()
     }
     func valueChanged(segmentedControl:UISegmentedControl){
+        
         if segmentedControl.selectedSegmentIndex == 0 {
-            self.filteredData = self.movies!
+            
+            if searchText == nil || searchText == ""{return}
+                searchMovies(searchText!)
+            
         }else if segmentedControl.selectedSegmentIndex == 1{
-            self.filteredData = self.numbers
+            
+            if searchText == nil || searchText == "" {return}
+            searchTVShows(searchText!)
         }else if segmentedControl.selectedSegmentIndex == 2{
             self.filteredData = self.names
         }else{
             self.filteredData = self.movies!
         }
         self.tableView.reloadData()
+    }
+    func searchMovies(searchText:String){
+        MovieService.sharedInstace.searchMoviesByText(searchText, result: { (movies, error) in
+            
+            if let err = error{
+                print(err)
+            }else{
+                self.movies = movies
+                self.filteredData = self.movies!
+                self.tableView.reloadData()
+            }
+        })
+        
+    }
+    func searchTVShows(searchText:String){
+        TVShowService.sharedInstance.searchTVShow(byText: searchText, result: { (tvShows, error) in
+            if let err = error{
+                print(err)
+            }else{
+                self.tvShows = tvShows
+                self.filteredData = self.tvShows!
+                self.tableView.reloadData()
+            }
+        })
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -104,38 +118,48 @@ extension SearchController:UITableViewDataSource{
         return data.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let movieCell = tableView.dequeueReusableCellWithIdentifier("MovieAndTVShowSearchResultCell", forIndexPath: indexPath) as! MovieAndTVShowSearchResultCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("MovieAndTVShowSearchResultCell", forIndexPath: indexPath) as! MovieAndTVShowSearchResultCell
         if segmentedControl.selectedSegmentIndex == 0 && movies != nil{
-            let movies = filteredData as! [Movie]
-            let movie = movies[indexPath.row]
+            print(segmentedControl.selectedSegmentIndex)
+            let movies = self.movies
+            let movie = movies![indexPath.row]
             if let URL = movie.moviePosterUrl{
-                print(URL)
-                movieCell.photoView?.af_setImageWithURL(URL,
+                cell.photoView?.af_setImageWithURL(URL,
                                                    placeholderImage: UIImage(named:"default"),
                                                    filter: nil,
                                                    imageTransition: .CrossDissolve(0.2)
                 )
-                movieCell.nameLabel.text = movie.movieTitle
-            }else{
-                movieCell.photoView.image = nil
-                movieCell.nameLabel.text = ""
+                cell.nameLabel.text = movie.movieTitle
             }
-         
-    
+        }else if segmentedControl.selectedSegmentIndex == 1 && self.tvShows != nil{
+            let tvShows = self.tvShows
+            let tvShow = tvShows![indexPath.row]
+            if let URL = tvShow.posterURL{
+                
+                cell.photoView.af_setImageWithURL(URL, placeholderImage: UIImage(named: "default"), filter: nil, imageTransition: .CrossDissolve(0.2)
+                )
+            }
+            cell.nameLabel.text = tvShow.name
+            
+        }else{
+            cell.photoView.image = nil
+            cell.nameLabel.text = ""
+            
+            
             
         }
-        return movieCell
-//        let cell = tableView.dequeueReusableCellWithIdentifier("MovieAndTVShowSearchResultCell")
-//        let text:String
-//        if searchBarActive && searchBar.text != ""{
-//            text = filteredData[indexPath.row].title
-//        }else{
-//            text = data[indexPath.row]
-//        }
-//        cell?.textLabel?.text = text
-//        return cell!
+        return cell
+        //        let cell = tableView.dequeueReusableCellWithIdentifier("MovieAndTVShowSearchResultCell")
+        //        let text:String
+        //        if searchBarActive && searchBar.text != ""{
+        //            text = filteredData[indexPath.row].title
+        //        }else{
+        //            text = data[indexPath.row]
+        //        }
+        //        cell?.textLabel?.text = text
+        //        return cell!
     }
-
+    
     
     
 }

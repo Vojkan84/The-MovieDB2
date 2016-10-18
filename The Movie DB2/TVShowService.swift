@@ -29,7 +29,7 @@ extension TVShowService{
 
     func searchTVShow(byText text:String,result:(tvShows:[TVShow]?,error:NSError?)->Void){
        
-        request(.GET, "\(baseUrl)/search/tv?api_key=\(apiKey))&query=\(text)").validate().responseJSON { (response) in
+        request(.GET, "\(baseUrl)/search/tv?api_key=\(apiKey)&query=\(text)").validate().responseJSON { (response) in
             switch response.result{
             case .Failure(let error):
                 result(tvShows: nil, error: error)
@@ -37,6 +37,7 @@ extension TVShowService{
                 
                 if let value = response.result.value{
                     let json = JSON(value)
+                    print(json)
                     let tvShows = self.parseTVShowJson(json)
                     result(tvShows: tvShows, error: nil)
                     
@@ -47,9 +48,11 @@ extension TVShowService{
     
     func parseTVShowJson(json:JSON)->[TVShow]{
         var tvShows = [TVShow]()
-        let tvShow = TVShow()
-        tvShow.apiPage = json["page"].intValue
+        let apiPage = json["page"].intValue
+        
         for item in json["results"].arrayValue{
+            let tvShow = TVShow()
+            tvShow.apiPage = apiPage
             tvShow.name = item["name"].stringValue
             tvShow.backdropPath = item["backdrop_path"].stringValue
             tvShow.posterPath = item["poster_path"].stringValue

@@ -1378,32 +1378,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dEO-JE-tbe">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dEO-JE-tbe">
                                                     <rect key="frame" x="8" y="8" width="69" height="104"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="dEO-JE-tbe" secondAttribute="height" multiplier="2:3" id="rMj-b7-707"/>
+                                                        <constraint firstAttribute="width" constant="69" id="wr5-NI-HSa"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="rMj-b7-707"/>
+                                                        </mask>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jq3-X5-YXQ">
-                                                    <rect key="frame" x="85" y="49" width="282" height="21"/>
+                                                    <rect key="frame" x="85" y="49" width="283" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="jq3-X5-YXQ" firstAttribute="leading" secondItem="dEO-JE-tbe" secondAttribute="trailing" constant="8" id="Gia-kA-a05"/>
                                                 <constraint firstItem="jq3-X5-YXQ" firstAttribute="centerY" secondItem="dEO-JE-tbe" secondAttribute="centerY" id="Gqx-Qh-cga"/>
                                                 <constraint firstItem="dEO-JE-tbe" firstAttribute="bottom" secondItem="9ZI-Z5-eMu" secondAttribute="bottomMargin" id="K5n-VK-dnG"/>
                                                 <constraint firstItem="dEO-JE-tbe" firstAttribute="top" secondItem="9ZI-Z5-eMu" secondAttribute="topMargin" id="YpZ-cN-ZBr"/>
-                                                <constraint firstItem="jq3-X5-YXQ" firstAttribute="leading" secondItem="dEO-JE-tbe" secondAttribute="trailing" constant="8" id="coU-C1-isv"/>
                                                 <constraint firstItem="dEO-JE-tbe" firstAttribute="leading" secondItem="9ZI-Z5-eMu" secondAttribute="leadingMargin" id="uOu-Vb-bov"/>
-                                                <constraint firstAttribute="trailing" secondItem="jq3-X5-YXQ" secondAttribute="trailing" constant="8" id="znf-SI-0Xh"/>
+                                                <constraint firstAttribute="trailing" secondItem="jq3-X5-YXQ" secondAttribute="trailing" constant="7" id="znf-SI-0Xh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="jq3-X5-YXQ" id="M3f-jL-odd"/>
-                                            <outlet property="photoView" destination="9ZI-Z5-eMu" id="LBQ-ys-CR9"/>
+                                            <outlet property="photoView" destination="dEO-JE-tbe" id="j5m-V5-wE9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

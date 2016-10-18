@@ -220,13 +220,28 @@ extension MovieService{
             }
         }
         
+        
     }
     
-//    func searchMoviesByText(text:String,result:(movies:[Movie]?,error:NSError?)->Void){
-//       
-//        request(.Get,
-//        
-//    }
+    func searchMoviesByText(text:String,result:(movies:[Movie]?,error:NSError?)->Void){
+       
+        request(.GET, "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(text)").validate().responseJSON { (response) in
+            switch response.result{
+            case . Success:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    let movies = self.parseMovieJson(json)
+                    
+                    result(movies:movies, error: nil)
+                }
+            case .Failure(let error):
+                result(movies: nil, error: error)
+                
+            }
+        }
+        
+        
+    }
     
     private func parseMovieJson(json:JSON)->[Movie]{
         var movies:[Movie] = []

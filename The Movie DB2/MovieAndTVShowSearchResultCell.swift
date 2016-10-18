@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieAndTVShowSearchResultCell:UITableViewCell{
-    @IBOutlet weak var photoView: UIView!
+    @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
 
 }

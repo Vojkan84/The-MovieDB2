@@ -100,6 +100,7 @@ extension SearchController:UITableViewDataSource{
         cell?.textLabel?.text = text
         return cell!
     }
+
    
 }
 extension SearchController:UITableViewDelegate{

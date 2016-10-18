@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E81A99571DB4EDCC006A5205 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A99561DB4EDCC006A5205 /* SearchController.swift */; };
+		E81A99591DB5FB7D006A5205 /* MovieSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A99581DB5FB7D006A5205 /* MovieSearchResultCell.swift */; };
 		E81AAC041D6B169F00308D5F /* TVShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81AAC031D6B169F00308D5F /* TVShowController.swift */; };
 		E81AAC061D6B170500308D5F /* TVPosterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81AAC051D6B170500308D5F /* TVPosterRow.swift */; };
 		E81AAC0A1D6B179B00308D5F /* TVVideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81AAC091D6B179B00308D5F /* TVVideoRow.swift */; };
@@ -65,6 +66,7 @@
 		A8116B5A80F92CEE475C8C84 /* Pods-The Movie DB2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Movie DB2.release.xcconfig"; path = "Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2.release.xcconfig"; sourceTree = "<group>"; };
 		C3868C84A0AB859A95AACF74 /* Pods-The Movie DB2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Movie DB2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-The Movie DB2/Pods-The Movie DB2.debug.xcconfig"; sourceTree = "<group>"; };
 		E81A99561DB4EDCC006A5205 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		E81A99581DB5FB7D006A5205 /* MovieSearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearchResultCell.swift; sourceTree = "<group>"; };
 		E81AAC031D6B169F00308D5F /* TVShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVShowController.swift; sourceTree = "<group>"; };
 		E81AAC051D6B170500308D5F /* TVPosterRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVPosterRow.swift; sourceTree = "<group>"; };
 		E81AAC091D6B179B00308D5F /* TVVideoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVVideoRow.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				E81A99561DB4EDCC006A5205 /* SearchController.swift */,
+				E81A99581DB5FB7D006A5205 /* MovieSearchResultCell.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				E881BD971D87FE3C001ED040 /* Backdrops.swift in Sources */,
 				E8E014A41D7C32BA0083C3DA /* ProfileController.swift in Sources */,
 				E881BDA51D89ECD2001ED040 /* MovieDetailVideoRow.swift in Sources */,
+				E81A99591DB5FB7D006A5205 /* MovieSearchResultCell.swift in Sources */,
 				E881BD891D8420EF001ED040 /* MovieDetailController.swift in Sources */,
 				E881BD9D1D895DBF001ED040 /* MovieLegendRow.swift in Sources */,
 				E8601F491D6842C900E2ED6A /* TMDBNavigationController.swift in Sources */,

@@ -8,6 +8,8 @@
 
 import UIKit
 
-class MovieSearchResultCell:UITableViewCell{
+class MovieAndTVShowSearchResultCell:UITableViewCell{
+    @IBOutlet weak var photoView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
 
 }

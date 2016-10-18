@@ -1371,7 +1371,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchControllerCell" rowHeight="121" id="ROF-Fs-bZ8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchControllerCell" rowHeight="121" id="ROF-Fs-bZ8" customClass="MovieAndTVShowSearchResultCell" customModule="The_Movie_DB2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="375" height="121"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROF-Fs-bZ8" id="9ZI-Z5-eMu">
@@ -1401,6 +1401,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="jq3-X5-YXQ" id="M3f-jL-odd"/>
+                                            <outlet property="photoView" destination="9ZI-Z5-eMu" id="LBQ-ys-CR9"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
